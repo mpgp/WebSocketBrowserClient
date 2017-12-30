@@ -9,18 +9,32 @@ import MessageList from './MessageList';
 class Chat extends React.Component<{}, {}> {
     static contextTypes = {
         ws: PropTypes.object.isRequired,
-        message: PropTypes.string,
-        chatMessages: PropTypes.arrayOf(PropTypes.string)
+        webSocketMessages: PropTypes.arrayOf(PropTypes.shape({
+            type: PropTypes.string,
+            payload: PropTypes.object
+        })),
+        userName: PropTypes.string,
     };
 
-    onSubmitForm = (userName: string) => {
-        this.context.ws.send(userName);
-    };
+    onSubmitForm = (message: string) => {
+        const data = {
+            type: 'CHAT_MESSAGE',
+            payload: {
+                Message: message,
+                Time: '16:42',
+                UserName: this.context.userName
+            }
+        };
+        this.context.ws.send(JSON.stringify(data));
+    }
 
     render() {
         return (
             <div className='Chat'>
-                <MessageList messages={this.context.chatMessages} myName={'admin'} />
+                <MessageList
+                    messages={this.context.webSocketMessages}
+                    myName={this.context.userName}
+                />
                 <AddMessageForm onSubmit={this.onSubmitForm} />
             </div>
         );

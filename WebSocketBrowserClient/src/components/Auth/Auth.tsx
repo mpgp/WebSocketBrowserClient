@@ -3,18 +3,25 @@ import * as PropTypes from 'prop-types';
 
 import AuthForm from './AuthForm';
 
+export interface WebSocketMessage {
+    type: string;
+    payload?: any;
+}
+
 interface AuthState {
     authorized: boolean;
-    chatMessages: string[];
-    message: string;
+    userName: string;
+    webSocketMessages: WebSocketMessage[];
     ws: WebSocket;
 }
 
-class Auth extends React.Component<{}, AuthState>
-{
+class Auth extends React.Component<{}, AuthState> {
     static childContextTypes = {
-        chatMessages: PropTypes.arrayOf(PropTypes.string),
-        message: PropTypes.string,
+        userName: PropTypes.string.isRequired,
+        webSocketMessages: PropTypes.arrayOf(PropTypes.shape({
+            type: PropTypes.string,
+            payload: PropTypes.object
+        })),
         ws: PropTypes.object.isRequired
     };
 
@@ -25,16 +32,16 @@ class Auth extends React.Component<{}, AuthState>
         super();
         this.state = {
             authorized: false,
-            chatMessages: [],
-            message: '',
+            userName: '',
+            webSocketMessages: [],
             ws: null
         };
     }
 
     getChildContext() {
         return {
-            message: this.state.message,
-            chatMessages: this.state.chatMessages,
+            userName: this.state.userName,
+            webSocketMessages: this.state.webSocketMessages,
             ws: this.state.ws
         };
     }
@@ -64,9 +71,9 @@ class Auth extends React.Component<{}, AuthState>
     }
 
     OnMessage = ({ data }: any) => {
-        console.warn('OnMessage:::', event);
+        console.warn('OnMessage:::', data);
         this.setState((prevState: AuthState) => {
-            return {chatMessages: [...prevState.chatMessages, data]};
+            return {webSocketMessages: [...prevState.webSocketMessages, JSON.parse(data)]};
         });
     }
 
@@ -75,8 +82,18 @@ class Auth extends React.Component<{}, AuthState>
     }
 
     onSubmitForm = (userName: string) => {
-        this.state.ws.send(userName);
-        this.setState({ authorized: true });
+        const data = {
+            type: 'AUTH',
+            payload: {
+                Time: '16:42',
+                UserName: userName
+            }
+        };
+        this.setState({
+            authorized: true,
+            userName
+        });
+        this.state.ws.send(JSON.stringify(data));
     }
 
     render() {

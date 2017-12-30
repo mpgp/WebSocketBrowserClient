@@ -8,7 +8,7 @@ class AuthForm extends React.Component<AuthFormProps, {}> {
     handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         this.props.onSubmit((this.refs.userName as HTMLInputElement).value);
-    };
+    }
 
     render() {
         return (
