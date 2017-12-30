@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSocketBrowserClient", "WebSocketBrowserClient\", "{F44CE517-2FD5-4A01-8521-E3D5D0F0F630}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_50712"
+		Debug.AspNetCompiler.PhysicalPath = "WebSocketBrowserClient\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50712\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_50712"
+		Release.AspNetCompiler.PhysicalPath = "WebSocketBrowserClient\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50712\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "50712"
+		SlnRelativePath = "WebSocketBrowserClient\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F44CE517-2FD5-4A01-8521-E3D5D0F0F630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F44CE517-2FD5-4A01-8521-E3D5D0F0F630}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6E4DF98-D9E1-414E-BE41-CAB3EDD0BF07}
+	EndGlobalSection
+EndGlobal
