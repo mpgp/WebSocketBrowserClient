@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 interface AuthFormProps {
-    onSubmit: any;
+    onSubmit: (userName: string) => void;
 }
 
 class AuthForm extends React.Component<AuthFormProps, {}> {
-    handleSubmit = (event: any) => {
+    handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         this.props.onSubmit((this.refs.userName as HTMLInputElement).value);
     };
@@ -17,11 +17,11 @@ class AuthForm extends React.Component<AuthFormProps, {}> {
                     <p>
                         <label>
                             <span><b>Login:</b> </span>
-                            <input type="text" name="userName" ref="userName" />
+                            <input type='text' name='userName' ref='userName' />
                         </label>
                     </p>
                     <p>
-                        <button type="submit">Log In!</button>
+                        <button type='submit'>Log In!</button>
                     </p>
                 </form>
             </div>

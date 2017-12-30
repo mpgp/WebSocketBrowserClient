@@ -1,36 +1,41 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+
 import AuthForm from './AuthForm';
 
 interface AuthState {
     authorized: boolean;
+    chatMessages: string[];
     message: string;
     ws: WebSocket;
 }
 
 class Auth extends React.Component<{}, AuthState>
 {
-    // private readonly WS_PATH = 'ws://localhost:8181/consoleappsample';
-    private readonly WS_PATH = 'ws://echo.websocket.org';
-
     static childContextTypes = {
+        chatMessages: PropTypes.arrayOf(PropTypes.string),
         message: PropTypes.string,
         ws: PropTypes.object.isRequired
     };
 
-    getChildContext() {
-        return {
-            message: this.state.message,
-            ws: this.state.ws
+    // private readonly WS_PATH = 'ws://localhost:8181/consoleappsample';
+    private readonly WS_PATH = 'ws://echo.websocket.org';
+
+    constructor() {
+        super();
+        this.state = {
+            authorized: false,
+            chatMessages: [],
+            message: '',
+            ws: null
         };
     }
 
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            authorized: false,
-            message: '',
-            ws: null
+    getChildContext() {
+        return {
+            message: this.state.message,
+            chatMessages: this.state.chatMessages,
+            ws: this.state.ws
         };
     }
 
@@ -40,7 +45,6 @@ class Auth extends React.Component<{}, AuthState>
 
     componentWillUnmount() {
         this.state.ws.close();
-        this.setState({ authorized: false });
     }
 
     connectToServer() {
@@ -53,23 +57,27 @@ class Auth extends React.Component<{}, AuthState>
         ws.onopen = this.OnOpen;
     }
 
-    OnClose = (event: any) => {
+    OnClose = (event: Event) => {
+        this.setState({ authorized: false });
+        this.connectToServer();
         console.warn('OnClose:::', event);
-    };
+    }
 
-    OnMessage = (event: any) => {
+    OnMessage = ({ data }: any) => {
         console.warn('OnMessage:::', event);
-        this.setState({ message: event.data })
-    };
+        this.setState((prevState: AuthState) => {
+            return {chatMessages: [...prevState.chatMessages, data]};
+        });
+    }
 
-    OnOpen = (event: any) => {
+    OnOpen = (event: Event) => {
         console.warn('OnOpen:::', event);
-    };
+    }
 
     onSubmitForm = (userName: string) => {
         this.state.ws.send(userName);
         this.setState({ authorized: true });
-    };
+    }
 
     render() {
         console.warn(this.state.ws);

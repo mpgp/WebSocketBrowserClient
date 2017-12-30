@@ -1,19 +1,16 @@
 import * as React from 'react';
 
-import Chat from './components/Chat';
 import Auth from './components/Auth';
+import Chat from './components/Chat';
+import Game from './components/Game';
 
-class App extends React.Component<{}, {}> {
-
-    render() {
-        return (
-            <div className='App'>
-                <Auth>
-                    <Chat/>
-                </Auth>
-            </div>
-        );
-    }
-}
+const App = () => (
+    <div className='App'>
+        <Auth>
+            <Game />
+            <Chat/>
+        </Auth>
+    </div>
+);
 
 export default App;
