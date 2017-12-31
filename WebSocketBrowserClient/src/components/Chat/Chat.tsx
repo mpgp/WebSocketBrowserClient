@@ -1,39 +1,29 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
 
 import './Chat.scss';
-import AddMessageForm from './AddMessageForm';
 import MessageList from './MessageList';
+import AddMessageForm from './AddMessageForm';
+import WebSocketStore from '../../stores/WebSocketStore';
 
-
+@observer
 class Chat extends React.Component<{}, {}> {
-    static contextTypes = {
-        ws: PropTypes.object.isRequired,
-        webSocketMessages: PropTypes.arrayOf(PropTypes.shape({
-            type: PropTypes.string,
-            payload: PropTypes.object
-        })),
-        userName: PropTypes.string,
-    };
 
     onSubmitForm = (message: string) => {
-        const data = {
-            type: 'CHAT_MESSAGE',
-            payload: {
-                Message: message,
-                Time: '16:42',
-                UserName: this.context.userName
+        WebSocketStore.send({
+            Type: 'CHAT_MESSAGE',
+            Payload: {
+                Message: message
             }
-        };
-        this.context.ws.send(JSON.stringify(data));
+        });
     }
 
     render() {
         return (
             <div className='Chat'>
                 <MessageList
-                    messages={this.context.webSocketMessages}
-                    myName={this.context.userName}
+                    messages={WebSocketStore.messages}
+                    myName={WebSocketStore.userName}
                 />
                 <AddMessageForm onSubmit={this.onSubmitForm} />
             </div>
