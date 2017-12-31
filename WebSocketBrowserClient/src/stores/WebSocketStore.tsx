@@ -1,15 +1,15 @@
 import { action, observable } from 'mobx';
 
 export interface WebSocketMessage {
-    type: string;
-    payload?: any;
+    Type: string;
+    Payload?: any;
 }
 
 class WebSocketStore {
     @observable userName: string;
     @observable messages: WebSocketMessage[];
     @observable connectionStatus: boolean;
-    private readonly WS_PATH = 'ws://echo.websocket.org'; // 'ws://localhost:8181/consoleappsample'
+    private readonly WS_PATH = 'ws://localhost:8181/consoleappsample';
     private ws: WebSocket;
 
     constructor() {

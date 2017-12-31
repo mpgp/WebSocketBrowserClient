@@ -18,9 +18,8 @@ class Auth extends React.Component<{}, {}> {
         WebSocketStore.setUserName(userName);
         WebSocketStore.setConnectionStatus(true);
         WebSocketStore.send({
-            type: 'AUTH',
-            payload: {
-                Time: '16:42',
+            Type: 'AUTH_MESSAGE',
+            Payload: {
                 UserName: userName
             }
         });
