@@ -10,7 +10,7 @@ interface MessageListProps {
 }
 
 const Message = (myName: string) => (message: WebSocketMessage, index: number) => (
-    message.Type === 'CHAT_MESSAGE' || message.Type === 'AUTH_MESSAGE' ?
+    message.Type === 'CHAT_MESSAGE' ?
         <p className='Message' key={index}>
             [{message.Payload.Time }]
             &nbsp;
@@ -18,11 +18,7 @@ const Message = (myName: string) => (message: WebSocketMessage, index: number) =
                 &lt;{ message.Payload.UserName }&gt;
             </span>
             &nbsp;
-            {
-                message.Type === 'CHAT_MESSAGE'
-                ? message.Payload.Message
-                : 'was joined to chat!'
-            }
+            {message.Payload.Message}
         </p>
     : null
 );

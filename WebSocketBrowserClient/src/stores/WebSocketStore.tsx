@@ -39,21 +39,25 @@ class WebSocketStore {
 
     @action
     OnMessage = ({ data }: any) => {
-        this.messages = [...this.messages, JSON.parse(data)];
+        const newMessage = JSON.parse(data) as WebSocketMessage;
+        console.warn({
+            str: data,
+            obj: newMessage
+        });
+
+        if (newMessage.Type === 'AUTH_MESSAGE') {
+            this.userName = newMessage.Payload.UserName;
+            this.connectionStatus = newMessage.Payload.Status as boolean;
+            if (!newMessage.Payload.Status) {
+                alert(newMessage.Payload.Message);
+            }
+        } else {
+            this.messages = [...this.messages, newMessage];
+        }
     }
 
     send(data: WebSocketMessage) {
         this.ws.send(JSON.stringify(data));
-    }
-
-    @action
-    setConnectionStatus(status: boolean) {
-        this.connectionStatus = status;
-    }
-
-    @action
-    setUserName(userName: string) {
-        this.userName = userName;
     }
 }
 
