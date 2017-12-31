@@ -24,7 +24,7 @@ class WebSocketStore {
 
     @action
     connectToServer() {
-        const wsImpl = window.WebSocket || window.MozWebSocket;
+        const wsImpl = WebSocket;
         this.ws = new wsImpl(this.WS_PATH);
 
         this.ws.onclose = this.OnClose;
