@@ -3,7 +3,6 @@ import * as React from 'react';
 import './MessageList.scss';
 import { WebSocketMessage } from '../../stores/WebSocketStore';
 
-
 interface MessageListProps {
     messages: WebSocketMessage[];
     myName: string;
@@ -12,10 +11,10 @@ interface MessageListProps {
 const Message = (myName: string) => (message: WebSocketMessage, index: number) => (
     message.Type === 'CHAT_MESSAGE' ?
         <p className='Message' key={index}>
-            [{message.Payload.Time }]
+            [{message.Payload.Time}]
             &nbsp;
             <span className={'Message__userName' + (myName === message.Payload.UserName ? ' bold' : '')}>
-                &lt;{ message.Payload.UserName }&gt;
+                &lt;{message.Payload.UserName}&gt;
             </span>
             &nbsp;
             {message.Payload.Message}

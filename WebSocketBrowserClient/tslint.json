@@ -1,6 +1,8 @@
 {
   "extends": [
-    "tslint:recommended"
+    "tslint:recommended",
+	"tslint:latest",
+	"tslint-react"
   ],
   "rulesDirectory": [
     "node_modules/codelyzer"
@@ -33,6 +35,9 @@
       "allow-pascal-case",
       "ban-keywords",
       "check-format"
-    ]
+    ],
+	"jsx-no-multiline-js": false,
+	"jsx-no-string-ref": false,
+	"jsx-wrap-multiline": false
   }
 }
