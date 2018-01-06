@@ -1,13 +1,9 @@
-import * as webpack from 'webpack';
 import * as path from 'path';
+import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
 const config: webpack.Configuration = {
-    entry: [
-        'react-hot-loader/patch',
-        './src/index.tsx',
-    ],
     output: {
         path: path.join(__dirname, '../dist'),
         filename: '[name].js',
@@ -24,7 +20,6 @@ const config: webpack.Configuration = {
                 typeof module.context === 'string' && module.context.indexOf('node_modules') !== -1
             )}),
         new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             title: 'Multiplayer Game Platform',
             chunksSortMode: 'dependency',
@@ -34,20 +29,6 @@ const config: webpack.Configuration = {
 
     module: {
         loaders: [
-            {
-                test: /\.tsx?$/,
-                loaders: [
-                    'react-hot-loader/webpack',
-                    'awesome-typescript-loader'
-                ],
-                exclude: path.resolve(__dirname, '../node_modules'),
-                include: path.resolve(__dirname, '../src'),
-            },
-            {
-                enforce: 'pre',
-                test: /\.js$/,
-                loader: 'source-map-loader'
-            },
             {
                 test: /\.scss$/,
                 use: [{
