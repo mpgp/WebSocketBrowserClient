@@ -1,3 +1,11 @@
 .Message {
   color: #666;
+
+  &__userName {
+    color: #000;
+
+    &.bold {
+      font-weight: bold;
+    }
+  }
 }
