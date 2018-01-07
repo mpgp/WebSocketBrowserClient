@@ -4,19 +4,23 @@ const merge = require('webpack-merge');
 
 const commonConfig = require('./webpack.common');
 
+const NODE_ENV = 'dev';
+const API_PATH = '/api/';
+
 module.exports = merge(commonConfig, {
     entry: [
         'react-hot-loader/patch',
-        './src/index.tsx',
+        './src/index.tsx'
     ],
 
     devtool: 'source-map',
 
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('dev')
+            'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
+            'process.env.API_PATH': JSON.stringify(API_PATH)
         }),
-        new webpack.HotModuleReplacementPlugin(),
+        new webpack.HotModuleReplacementPlugin()
     ],
 
     module: {

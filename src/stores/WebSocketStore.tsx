@@ -9,7 +9,7 @@ class WebSocketStore {
     @observable userName: string;
     @observable messages: WebSocketMessage[];
     @observable connectionStatus: boolean;
-    private readonly WS_PATH = 'ws://localhost:8181/consoleappsample';
+    private readonly WS_PATH = `ws://${window.location.hostname}:8181/consoleappsample`;
     private ws: WebSocket;
 
     constructor() {
