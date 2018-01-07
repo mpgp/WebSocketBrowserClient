@@ -10,9 +10,9 @@
   </PropertyGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)config\webpack.common.ts" />
-    <Content Include="$(MSBuildThisFileDirectory)config\webpack.dev.ts" />
-    <Content Include="$(MSBuildThisFileDirectory)config\webpack.prod.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)config\webpack.common.js" />
+    <Content Include="$(MSBuildThisFileDirectory)config\webpack.dev.js" />
+    <Content Include="$(MSBuildThisFileDirectory)config\webpack.prod.js" />
     <Content Include="$(MSBuildThisFileDirectory)package.json" />
     <Content Include="$(MSBuildThisFileDirectory)README.md" />
     <Content Include="$(MSBuildThisFileDirectory)src\App.tsx" />

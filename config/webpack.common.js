@@ -1,9 +1,9 @@
-import * as path from 'path';
-import * as webpack from 'webpack';
-import * as HtmlWebpackPlugin from 'html-webpack-plugin';
-import CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
-const config: webpack.Configuration = {
+module.exports = {
     output: {
         path: path.join(__dirname, '../dist'),
         filename: '[name].js',
@@ -16,7 +16,7 @@ const config: webpack.Configuration = {
     plugins: [
         new CommonsChunkPlugin({
             name: 'vendors',
-            minChunks: (module: any) => (
+            minChunks: (module) => (
                 typeof module.context === 'string' && module.context.indexOf('node_modules') !== -1
             )}),
         new webpack.NamedModulesPlugin(),
@@ -43,5 +43,3 @@ const config: webpack.Configuration = {
     }
 
 };
-
-export default config;

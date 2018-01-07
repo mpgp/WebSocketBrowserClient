@@ -1,10 +1,10 @@
-import * as path from 'path';
-import * as webpack from 'webpack';
-import commonConfig from './webpack.common';
-
+const path = require('path');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 
-const config: webpack.Configuration = merge(commonConfig, {
+const commonConfig = require('./webpack.common');
+
+module.exports = merge(commonConfig, {
     entry: [
         './src/index.tsx',
     ],
@@ -30,5 +30,3 @@ const config: webpack.Configuration = merge(commonConfig, {
         ]
     }
 });
-
-export default config;
