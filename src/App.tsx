@@ -1,26 +1,21 @@
 import * as React from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-import { Home, Home2 } from './home';
-import Auth from './components/Auth';
-import Chat from './components/Chat';
-import Game from './components/Game';
-import { Link, Route, Switch } from 'react-router-dom';
+import Auth from './containers/Auth';
+import { Header } from './components/Header';
+import ServerPage from './containers/ServerPage';
+import ServerSelect from './containers/ServerSelect';
 
 const App = () => (
     <div className='App'>
-        <div className='menu'>
-            <ul>
-                <li> <Link to='/'>Home</Link> </li>
-                <li> <Link to='/home2'>Home2</Link> </li>
-            </ul>
-        </div>
-        <div className='auth'>
+        <Auth>
+            <Header />
             <Switch>
-                <Route exact={true} path='/' component={Home}/>
-                <Route path='/home2' component={Home2}/>
+                <Route path='/' component={ServerSelect} exact={true}/>
+                <Route path='/server/:code' component={ServerPage}/>
             </Switch>
-        </div>
+        </Auth>
     </div>
 );
 
-export default App;
+export { App };
