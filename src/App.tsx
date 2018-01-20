@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import Auth from './containers/Auth';
 import { Header } from './components/Header';
@@ -13,6 +13,7 @@ const App = () => (
             <Switch>
                 <Route path='/' component={ServerSelect} exact={true}/>
                 <Route path='/server/:code' component={ServerPage}/>
+                <Redirect to='/'/>
             </Switch>
         </Auth>
     </div>
