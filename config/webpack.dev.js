@@ -44,7 +44,8 @@ module.exports = merge(commonConfig, {
 
     devServer: {
         hot: true,
-        disableHostCheck: true
+        disableHostCheck: true,
+        historyApiFallback: true
     }
 
 });

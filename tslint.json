@@ -4,9 +4,6 @@
 	"tslint:latest",
 	"tslint-react"
   ],
-  "rulesDirectory": [
-    "node_modules/codelyzer"
-  ],
   "rules": {
     "trailing-comma": [false, {"multiline": "always", "singleline": "never"}],
     "interface-name": [false, "always-prefix"],
