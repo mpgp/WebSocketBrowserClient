@@ -3,8 +3,8 @@ import { RouteComponentProps } from 'react-router-dom';
 
 import SERVERS_MOCK_DATA from './servers.mock';
 import { REQUEST_STATUS } from '../common/enums';
-import { RequestStatus, Server } from '../common/interfaces';
 import { ServerRoom } from '../components/ServerRoom';
+import { RequestStatus, Server } from '../common/interfaces';
 
 interface ServerPageState extends RequestStatus {
     server: Server;

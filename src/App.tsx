@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import Auth from './containers/Auth';
+import Logout from './containers/Logout';
 import { Header } from './components/Header';
 import ServerPage from './containers/ServerPage';
 import ServerSelect from './containers/ServerSelect';
@@ -12,6 +13,7 @@ const App = () => (
             <Header />
             <Switch>
                 <Route path='/' component={ServerSelect} exact={true}/>
+                <Route path='/logout' component={Logout}/>
                 <Route path='/server/:code' component={ServerPage}/>
                 <Redirect to='/'/>
             </Switch>
