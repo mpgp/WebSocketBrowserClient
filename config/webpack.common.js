@@ -6,7 +6,7 @@ const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 module.exports = {
     output: {
         path: path.join(__dirname, '../dist'),
-        filename: '[name].js',
+        filename: 'js/[name].js',
     },
 
     resolve: {
