@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --config config/webpack.prod.js --optimize-minimize --progress --profile --bail",
     "start": "webpack-dev-server --config config/webpack.dev.js --content-base dist/ --progress --profile --bail",
+    "copy": "cp -rf ./public/. ./dist",
     "lint": "tslint --project tslint.json \"src/**/*.{ts,tsx}\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
