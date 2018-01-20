@@ -18,7 +18,6 @@ class SignUp extends React.Component<{}, RequestStatus> {
     signUp = ({Login, Password}: AuthData) => {
         FetchApi.put('account', { Login, Password })
             .then((response) => {
-                console.warn(response);
                 if (response && response.authToken) {
                     localStorage.setItem('auth', JSON.stringify({token: response.authToken}));
                     this.setState({status: REQUEST_STATUS.SUCCESS});
