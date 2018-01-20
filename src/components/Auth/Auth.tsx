@@ -14,7 +14,7 @@ class Auth extends React.Component<{}, {}> {
         WebSocketStore.close();
     }
 
-    onSubmitForm = (userName: string) => {
+    onSubmitForm = (userName: any) => {
         WebSocketStore.send({
             Type: 'AUTH_MESSAGE',
             Payload: {
