@@ -1,21 +1,18 @@
 import * as React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
+import Main from './Main';
 import Auth from './containers/Auth';
 import Logout from './containers/Logout';
-import { Header } from './components/Header';
-import ServerPage from './containers/ServerPage';
-import ServerSelect from './containers/ServerSelect';
+import SignUp from './containers/SignUp';
 
 const App = () => (
     <div className='App'>
         <Auth>
-            <Header />
             <Switch>
-                <Route path='/' component={ServerSelect} exact={true}/>
                 <Route path='/logout' component={Logout}/>
-                <Route path='/server/:code' component={ServerPage}/>
-                <Redirect to='/'/>
+                <Route path='/signup' component={SignUp}/>
+                <Route path='/' component={Main}/>
             </Switch>
         </Auth>
     </div>

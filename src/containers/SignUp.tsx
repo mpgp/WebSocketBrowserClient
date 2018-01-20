@@ -1,13 +1,12 @@
 import * as React from 'react';
+import { Redirect } from 'react-router-dom';
 
 import FetchApi from '../common/FetchApi';
 import { REQUEST_STATUS } from '../common/enums';
 import AuthForm, { AuthData } from '../components/Auth/AuthForm';
 import { RequestError, RequestStatus } from '../common/interfaces';
 
-class Auth extends React.Component<{}, RequestStatus> {
-    private static readonly IgnoreRoutes = ['signup'];
-
+class SignUp extends React.Component<{}, RequestStatus> {
     constructor() {
         super();
         this.state = {
@@ -16,8 +15,8 @@ class Auth extends React.Component<{}, RequestStatus> {
         };
     }
 
-    authorize = ({Login, Password}: AuthData) => {
-        FetchApi.post('account', { Login, Password })
+    signUp = ({Login, Password}: AuthData) => {
+        FetchApi.put('account', { Login, Password })
             .then((response) => {
                 console.warn(response);
                 if (response && response.authToken) {
@@ -34,23 +33,11 @@ class Auth extends React.Component<{}, RequestStatus> {
     }
 
     componentWillMount() {
-        if (Auth.IgnoreRoutes.includes(window.location.pathname.slice(1))) {
-            this.setState({status: REQUEST_STATUS.SUCCESS});
-            return;
-        }
-
         const auth = JSON.parse(localStorage.getItem('auth') || '{}');
 
-        if (!auth || !auth.token) {
-            this.setState({status: REQUEST_STATUS.ERROR});
-            return;
+        if (auth && auth.token) {
+            this.setState({status: REQUEST_STATUS.SUCCESS});
         }
-
-        FetchApi.patch('account', { Token: auth.token })
-            .then(({status}) => {
-                this.setState({status: status ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR});
-                console.warn(status);
-            });
     }
 
     render() {
@@ -58,40 +45,32 @@ class Auth extends React.Component<{}, RequestStatus> {
 
         switch (this.state.status) {
             case REQUEST_STATUS.SUCCESS: {
-                body = this.props.children;
+                body = <Redirect to='/'/>;
                 break;
             }
 
-            case REQUEST_STATUS.ERROR: {
+            default: {
                 body = (
                     <div>
-                        <h1>Sign In</h1>
                         {this.state.errors
                             .map((error: RequestError) => <p key={error.code}>{error.message}</p>)}
-                        <AuthForm onSubmit={this.authorize} />
+                        <AuthForm onSubmit={this.signUp} />
                         <p>
-                            <a href='/signup'>Sign Up</a>
-                        </p>
-                        <p>
-                            <a href='/forgot'>Forgot Password?</a>
+                            <a href='/'>Sign In</a>
                         </p>
                     </div>
                 );
                 break;
             }
-
-            default: {
-                body = 'spinner ...';
-                break;
-            }
         }
 
         return (
-            <div className='Auth'>
+            <div className='SignUp'>
+                <h1>Sign Up</h1>
                 {body}
             </div>
         );
     }
 }
 
-export default Auth;
+export default SignUp;

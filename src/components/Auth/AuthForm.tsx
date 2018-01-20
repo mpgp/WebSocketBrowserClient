@@ -35,7 +35,7 @@ class AuthForm extends React.Component<AuthFormProps, {}> {
                         </label>
                     </div>
                     <div>
-                        <button type='submit'>Log In!</button>
+                        <button type='submit'>Submit!</button>
                     </div>
                 </form>
             </div>
