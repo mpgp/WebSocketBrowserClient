@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Redirect } from 'react-router-dom';
 
-import FetchApi from '../common/FetchApi';
+import { CONTROLLERS, FetchApi } from '../common/FetchApi';
 import { REQUEST_STATUS } from '../common/enums';
-import AuthForm, { AuthData } from '../components/Auth/AuthForm';
+import AuthForm, { AuthData } from '../components/AuthForm';
 import { RequestError, RequestStatus } from '../common/interfaces';
 
 class SignUp extends React.Component<{}, RequestStatus> {
@@ -16,10 +16,10 @@ class SignUp extends React.Component<{}, RequestStatus> {
     }
 
     signUp = ({Login, Password}: AuthData) => {
-        FetchApi.put('account', { Login, Password })
+        FetchApi.put(CONTROLLERS.account, { Login, Password })
             .then((response) => {
                 if (response && response.authToken) {
-                    localStorage.setItem('auth', JSON.stringify({token: response.authToken}));
+                    localStorage.setItem('auth', JSON.stringify({token: response.authToken, Login}));
                     this.setState({status: REQUEST_STATUS.SUCCESS});
                     return;
                 }

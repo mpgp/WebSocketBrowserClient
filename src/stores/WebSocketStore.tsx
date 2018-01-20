@@ -9,7 +9,7 @@ class WebSocketStore {
     @observable userName: string;
     @observable messages: WebSocketMessage[];
     @observable connectionStatus: boolean;
-    private readonly WS_PATH = `ws://${window.location.hostname}:8181/consoleappsample`;
+    private readonly WS_PATH = 'consoleappsample';
     private ws: WebSocket;
 
     constructor() {
@@ -23,18 +23,24 @@ class WebSocketStore {
     }
 
     @action
-    connectToServer() {
+    connectToServer(address: string) {
         const wsImpl = WebSocket;
-        this.ws = new wsImpl(this.WS_PATH);
+        this.ws = new wsImpl(`${address}/${this.WS_PATH}`);
 
-        this.ws.onclose = this.OnClose;
+        this.ws.onopen = this.OnOpen;
         this.ws.onmessage = this.OnMessage;
     }
 
     @action
-    OnClose = () => {
-        this.connectionStatus = false;
-        this.connectToServer();
+    OnOpen = () => {
+        this.connectionStatus = true;
+        const auth = JSON.parse(localStorage.getItem('auth') || '{}');
+        this.send({
+            Type: 'AUTH_MESSAGE',
+            Payload: {
+                AuthToken: auth.token
+            }
+        });
     }
 
     @action
@@ -45,13 +51,7 @@ class WebSocketStore {
             obj: newMessage
         });
 
-        if (newMessage.Type === 'AUTH_MESSAGE') {
-            this.userName = newMessage.Payload.UserName;
-            this.connectionStatus = newMessage.Payload.Status as boolean;
-            if (!newMessage.Payload.Status) {
-                alert(newMessage.Payload.Message);
-            }
-        } else {
+        if (newMessage.Type === 'CHAT_MESSAGE') {
             this.messages = [...this.messages, newMessage];
         }
     }

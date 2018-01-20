@@ -17,5 +17,16 @@ const patch = (path: string, body: any) => sendRequest('PATCH', path, body);
 const post = (path: string, body: any) => sendRequest('POST', path, body);
 const put = (path: string, body: any) => sendRequest('PUT', path, body);
 
+const CONTROLLERS_LIST = [
+    'account',
+    // 'server',
+    // 'room',
+    // 'user',
+];
+
+const CONTROLLERS = CONTROLLERS_LIST.reduce((prev: any, next: string) => {
+    prev[next] = next;
+    return prev;
+}, {});
 const FetchApi = {del, get, patch, post, put};
-export default FetchApi;
+export { CONTROLLERS, FetchApi };
