@@ -4,13 +4,39 @@ import { observer } from 'mobx-react';
 import './Chat.scss';
 import MessageList from './MessageList';
 import AddMessageForm from './AddMessageForm';
-import WebSocketStore from '../../stores/WebSocketStore';
+import WebSocketService, { Subscription } from '../../services/WebSocketService';
+
+interface ChatState {
+    messages: any[];
+}
 
 @observer
-class Chat extends React.Component<{}, {}> {
+class Chat extends React.Component<{}, ChatState> {
+    private chatMessageSub: Subscription;
+    private Login = JSON.parse(localStorage.getItem('auth')).Login;
+
+    constructor() {
+        super();
+        this.state = {
+            messages: []
+        };
+    }
+
+    componentWillMount() {
+        this.chatMessageSub = WebSocketService.subscribe(
+            'CHAT_MESSAGE',
+            (message: any) => {
+                this.setState((prevState) => ({messages: prevState.messages.concat(message)}));
+            }
+        );
+    }
+
+    componentWillUnmount() {
+        this.chatMessageSub.unsubscribe();
+    }
 
     onSubmitForm = (message: string) => {
-        WebSocketStore.send({
+        WebSocketService.send({
             Type: 'CHAT_MESSAGE',
             Payload: {
                 Message: message
@@ -22,8 +48,8 @@ class Chat extends React.Component<{}, {}> {
         return (
             <div className='Chat'>
                 <MessageList
-                    messages={WebSocketStore.messages}
-                    myName={WebSocketStore.userName}
+                    messages={this.state.messages}
+                    myName={this.Login}
                 />
                 <AddMessageForm onSubmit={this.onSubmitForm} />
             </div>

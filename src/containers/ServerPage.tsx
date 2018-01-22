@@ -5,8 +5,8 @@ import { RouteComponentProps } from 'react-router-dom';
 import SERVERS_MOCK_DATA from './servers.mock';
 import { REQUEST_STATUS } from '../common/enums';
 import { ServerRoom } from '../components/ServerRoom';
-import WebSocketStore from '../stores/WebSocketStore';
 import { RequestStatus, Server } from '../common/interfaces';
+import WebSocketService from '../services/WebSocketService';
 
 interface ServerPageState extends RequestStatus {
     server: Server;
@@ -32,11 +32,11 @@ class ServerPage extends React.Component<RouteComponentProps<any>, ServerPageSta
             return;
         }
 
-        WebSocketStore.connectToServer(server.address);
+        WebSocketService.connectToServer(server.address);
     }
 
     componentWillUnmount() {
-        WebSocketStore.close();
+        WebSocketService.close();
     }
 
     render() {
