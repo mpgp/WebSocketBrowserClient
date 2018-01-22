@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { CONTROLLERS, ApiService } from '../services/ApiService';
 import { REQUEST_STATUS } from '../common/enums';
 import AuthForm, { AuthData } from '../components/AuthForm';
+import { CONTROLLERS, ApiService } from '../services/ApiService';
 import { RequestError, RequestStatus } from '../common/interfaces';
 
 class Auth extends React.Component<{}, RequestStatus> {

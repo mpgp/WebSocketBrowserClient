@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { Server } from '../../common/interfaces';
 import Chat from '../Chat/Chat';
 import Game from '../Game/Game';
+import { Server } from '../../common/interfaces';
 
 const ServerRoom = (props: Server) => (
     <div className='ServerRoom'>
