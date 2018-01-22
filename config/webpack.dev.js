@@ -4,8 +4,11 @@ const merge = require('webpack-merge');
 
 const commonConfig = require('./webpack.common');
 
-const NODE_ENV = 'dev';
-const API_PATH = '/api/';
+const DEFINITIONS = {
+    NODE_ENV: 'dev',
+    API_PATH: 'http://localhost:5000/api/',
+    WEBSOCKET_PATH: 'consoleappsample'
+};
 
 module.exports = merge(commonConfig, {
     entry: [
@@ -16,10 +19,10 @@ module.exports = merge(commonConfig, {
     devtool: 'source-map',
 
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-            'process.env.API_PATH': JSON.stringify(API_PATH)
-        }),
+        new webpack.DefinePlugin(Object.keys(DEFINITIONS).reduce((prev, cur) => {
+            prev['process.env.' + cur] = JSON.stringify(DEFINITIONS[cur]);
+            return prev;
+        }, {})),
         new webpack.HotModuleReplacementPlugin()
     ],
 

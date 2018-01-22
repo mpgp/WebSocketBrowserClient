@@ -1,5 +1,5 @@
 const sendRequest = (method: string, path: string, body: any) => {
-    return fetch(`http://localhost:5000/api/${path}`, {
+    return fetch(process.env.API_PATH + path, {
         method,
         body: JSON.stringify(body),
         headers: {
