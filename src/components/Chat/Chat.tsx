@@ -5,9 +5,10 @@ import './Chat.scss';
 import MessageList from './MessageList';
 import AddMessageForm from './AddMessageForm';
 import WebSocketService, { Subscription } from '../../services/WebSocketService';
+import { ChatMessage } from '../../common/interfaces/WebSocketPayloads/Server';
 
 interface ChatState {
-    messages: any[];
+    messages: ChatMessage[];
 }
 
 @observer
@@ -25,7 +26,7 @@ class Chat extends React.Component<{}, ChatState> {
     componentWillMount() {
         this.chatMessageSub = WebSocketService.subscribe(
             'CHAT_MESSAGE',
-            (message: any) => {
+            (message: ChatMessage) => {
                 this.setState((prevState) => ({messages: prevState.messages.concat(message)}));
             }
         );

@@ -1,6 +1,8 @@
+import { BaseMessage } from '../common/interfaces/WebSocketPayloads/BaseMessage';
+
 export interface Subscriber {
     messageType: string;
-    callback: (message: any) => any;
+    callback: (message: BaseMessage) => void | any;
 }
 
 export interface Subscription {
@@ -27,14 +29,19 @@ class WebSocketService {
         this.ws.onmessage = this.OnMessage.bind(this);
     }
 
-    send(data: any) {
+    send(data: WebSocketMessage) {
         this.ws.send(JSON.stringify(data));
     }
 
-    subscribe(messageType: string, callback: (message: any) => any): Subscription {
-        this.subscribersList.push({messageType, callback});
+    subscribe(messageType: string, callback: (message: BaseMessage) => void | any): Subscription {
+        const newSubscriber: Subscriber = {messageType, callback};
+        this.subscribersList.push(newSubscriber);
         return {
-            unsubscribe: () => { this.subscribersList.splice(this.subscribersList.findIndex(callback), 1); }
+            unsubscribe: () => {
+                this.subscribersList.splice(
+                    this.subscribersList.findIndex((subscriber) => subscriber === newSubscriber),
+                    1);
+            }
         };
     }
 
@@ -48,7 +55,7 @@ class WebSocketService {
         });
     }
 
-    private OnMessage({ data }: any) {
+    private OnMessage({ data }: {data: string}) {
         const newMessage = JSON.parse(data) as WebSocketMessage;
         console.warn({
             str: data,

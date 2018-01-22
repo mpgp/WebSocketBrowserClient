@@ -6,7 +6,7 @@ import { Header } from './components/Header';
 import ServerPage from './containers/ServerPage';
 import ServerSelect from './containers/ServerSelect';
 
-const Main = (props: any) => (
+const Main = () => (
     <Auth>
         <Header />
         <Switch>

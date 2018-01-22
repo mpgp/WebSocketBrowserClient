@@ -2,21 +2,22 @@ import * as React from 'react';
 
 import './MessageList.scss';
 import { DateTimeView, DateModes } from '../Shared';
+import { ChatMessage } from '../../common/interfaces/WebSocketPayloads/Server';
 
 interface MessageListProps {
-    messages: any[];
+    messages: ChatMessage[];
     myName: string;
 }
 
-const Message = (myName: string) => (message: any, index: number) => (
+const Message = (myName: string) => (chatMessage: ChatMessage, index: number) => (
     <p className='Message' key={index}>
-        [<DateTimeView Time={message.Time} Mode={DateModes.DateTime}/>]
+        [<DateTimeView Time={chatMessage.Time} Mode={DateModes.DateTime}/>]
         &nbsp;
-        <span className={'Message__userName' + (myName === message.UserName ? ' bold' : '')}>
-            &lt;{message.UserName}&gt;
+        <span className={'Message__userName' + (myName === chatMessage.UserName ? ' bold' : '')}>
+            &lt;{chatMessage.UserName}&gt;
         </span>
         &nbsp;
-        {message.Message}
+        {chatMessage.Message}
     </p>
 );
 
