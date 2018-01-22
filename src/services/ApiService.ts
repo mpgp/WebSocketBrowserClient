@@ -28,5 +28,5 @@ const CONTROLLERS = CONTROLLERS_LIST.reduce((prev: any, next: string) => {
     prev[next] = next;
     return prev;
 }, {});
-const FetchApi = {del, get, patch, post, put};
-export { CONTROLLERS, FetchApi };
+const ApiService = { del, get, patch, post, put };
+export { CONTROLLERS, ApiService };

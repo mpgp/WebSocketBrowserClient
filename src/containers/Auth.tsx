@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { CONTROLLERS, FetchApi } from '../common/FetchApi';
+import { CONTROLLERS, ApiService } from '../services/ApiService';
 import { REQUEST_STATUS } from '../common/enums';
 import AuthForm, { AuthData } from '../components/AuthForm';
 import { RequestError, RequestStatus } from '../common/interfaces';
@@ -15,7 +15,7 @@ class Auth extends React.Component<{}, RequestStatus> {
     }
 
     authorize = ({Login, Password}: AuthData) => {
-        FetchApi.post(CONTROLLERS.account, { Login, Password })
+        ApiService.post(CONTROLLERS.account, { Login, Password })
             .then((response) => {
                 if (response && response.authToken) {
                     localStorage.setItem('auth', JSON.stringify({token: response.authToken, Login}));
@@ -38,7 +38,7 @@ class Auth extends React.Component<{}, RequestStatus> {
             return;
         }
 
-        FetchApi.patch(CONTROLLERS.account, { Token: auth.token })
+        ApiService.patch(CONTROLLERS.account, { Token: auth.token })
             .then(({status}) => {
                 this.setState({status: status ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR});
             });
