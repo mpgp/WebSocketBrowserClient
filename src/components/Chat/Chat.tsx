@@ -5,10 +5,11 @@ import './Chat.scss';
 import MessageList from './MessageList';
 import AddMessageForm from './AddMessageForm';
 import WebSocketService, { Subscription } from '../../services/WebSocketService';
-import { ChatMessage } from '../../common/interfaces/WebSocketPayloads/Server';
+import { ChatMessage as ServerChatMessage } from '../../common/interfaces/WebSocketPayloads/Server';
+import { ChatMessage as ClientChatMessage} from '../../common/interfaces/WebSocketPayloads/Client';
 
 interface ChatState {
-    messages: ChatMessage[];
+    messages: ServerChatMessage[];
 }
 
 @observer
@@ -26,7 +27,7 @@ class Chat extends React.Component<{}, ChatState> {
     componentWillMount() {
         this.chatMessageSub = WebSocketService.subscribe(
             'CHAT_MESSAGE',
-            (message: ChatMessage) => {
+            (message: ServerChatMessage) => {
                 this.setState((prevState) => ({messages: prevState.messages.concat(message)}));
             }
         );
@@ -37,12 +38,7 @@ class Chat extends React.Component<{}, ChatState> {
     }
 
     onSubmitForm = (message: string) => {
-        WebSocketService.send({
-            Type: 'CHAT_MESSAGE',
-            Payload: {
-                Message: message
-            }
-        });
+        WebSocketService.send(new ClientChatMessage(message));
     }
 
     render() {

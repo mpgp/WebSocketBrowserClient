@@ -1,4 +1,6 @@
 import { BaseMessage } from '../common/interfaces/WebSocketPayloads/BaseMessage';
+import { AuthMessage } from '../common/interfaces/WebSocketPayloads/Client/AuthMessage';
+import { WebSocketMessage } from '../common/interfaces/WebSocketPayloads/WebSocketMessage';
 
 export interface Subscriber {
     messageType: string;
@@ -7,11 +9,6 @@ export interface Subscriber {
 
 export interface Subscription {
     unsubscribe: () => void;
-}
-
-export interface WebSocketMessage {
-    Type: string;
-    Payload?: any;
 }
 
 class WebSocketService {
@@ -29,8 +26,13 @@ class WebSocketService {
         this.ws.onmessage = this.OnMessage.bind(this);
     }
 
-    send(data: WebSocketMessage) {
-        this.ws.send(JSON.stringify(data));
+    send<T extends BaseMessage>(data: T) {
+        this.ws.send(
+            JSON.stringify({
+                Type: data.toString(),
+                Payload: data
+            })
+        );
     }
 
     subscribe(messageType: string, callback: (message: BaseMessage) => void | any): Subscription {
@@ -47,16 +49,11 @@ class WebSocketService {
 
     private OnOpen() {
         const auth = JSON.parse(localStorage.getItem('auth') || '{}');
-        this.send({
-            Type: 'AUTH_MESSAGE',
-            Payload: {
-                AuthToken: auth.token
-            }
-        });
+        this.send(new AuthMessage(auth.token));
     }
 
     private OnMessage({ data }: {data: string}) {
-        const newMessage = JSON.parse(data) as WebSocketMessage;
+        const newMessage = JSON.parse(data) as WebSocketMessage<BaseMessage>;
         console.warn({
             str: data,
             obj: newMessage
