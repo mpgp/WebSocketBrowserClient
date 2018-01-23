@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import Auth from './containers/Auth';
+import Auth from './pages/Auth';
 import { Header } from './components/Header';
-import ServerPage from './containers/ServerPage';
-import ServerSelect from './containers/ServerSelect';
+import ServerPage from './pages/ServerPage';
+import ServerSelect from './pages/ServerSelect';
 
 const Main = () => (
     <Auth>

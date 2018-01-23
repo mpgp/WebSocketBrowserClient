@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import Chat from '../Chat/Chat';
-import Game from '../Game/Game';
+import Game from '../Game';
+import Chat from '../../containers/Chat';
 import { Server } from '../../common/interfaces';
 
 const ServerRoom = (props: Server) => (

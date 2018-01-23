@@ -1,11 +1,12 @@
 import * as React from 'react';
+import { Redirect } from 'react-router-dom';
 
 import { REQUEST_STATUS } from '../common/enums';
-import AuthForm, { AuthData } from '../components/AuthForm';
+import AuthForm, { AuthData } from '../components/forms/AuthForm';
 import { CONTROLLERS, ApiService } from '../services/ApiService';
 import { RequestError, RequestStatus } from '../common/interfaces';
 
-class Auth extends React.Component<{}, RequestStatus> {
+class SignUp extends React.Component<{}, RequestStatus> {
     constructor() {
         super();
         this.state = {
@@ -14,8 +15,8 @@ class Auth extends React.Component<{}, RequestStatus> {
         };
     }
 
-    authorize = ({Login, Password}: AuthData) => {
-        ApiService.post(CONTROLLERS.account, { Login, Password })
+    signUp = ({Login, Password}: AuthData) => {
+        ApiService.put(CONTROLLERS.account, { Login, Password })
             .then((response) => {
                 if (response && response.authToken) {
                     localStorage.setItem('auth', JSON.stringify({token: response.authToken, Login}));
@@ -33,15 +34,9 @@ class Auth extends React.Component<{}, RequestStatus> {
     componentWillMount() {
         const auth = JSON.parse(localStorage.getItem('auth') || '{}');
 
-        if (!auth || !auth.token) {
-            this.setState({status: REQUEST_STATUS.ERROR});
-            return;
+        if (auth && auth.token) {
+            this.setState({status: REQUEST_STATUS.SUCCESS});
         }
-
-        ApiService.patch(CONTROLLERS.account, { Token: auth.token })
-            .then(({status}) => {
-                this.setState({status: status ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR});
-            });
     }
 
     render() {
@@ -49,40 +44,32 @@ class Auth extends React.Component<{}, RequestStatus> {
 
         switch (this.state.status) {
             case REQUEST_STATUS.SUCCESS: {
-                body = this.props.children;
+                body = <Redirect to='/'/>;
                 break;
             }
 
-            case REQUEST_STATUS.ERROR: {
+            default: {
                 body = (
                     <div>
-                        <h1>Sign In</h1>
                         {this.state.errors
                             .map((error: RequestError) => <p key={error.code}>{error.message}</p>)}
-                        <AuthForm onSubmit={this.authorize} />
+                        <AuthForm onSubmit={this.signUp} />
                         <p>
-                            <a href='/signup'>Sign Up</a>
-                        </p>
-                        <p>
-                            <a href='/forgot'>Forgot Password?</a>
+                            <a href='/'>Sign In</a>
                         </p>
                     </div>
                 );
                 break;
             }
-
-            default: {
-                body = 'spinner ...';
-                break;
-            }
         }
 
         return (
-            <div className='Auth'>
+            <div className='SignUp'>
+                <h1>Sign Up</h1>
                 {body}
             </div>
         );
     }
 }
 
-export default Auth;
+export default SignUp;

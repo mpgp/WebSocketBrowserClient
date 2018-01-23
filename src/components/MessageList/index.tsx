@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import './MessageList.scss';
+import './styles.scss';
 import { DateTimeView, DateModes } from '../Shared';
 import { ChatMessage } from '../../common/interfaces/WebSocketPayloads/Server';
 
@@ -25,8 +25,8 @@ const MessageList = (props: MessageListProps) => (
     <div className='MessageList'>
         {
             props.messages.length > 0
-            ? props.messages.map(Message(props.myName))
-            : <p>No messages...</p>
+                ? props.messages.map(Message(props.myName))
+                : <p>No messages...</p>
         }
     </div>
 );

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 
-import './Chat.scss';
-import MessageList from './MessageList';
-import AddMessageForm from './AddMessageForm';
-import WebSocketService, { Subscription } from '../../services/WebSocketService';
-import { ChatMessage as ServerChatMessage } from '../../common/interfaces/WebSocketPayloads/Server';
-import { ChatMessage as ClientChatMessage} from '../../common/interfaces/WebSocketPayloads/Client';
+import MessageList from '../components/MessageList';
+import AddMessageForm from '../components/forms/AddMessageForm';
+import WebSocketService, { Subscription } from '../services/WebSocketService';
+import { ChatMessage as ClientChatMessage} from '../common/interfaces/WebSocketPayloads/Client';
+import { ChatMessage as ServerChatMessage } from '../common/interfaces/WebSocketPayloads/Server';
+import { WebSocketPayloadTypes } from '../common/interfaces/WebSocketPayloads/WebSocketPayloadTypes';
 
 interface ChatState {
     messages: ServerChatMessage[];
@@ -26,7 +26,7 @@ class Chat extends React.Component<{}, ChatState> {
 
     componentWillMount() {
         this.chatMessageSub = WebSocketService.subscribe(
-            'CHAT_MESSAGE',
+            WebSocketPayloadTypes.ChatMessage,
             (message: ServerChatMessage) => {
                 this.setState((prevState) => ({messages: prevState.messages.concat(message)}));
             }
