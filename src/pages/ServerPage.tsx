@@ -2,11 +2,11 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { RouteComponentProps } from 'react-router-dom';
 
-import SERVERS_MOCK_DATA from './servers.mock';
 import { REQUEST_STATUS } from '../common/enums';
 import { ServerRoom } from '../components/ServerRoom';
 import { RequestStatus, Server } from '../common/interfaces';
 import WebSocketService from '../services/WebSocketService';
+import { ApiService, CONTROLLERS } from '../services/ApiService';
 
 interface ServerPageState extends RequestStatus {
     server: Server;
@@ -22,9 +22,8 @@ class ServerPage extends React.Component<RouteComponentProps<any>, ServerPageSta
         };
     }
 
-    componentWillMount() {
-        const server = SERVERS_MOCK_DATA
-            .find((serverItem: Server) => serverItem.code === this.props.match.params.code);
+    async componentWillMount() {
+        const server = await ApiService.post(CONTROLLERS.Server, {Code: this.props.match.params.code });
         const status = server != null ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR;
 
         this.setState({server, status});

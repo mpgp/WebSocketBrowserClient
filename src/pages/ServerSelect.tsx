@@ -1,8 +1,8 @@
 import * as React from 'react';
-import SERVERS_MOCK_DATA from './servers.mock';
 import { REQUEST_STATUS } from '../common/enums';
 import { ServersList } from '../components/ServersList';
 import { RequestStatus, Server } from '../common/interfaces';
+import { ApiService, CONTROLLERS } from '../services/ApiService';
 
 interface ServerSelectState extends RequestStatus {
     servers: Server[];
@@ -17,16 +17,14 @@ class ServerSelect extends React.Component<{}, ServerSelectState> {
         };
     }
 
-    componentWillMount() {
-        setTimeout(() => {
-            const servers = SERVERS_MOCK_DATA;
-            const status = servers.length > 0 ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR;
+    async componentWillMount() {
+        const servers = await ApiService.get(CONTROLLERS.Server);
+        const status = servers.length > 0 ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR;
 
-            this.setState({
-                servers,
-                status
-            });
-        }, 1000);
+        this.setState({
+            servers,
+            status
+        });
     }
 
     render() {

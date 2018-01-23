@@ -15,7 +15,7 @@ class Auth extends React.Component<{}, RequestStatus> {
     }
 
     authorize = ({Login, Password}: AuthData) => {
-        ApiService.post(CONTROLLERS.account, { Login, Password })
+        ApiService.post(CONTROLLERS.Account, { Login, Password })
             .then((response) => {
                 if (response && response.authToken) {
                     localStorage.setItem('auth', JSON.stringify({token: response.authToken, Login}));
@@ -38,7 +38,7 @@ class Auth extends React.Component<{}, RequestStatus> {
             return;
         }
 
-        ApiService.patch(CONTROLLERS.account, { Token: auth.token })
+        ApiService.patch(CONTROLLERS.Account, { Token: auth.token })
             .then(({status}) => {
                 this.setState({status: status ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR});
             });

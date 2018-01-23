@@ -16,7 +16,7 @@ class SignUp extends React.Component<{}, RequestStatus> {
     }
 
     signUp = ({Login, Password}: AuthData) => {
-        ApiService.put(CONTROLLERS.account, { Login, Password })
+        ApiService.put(CONTROLLERS.Account, { Login, Password })
             .then((response) => {
                 if (response && response.authToken) {
                     localStorage.setItem('auth', JSON.stringify({token: response.authToken, Login}));
