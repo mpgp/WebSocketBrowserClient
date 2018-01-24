@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { REQUEST_STATUS } from '../common/enums';
+import { ServerService } from '../services/http';
 import { ServersList } from '../components/ServersList';
 import { RequestStatus, Server } from '../common/interfaces';
-import { ApiService, CONTROLLERS } from '../services/ApiService';
 
 interface ServerSelectState extends RequestStatus {
     servers: Server[];
@@ -18,7 +18,7 @@ class ServerSelect extends React.Component<{}, ServerSelectState> {
     }
 
     async componentWillMount() {
-        const servers = await ApiService.get(CONTROLLERS.Server);
+        const servers = await ServerService.getServers();
         const status = servers.length > 0 ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR;
 
         this.setState({

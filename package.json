@@ -2,12 +2,12 @@
   "name": "WebSocketBrowserClient",
   "version": "1.0.0",
   "description": "Webpack + React + TypeScript",
-  "main": "./dist/bundle.js",
+  "main": "./dist/js/main.js",
   "scripts": {
     "build": "webpack --config config/webpack.prod.js --optimize-minimize --progress --profile --bail",
     "start": "webpack-dev-server --config config/webpack.dev.js --content-base dist/ --progress --profile --bail",
     "copy": "cp -rf ./public/. ./dist",
-    "lint": "tslint --project tslint.json \"src/**/*.{ts,tsx}\"",
+    "lint": "tslint --project tsconfig.json \"src/**/*.{ts,tsx}\" --format stylish",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

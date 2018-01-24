@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { observer } from 'mobx-react';
 
 import MessageList from '../components/MessageList';
 import AddMessageForm from '../components/forms/AddMessageForm';
@@ -12,7 +11,6 @@ interface ChatState {
     messages: ServerChatMessage[];
 }
 
-@observer
 class Chat extends React.Component<{}, ChatState> {
     private chatMessageSub: Subscription;
     private Login = JSON.parse(localStorage.getItem('auth')).Login;

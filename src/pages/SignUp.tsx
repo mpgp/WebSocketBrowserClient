@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Redirect } from 'react-router-dom';
 
 import { REQUEST_STATUS } from '../common/enums';
+import { AccountService } from '../services/http';
 import AuthForm, { AuthData } from '../components/forms/AuthForm';
-import { CONTROLLERS, ApiService } from '../services/ApiService';
 import { RequestError, RequestStatus } from '../common/interfaces';
 
 class SignUp extends React.Component<{}, RequestStatus> {
@@ -16,7 +16,7 @@ class SignUp extends React.Component<{}, RequestStatus> {
     }
 
     signUp = ({Login, Password}: AuthData) => {
-        ApiService.put(CONTROLLERS.Account, { Login, Password })
+        AccountService.register({ Login, Password })
             .then((response) => {
                 if (response && response.authToken) {
                     localStorage.setItem('auth', JSON.stringify({token: response.authToken, Login}));

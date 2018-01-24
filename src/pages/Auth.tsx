@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import { REQUEST_STATUS } from '../common/enums';
+import { AccountService } from '../services/http';
 import AuthForm, { AuthData } from '../components/forms/AuthForm';
-import { CONTROLLERS, ApiService } from '../services/ApiService';
 import { RequestError, RequestStatus } from '../common/interfaces';
 
 class Auth extends React.Component<{}, RequestStatus> {
@@ -15,7 +15,7 @@ class Auth extends React.Component<{}, RequestStatus> {
     }
 
     authorize = ({Login, Password}: AuthData) => {
-        ApiService.post(CONTROLLERS.Account, { Login, Password })
+        AccountService.auth({ Login, Password })
             .then((response) => {
                 if (response && response.authToken) {
                     localStorage.setItem('auth', JSON.stringify({token: response.authToken, Login}));
@@ -38,7 +38,7 @@ class Auth extends React.Component<{}, RequestStatus> {
             return;
         }
 
-        ApiService.patch(CONTROLLERS.Account, { Token: auth.token })
+        AccountService.checkToken({ Token: auth.token })
             .then(({status}) => {
                 this.setState({status: status ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR});
             });
