@@ -1,6 +1,5 @@
-import { BaseMessage } from '../common/interfaces/WebSocketPayloads/BaseMessage';
-import { AuthMessage } from '../common/interfaces/WebSocketPayloads/Client/AuthMessage';
-import { WebSocketMessage } from '../common/interfaces/WebSocketPayloads/WebSocketMessage';
+import { AuthMessage } from '../common/interfaces/WebSocketPayloads/Client';
+import { BaseMessage, WebSocketMessage } from '../common/interfaces/WebSocketPayloads';
 
 export interface Subscriber {
     messageType: string;
