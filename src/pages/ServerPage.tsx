@@ -20,8 +20,8 @@ class ServerPage extends React.Component<RouteComponentProps<any>, ServerPageSta
         };
     }
 
-    async componentWillMount() {
-        const server = (await ServerService.getServer(this.props.match.params.code)).data;
+    async componentDidMount() {
+        const server = await ServerService.getServer(this.props.match.params.code);
         const status = server != null ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR;
 
         this.setState({server, status});

@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { REQUEST_STATUS } from '../common/enums';
 import { AccountService } from '../services/http';
+import { RequestStatus } from '../common/interfaces';
 import AuthForm, { AuthData } from '../components/forms/AuthForm';
-import { RequestError, RequestStatus } from '../common/interfaces';
 
 class Auth extends React.Component<{}, RequestStatus> {
     constructor() {
@@ -12,25 +12,26 @@ class Auth extends React.Component<{}, RequestStatus> {
             errors: [],
             status: REQUEST_STATUS.PENDING
         };
+        this.authorize = this.authorize.bind(this);
     }
 
-    authorize = ({Login, Password}: AuthData) => {
-        AccountService.auth({ Login, Password })
-            .then((response) => {
-                if (response && response.authToken) {
-                    localStorage.setItem('auth', JSON.stringify({token: response.authToken, Login}));
-                    this.setState({status: REQUEST_STATUS.SUCCESS});
-                    return;
-                }
+    async authorize(authData: AuthData) {
+        const response = await AccountService.auth(authData);
 
-                this.setState({
-                    errors: response.errors,
-                    status: REQUEST_STATUS.ERROR
-                });
+        if (!response || response.errors) {
+            this.setState({
+                errors: response.errors,
+                status: REQUEST_STATUS.ERROR
             });
+            return;
+        }
+
+        const jsonAuthData = JSON.stringify({token: response.data.Token, login: authData.Login});
+        localStorage.setItem('auth', jsonAuthData);
+        this.setState({status: REQUEST_STATUS.SUCCESS});
     }
 
-    componentWillMount() {
+    async componentDidMount() {
         const auth = JSON.parse(localStorage.getItem('auth') || '{}');
 
         if (!auth || !auth.token) {
@@ -38,10 +39,10 @@ class Auth extends React.Component<{}, RequestStatus> {
             return;
         }
 
-        AccountService.checkToken({ Token: auth.token })
-            .then(({status}) => {
-                this.setState({status: status ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR});
-            });
+        const status = await AccountService.checkToken(auth.token);
+        this.setState({
+            status: status ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR
+        });
     }
 
     render() {
@@ -58,7 +59,7 @@ class Auth extends React.Component<{}, RequestStatus> {
                     <div>
                         <h1>Sign In</h1>
                         {this.state.errors
-                            .map((error: RequestError) => <p key={error.code}>{error.message}</p>)}
+                            .map((error: string) => <p key={error}>{error}</p>)}
                         <AuthForm onSubmit={this.authorize} />
                         <p>
                             <a href='/signup'>Sign Up</a>

@@ -12,7 +12,7 @@ class Logout extends React.Component<{}, RequestStatus> {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         // TODO: send request
         localStorage.removeItem('auth');
         console.warn('send DELETE to /api/account');

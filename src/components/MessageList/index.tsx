@@ -13,8 +13,8 @@ const Message = (myName: string) => (chatMessage: ChatMessage, index: number) =>
     <p className='Message' key={index}>
         [<DateTimeView Time={chatMessage.Time} Mode={DateModes.DateTime}/>]
         &nbsp;
-        <span className={'Message__userName' + (myName === chatMessage.UserName ? ' bold' : '')}>
-            &lt;{chatMessage.UserName}&gt;
+        <span className={'Message__login' + (myName === chatMessage.Login ? ' bold' : '')}>
+            &lt;{chatMessage.Login}&gt;
         </span>
         &nbsp;
         {chatMessage.Message}

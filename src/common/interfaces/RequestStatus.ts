@@ -1,11 +1,6 @@
 import { REQUEST_STATUS } from '../enums';
 
-export interface RequestError {
-    code: string;
-    message: string;
-}
-
 export interface RequestStatus {
-    errors?: RequestError[];
+    errors?: string[];
     status: REQUEST_STATUS;
 }

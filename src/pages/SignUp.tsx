@@ -3,8 +3,8 @@ import { Redirect } from 'react-router-dom';
 
 import { REQUEST_STATUS } from '../common/enums';
 import { AccountService } from '../services/http';
+import { RequestStatus } from '../common/interfaces';
 import AuthForm, { AuthData } from '../components/forms/AuthForm';
-import { RequestError, RequestStatus } from '../common/interfaces';
 
 class SignUp extends React.Component<{}, RequestStatus> {
     constructor() {
@@ -13,25 +13,26 @@ class SignUp extends React.Component<{}, RequestStatus> {
             errors: [],
             status: REQUEST_STATUS.PENDING
         };
+
+        this.signUp = this.signUp.bind(this);
     }
 
-    signUp = ({Login, Password}: AuthData) => {
-        AccountService.register({ Login, Password })
-            .then((response) => {
-                if (response && response.authToken) {
-                    localStorage.setItem('auth', JSON.stringify({token: response.authToken, Login}));
-                    this.setState({status: REQUEST_STATUS.SUCCESS});
-                    return;
-                }
-
-                this.setState({
-                    errors: response.errors,
-                    status: REQUEST_STATUS.ERROR
-                });
+    async signUp(authData: AuthData) {
+        const response = await AccountService.register(authData);
+        if (!response || response.errors) {
+            this.setState({
+                errors: response.errors,
+                status: REQUEST_STATUS.ERROR
             });
+            return;
+        }
+
+        const jsonAuthData = JSON.stringify({token: response.data.Token, login: authData.Login});
+        localStorage.setItem('auth', jsonAuthData);
+        this.setState({status: REQUEST_STATUS.SUCCESS});
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const auth = JSON.parse(localStorage.getItem('auth') || '{}');
 
         if (auth && auth.token) {
@@ -52,7 +53,7 @@ class SignUp extends React.Component<{}, RequestStatus> {
                 body = (
                     <div>
                         {this.state.errors
-                            .map((error: RequestError) => <p key={error.code}>{error.message}</p>)}
+                            .map((error: string) => <p key={error}>{error}</p>)}
                         <AuthForm onSubmit={this.signUp} />
                         <p>
                             <a href='/'>Sign In</a>

@@ -8,7 +8,13 @@ const sendRequest = (method: string, path: string, body: any = null) => {
         }
     })
         .then((response) => response.json())
-        .catch((error) => console.error(error));
+        .catch((error) => console.warn({
+            error,
+            msg: 'Не удалось получить данные',
+            path,
+            method,
+            body,
+        }));
 };
 
 const get = (path: string) => sendRequest('GET', path);

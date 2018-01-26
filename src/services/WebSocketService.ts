@@ -15,7 +15,9 @@ class WebSocketService {
     private ws: WebSocket;
 
     close() {
-        this.ws.close();
+        if (this.ws) {
+            this.ws.close();
+        }
     }
 
     connectToServer(address: string) {

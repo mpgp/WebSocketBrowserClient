@@ -3,9 +3,9 @@ import * as React from 'react';
 import MessageList from '../components/MessageList';
 import AddMessageForm from '../components/forms/AddMessageForm';
 import WebSocketService, { Subscription } from '../services/WebSocketService';
+import { WebSocketPayloadTypes } from '../common/interfaces/WebSocketPayloads';
 import { ChatMessage as ClientChatMessage} from '../common/interfaces/WebSocketPayloads/Client';
 import { ChatMessage as ServerChatMessage } from '../common/interfaces/WebSocketPayloads/Server';
-import { WebSocketPayloadTypes } from '../common/interfaces/WebSocketPayloads/WebSocketPayloadTypes';
 
 interface ChatState {
     messages: ServerChatMessage[];
@@ -13,16 +13,18 @@ interface ChatState {
 
 class Chat extends React.Component<{}, ChatState> {
     private chatMessageSub: Subscription;
-    private Login = JSON.parse(localStorage.getItem('auth')).Login;
+    private Login = JSON.parse(localStorage.getItem('auth')).login;
 
     constructor() {
         super();
         this.state = {
             messages: []
         };
+
+        this.onSubmitForm = this.onSubmitForm.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.chatMessageSub = WebSocketService.subscribe(
             WebSocketPayloadTypes.ChatMessage,
             (message: ServerChatMessage) => {
@@ -35,7 +37,7 @@ class Chat extends React.Component<{}, ChatState> {
         this.chatMessageSub.unsubscribe();
     }
 
-    onSubmitForm = (message: string) => {
+    onSubmitForm(message: string) {
         WebSocketService.send(new ClientChatMessage(message));
     }
 

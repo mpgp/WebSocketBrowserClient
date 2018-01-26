@@ -2,11 +2,11 @@ import { BaseMessage } from '../BaseMessage';
 import { WebSocketPayloadTypes } from '../WebSocketPayloadTypes';
 
 export class AuthMessage extends BaseMessage {
-    public AuthToken: string;
+    public Token: string;
     protected messageType = WebSocketPayloadTypes.AuthMessage;
 
-    constructor(authToken: string) {
+    constructor(token: string) {
         super();
-        this.AuthToken = authToken;
+        this.Token = token;
     }
 }
