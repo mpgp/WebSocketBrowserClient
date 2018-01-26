@@ -1,4 +1,5 @@
 import { ApiService } from './ApiService';
+import NotificationService from '../NotificationService';
 import { ApiResponse, Server } from '../../common/interfaces';
 
 const controller = 'server';
@@ -7,8 +8,9 @@ const getServers = (): Promise<Server[]> => ApiService.get(controller)
     .then((response: ApiResponse<Server[]>) => {
         try {
             return response.data;
-        } catch (e) {
-            window.alert(e);
+        } catch (error) {
+            console.warn({error, response});
+            NotificationService.error({title: 'getServers', message: 'cqw<br />\r\n\\r\\newqe'});
         }
     });
 
@@ -16,8 +18,9 @@ const getServer = (code: string): Promise<Server> => ApiService.get(`${controlle
     .then((response: ApiResponse<Server>) => {
         try {
             return response.data;
-        } catch (e) {
-            window.alert(e);
+        } catch (error) {
+            console.warn({error, response});
+            NotificationService.error({title: 'getServer', message: 'cqw<br />\r\n\\r\\newqe'});
         }
     });
 

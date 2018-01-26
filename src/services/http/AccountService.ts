@@ -1,5 +1,6 @@
 import { ApiService } from './ApiService';
 import { ApiResponse } from '../../common/interfaces';
+import NotificationService from '../NotificationService';
 import { AuthData } from '../../components/forms/AuthForm';
 import { TokenValidation, UserToken } from '../../common/interfaces/ApiPayloads/Account';
 
@@ -11,8 +12,9 @@ const checkToken = (token: string): Promise<number> => ApiService.patch(controll
     .then((response: ApiResponse<TokenValidation>) => {
         try {
             return response.data.status;
-        } catch (e) {
-            window.alert(e);
+        } catch (error) {
+            console.warn({error, response});
+            NotificationService.error({title: 'Oops', message: 'Failed to validate token'});
         }
     });
 

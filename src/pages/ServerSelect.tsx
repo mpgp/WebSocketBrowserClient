@@ -20,7 +20,6 @@ class ServerSelect extends React.Component<{}, ServerSelectState> {
     async componentDidMount() {
         const servers = await ServerService.getServers();
         const status = servers && servers.length > 0 ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR;
-
         this.setState({
             servers,
             status
