@@ -12,8 +12,8 @@ interface ServerPageState extends RequestStatus {
 }
 
 class ServerPage extends React.Component<RouteComponentProps<any>, ServerPageState> {
-    constructor() {
-        super();
+    constructor(props: RouteComponentProps<any>) {
+        super(props);
         this.state = {
             server: null,
             status: REQUEST_STATUS.PENDING
@@ -22,14 +22,12 @@ class ServerPage extends React.Component<RouteComponentProps<any>, ServerPageSta
 
     async componentDidMount() {
         const server = await ServerService.getServer(this.props.match.params.code);
-        const status = server != null ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR;
+        const status = server ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR;
 
         this.setState({server, status});
-        if (status === REQUEST_STATUS.ERROR) {
-            return;
+        if (status === REQUEST_STATUS.SUCCESS) {
+            WebSocketService.connectToServer(server.address);
         }
-
-        WebSocketService.connectToServer(server.address);
     }
 
     componentWillUnmount() {

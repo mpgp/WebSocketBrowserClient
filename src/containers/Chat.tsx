@@ -15,8 +15,8 @@ class Chat extends React.Component<{}, ChatState> {
     private chatMessageSub: Subscription;
     private Login = JSON.parse(localStorage.getItem('auth')).login;
 
-    constructor() {
-        super();
+    constructor(props: {}) {
+        super(props);
         this.state = {
             messages: []
         };

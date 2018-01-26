@@ -9,8 +9,8 @@ interface ServerSelectState extends RequestStatus {
 }
 
 class ServerSelect extends React.Component<{}, ServerSelectState> {
-    constructor() {
-        super();
+    constructor(props: {}) {
+        super(props);
         this.state = {
             servers: [],
             status: REQUEST_STATUS.PENDING
@@ -19,7 +19,7 @@ class ServerSelect extends React.Component<{}, ServerSelectState> {
 
     async componentDidMount() {
         const servers = await ServerService.getServers();
-        const status = servers.length > 0 ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR;
+        const status = servers && servers.length > 0 ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR;
 
         this.setState({
             servers,

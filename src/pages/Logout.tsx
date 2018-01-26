@@ -4,8 +4,8 @@ import { REQUEST_STATUS } from '../common/enums';
 import { RequestStatus } from '../common/interfaces';
 
 class Logout extends React.Component<{}, RequestStatus> {
-    constructor() {
-        super();
+    constructor(props: {}) {
+        super(props);
         this.state = {
             errors: [],
             status: REQUEST_STATUS.PENDING

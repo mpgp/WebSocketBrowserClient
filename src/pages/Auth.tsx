@@ -6,8 +6,8 @@ import { RequestStatus } from '../common/interfaces';
 import AuthForm, { AuthData } from '../components/forms/AuthForm';
 
 class Auth extends React.Component<{}, RequestStatus> {
-    constructor() {
-        super();
+    constructor(props: {}) {
+        super(props);
         this.state = {
             errors: [],
             status: REQUEST_STATUS.PENDING
@@ -20,13 +20,13 @@ class Auth extends React.Component<{}, RequestStatus> {
 
         if (!response || response.errors) {
             this.setState({
-                errors: response.errors,
+                errors: response && response.errors ? response.errors : [],
                 status: REQUEST_STATUS.ERROR
             });
             return;
         }
 
-        const jsonAuthData = JSON.stringify({token: response.data.Token, login: authData.Login});
+        const jsonAuthData = JSON.stringify({token: response.data.token, login: authData.Login});
         localStorage.setItem('auth', jsonAuthData);
         this.setState({status: REQUEST_STATUS.SUCCESS});
     }

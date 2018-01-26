@@ -9,5 +9,5 @@ export interface TokenValidation {
 }
 
 export interface UserToken {
-    Token: string;
+    token: string;
 }

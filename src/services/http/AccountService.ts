@@ -8,7 +8,13 @@ const controller = 'account';
 const auth = (body: AuthData): Promise<ApiResponse<UserToken>> => ApiService.post(controller, body);
 
 const checkToken = (token: string): Promise<number> => ApiService.patch(controller, { Token: token })
-    .then((response: ApiResponse<TokenValidation>) => response.data.status);
+    .then((response: ApiResponse<TokenValidation>) => {
+        try {
+            return response.data.status;
+        } catch (e) {
+            window.alert(e);
+        }
+    });
 
 const register = (body: AuthData): Promise<ApiResponse<UserToken>> => ApiService.put(controller, body);
 
