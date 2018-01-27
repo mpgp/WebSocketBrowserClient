@@ -10,9 +10,9 @@ const Main = () => (
     <Auth>
         <Header />
         <Switch>
-            <Route path='/' component={ServerSelect} exact={true}/>
-            <Route path='/server/:code' component={ServerPage}/>
-            <Redirect to='/'/>
+            <Route path="/" component={ServerSelect} exact={true}/>
+            <Route path="/server/:code" component={ServerPage}/>
+            <Redirect to="/"/>
         </Switch>
     </Auth>
 );

@@ -2,7 +2,7 @@ import * as React from 'react';
 
 const Game = () => (
     <img
-        src='/images/game.jpg'
+        src="/images/game.jpg"
         style={{ width: '400px', height: '400px', float: 'left' }}
     />
 );

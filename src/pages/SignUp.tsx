@@ -45,18 +45,18 @@ class SignUp extends React.Component<{}, RequestStatus> {
 
         switch (this.state.status) {
             case REQUEST_STATUS.SUCCESS: {
-                body = <Redirect to='/'/>;
+                body = <Redirect to="/"/>;
                 break;
             }
 
             default: {
                 body = (
                     <div>
-                        {this.state.errors
+                        {this.state.errors && this.state.errors
                             .map((error: string) => <p key={error}>{error}</p>)}
                         <AuthForm onSubmit={this.signUp} />
                         <p>
-                            <a href='/'>Sign In</a>
+                            <a href="/">Sign In</a>
                         </p>
                     </div>
                 );
@@ -65,7 +65,7 @@ class SignUp extends React.Component<{}, RequestStatus> {
         }
 
         return (
-            <div className='SignUp'>
+            <div className="SignUp">
                 <h1>Sign Up</h1>
                 {body}
             </div>

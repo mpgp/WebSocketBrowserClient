@@ -15,6 +15,7 @@ const checkToken = (token: string): Promise<number> => ApiService.patch(controll
         } catch (error) {
             console.warn({error, response});
             NotificationService.error({title: 'Oops', message: 'Failed to validate token'});
+            return 0;
         }
     });
 

@@ -10,7 +10,7 @@ interface MessageListProps {
 }
 
 const Message = (myName: string) => (chatMessage: ChatMessage, index: number) => (
-    <p className='Message' key={index}>
+    <p className="Message" key={index}>
         [<DateTimeView Time={chatMessage.Time} Mode={DateModes.DateTime}/>]
         &nbsp;
         <span className={'Message__login' + (myName === chatMessage.Login ? ' bold' : '')}>
@@ -22,7 +22,7 @@ const Message = (myName: string) => (chatMessage: ChatMessage, index: number) =>
 );
 
 const MessageList = (props: MessageListProps) => (
-    <div className='MessageList'>
+    <div className="MessageList">
         {
             props.messages.length > 0
                 ? props.messages.map(Message(props.myName))

@@ -2,9 +2,9 @@ import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Forgot = () => (
-    <div className='Forgot'>
+    <div className="Forgot">
         <p>Not implemented yet...</p>
-        <NavLink to='/'>Go back</NavLink>
+        <NavLink to="/">Go back</NavLink>
     </div>
 );
 

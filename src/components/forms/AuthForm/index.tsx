@@ -20,22 +20,22 @@ class AuthForm extends React.Component<AuthFormProps, {}> {
 
     render() {
         return (
-            <div className='AuthForm'>
+            <div className="AuthForm">
                 <form onSubmit={this.handleSubmit}>
                     <div>
                         <label>
                             <span><b>Login:</b> </span>
                             <p>
-                                <input type='text' name='Login' ref='Login' />
+                                <input type="text" name="Login" ref="Login" />
                             </p>
                         </label>
                         <label>
                             <span><b>Password:</b> </span>
-                            <p><input type='password' name='Password' ref='Password' /></p>
+                            <p><input type="password" name="Password" ref="Password" /></p>
                         </label>
                     </div>
                     <div>
-                        <button type='submit'>Submit!</button>
+                        <button type="submit">Submit!</button>
                     </div>
                 </form>
             </div>

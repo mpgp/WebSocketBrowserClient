@@ -11,6 +11,7 @@ const getServers = (): Promise<Server[]> => ApiService.get(controller)
         } catch (error) {
             console.warn({error, response});
             NotificationService.error({title: 'getServers', message: 'cqw<br />\r\n\\r\\newqe'});
+            return [];
         }
     });
 
@@ -21,6 +22,7 @@ const getServer = (code: string): Promise<Server> => ApiService.get(`${controlle
         } catch (error) {
             console.warn({error, response});
             NotificationService.error({title: 'getServer', message: 'cqw<br />\r\n\\r\\newqe'});
+            return {} as Server;
         }
     });
 

@@ -58,14 +58,14 @@ class Auth extends React.Component<{}, RequestStatus> {
                 body = (
                     <div>
                         <h1>Sign In</h1>
-                        {this.state.errors
+                        {this.state.errors && this.state.errors
                             .map((error: string) => <p key={error}>{error}</p>)}
                         <AuthForm onSubmit={this.authorize} />
                         <p>
-                            <a href='/signup'>Sign Up</a>
+                            <a href="/signup">Sign Up</a>
                         </p>
                         <p>
-                            <a href='/forgot'>Forgot Password?</a>
+                            <a href="/forgot">Forgot Password?</a>
                         </p>
                     </div>
                 );
@@ -79,7 +79,7 @@ class Auth extends React.Component<{}, RequestStatus> {
         }
 
         return (
-            <div className='Auth'>
+            <div className="Auth">
                 {body}
             </div>
         );

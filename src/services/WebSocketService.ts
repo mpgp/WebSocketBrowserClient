@@ -3,7 +3,7 @@ import { BaseMessage, WebSocketMessage } from '../common/interfaces/WebSocketPay
 
 export interface Subscriber {
     messageType: string;
-    callback: (message: BaseMessage) => void | any;
+    callback: <T>(message: BaseMessage) => void | T;
 }
 
 export interface Subscription {
@@ -21,7 +21,7 @@ class WebSocketService {
     }
 
     connectToServer(address: string) {
-        this.ws = new WebSocket(`${address}/${process.env.WEBSOCKET_PATH}`);
+        this.ws = new WebSocket(`${address}/${process.env.REACT_APP_WEBSOCKET_PATH}`);
 
         this.ws.onopen = this.OnOpen.bind(this);
         this.ws.onmessage = this.OnMessage.bind(this);
@@ -36,7 +36,7 @@ class WebSocketService {
         );
     }
 
-    subscribe(messageType: string, callback: (message: BaseMessage) => void | any): Subscription {
+    subscribe(messageType: string, callback: <T>(message: BaseMessage) => void | T): Subscription {
         const newSubscriber: Subscriber = {messageType, callback};
         this.subscribersList.push(newSubscriber);
         return {

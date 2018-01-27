@@ -21,7 +21,7 @@ class Logout extends React.Component<{}, RequestStatus> {
     }
 
     render() {
-        return this.state.status === REQUEST_STATUS.SUCCESS ? <Redirect to='/'/> : <div>...</div>;
+        return this.state.status === REQUEST_STATUS.SUCCESS ? <Redirect to="/"/> : <div>...</div>;
     }
 }
 

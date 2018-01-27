@@ -1,7 +1,7 @@
 import NotificationService from '../NotificationService';
 
-const sendRequest = (method: string, path: string, body: any = null) => {
-    return fetch(process.env.API_PATH + path, {
+const sendRequest = <T>(method: string, path: string, body: T) => {
+    return fetch(process.env.REACT_APP_API_PATH + path, {
         method,
         body: body ? JSON.stringify(body) : null,
         headers: {
@@ -11,6 +11,8 @@ const sendRequest = (method: string, path: string, body: any = null) => {
     })
         .then((response) => response.json())
         .catch((error) => {
+            console.warn(process);
+            console.warn(process.env);
             NotificationService.error({title: 'Oops', message: 'Failed to fetch data'});
             console.warn({
                 error,
@@ -22,11 +24,11 @@ const sendRequest = (method: string, path: string, body: any = null) => {
         });
 };
 
-const get = (path: string) => sendRequest('GET', path);
-const del = (path: string, body: any) => sendRequest('DELETE', path, body);
-const patch = (path: string, body: any) => sendRequest('PATCH', path, body);
-const post = (path: string, body: any) => sendRequest('POST', path, body);
-const put = (path: string, body: any) => sendRequest('PUT', path, body);
+const get = (path: string) => sendRequest('GET', path, null);
+const del = <T>(path: string, body: T) => sendRequest('DELETE', path, body);
+const patch = <T>(path: string, body: T) => sendRequest('PATCH', path, body);
+const post = <T>(path: string, body: T) => sendRequest('POST', path, body);
+const put = <T>(path: string, body: T) => sendRequest('PUT', path, body);
 
 const ApiService = { del, get, patch, post, put };
 export { ApiService };

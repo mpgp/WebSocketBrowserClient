@@ -15,16 +15,16 @@ class AddMessageForm extends React.Component<AddMessageFormProps, {}> {
 
     render() {
         return (
-            <div className='AuthForm'>
+            <div className="AuthForm">
                 <form onSubmit={this.handleSubmit}>
                     <p>
                         <label>
                             <span><b>Message:</b> </span>
-                            <input type='text' name='message' ref='message' />
+                            <input type="text" name="message" ref="message" />
                         </label>
                     </p>
                     <p>
-                        <button type='submit'>Send!</button>
+                        <button type="submit">Send!</button>
                     </p>
                 </form>
             </div>

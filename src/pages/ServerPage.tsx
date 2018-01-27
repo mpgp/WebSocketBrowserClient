@@ -4,18 +4,22 @@ import { RouteComponentProps } from 'react-router-dom';
 import { REQUEST_STATUS } from '../common/enums';
 import { ServerService } from '../services/http';
 import { ServerRoom } from '../components/ServerRoom';
-import { RequestStatus, Server } from '../common/interfaces';
 import WebSocketService from '../services/WebSocketService';
+import { RequestStatus, Server } from '../common/interfaces';
+
+interface ServerPageProps {
+    code: string;
+}
 
 interface ServerPageState extends RequestStatus {
     server: Server;
 }
 
-class ServerPage extends React.Component<RouteComponentProps<any>, ServerPageState> {
-    constructor(props: RouteComponentProps<any>) {
+class ServerPage extends React.Component<RouteComponentProps<ServerPageProps>, ServerPageState> {
+    constructor(props: RouteComponentProps<ServerPageProps>) {
         super(props);
         this.state = {
-            server: null,
+            server: {} as Server,
             status: REQUEST_STATUS.PENDING
         };
     }
@@ -55,7 +59,7 @@ class ServerPage extends React.Component<RouteComponentProps<any>, ServerPageSta
         }
 
         return (
-            <div className='ServerPage'>
+            <div className="ServerPage">
                 {body}
             </div>
         );

@@ -1,32 +1,18 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
 
-import { App } from './App';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
 
-const rootEl = document.getElementById('root');
-ReactDOM.render(
-  <AppContainer>
+const Root = () => (
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </AppContainer>,
-  rootEl
 );
 
-// Hot Module Replacement API
-if (module.hot) {
-  module.hot.accept('./App', () => {
-    const NextApp = require<{default: typeof App}>('./App').default;
-    ReactDOM.render(
-      <AppContainer>
-        <BrowserRouter>
-          <NextApp />
-        </BrowserRouter>
-      </AppContainer>
-      ,
-      rootEl
-    );
-  });
-}
+ReactDOM.render(
+  <Root />,
+  document.getElementById('root') as HTMLElement
+);
+registerServiceWorker();

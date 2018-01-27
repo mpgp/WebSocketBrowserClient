@@ -4,7 +4,7 @@ import MessageList from '../components/MessageList';
 import AddMessageForm from '../components/forms/AddMessageForm';
 import WebSocketService, { Subscription } from '../services/WebSocketService';
 import { WebSocketPayloadTypes } from '../common/interfaces/WebSocketPayloads';
-import { ChatMessage as ClientChatMessage} from '../common/interfaces/WebSocketPayloads/Client';
+import { ChatMessage as ClientChatMessage } from '../common/interfaces/WebSocketPayloads/Client';
 import { ChatMessage as ServerChatMessage } from '../common/interfaces/WebSocketPayloads/Server';
 
 interface ChatState {
@@ -13,7 +13,7 @@ interface ChatState {
 
 class Chat extends React.Component<{}, ChatState> {
     private chatMessageSub: Subscription;
-    private Login = JSON.parse(localStorage.getItem('auth')).login;
+    private Login = JSON.parse(localStorage.getItem('auth') || '').login;
 
     constructor(props: {}) {
         super(props);
@@ -43,7 +43,7 @@ class Chat extends React.Component<{}, ChatState> {
 
     render() {
         return (
-            <div className='Chat'>
+            <div className="Chat">
                 <MessageList
                     messages={this.state.messages}
                     myName={this.Login}

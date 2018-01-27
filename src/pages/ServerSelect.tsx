@@ -47,7 +47,7 @@ class ServerSelect extends React.Component<{}, ServerSelectState> {
         }
 
         return (
-            <div className='ServerSelect'>
+            <div className="ServerSelect">
                 {body}
             </div>
         );
