@@ -9,8 +9,8 @@
   },
   "readme": "README.md",
   "dependencies": {
-    "@types/react-notification-system": "latest",
     "material-ui": "next",
+    "material-ui-icons": "next",
     "mobx": "latest",
     "mobx-react": "latest",
     "moment": "latest",
@@ -25,6 +25,7 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "@types/react-notification-system": "latest",
     "@types/react-router-dom": "latest",
     "typescript": "latest"
   },

@@ -1,18 +1,27 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
+import StarIcon from 'material-ui-icons/Star';
+import Typography from 'material-ui/Typography';
+import List, { ListItem, ListItemIcon } from 'material-ui/List';
 
 import { Server, Servers } from '../../common/interfaces';
 
-const ServerItem =  (props: Server) => (
-    <div className="Server">
-        <NavLink to={'/server/' + props.code} title={props.address}>{props.name}</NavLink>
-    </div>
-);
-
 const ServersList = (props: Servers) => (
-    <div className="ServersList">
-        {props.servers.map((serverProps) => <ServerItem key={serverProps.id} {...serverProps}/>)}
-    </div>
+    <List style={{width: '300px'}}>
+        {props.servers.map((server: Server) => (
+            <ListItem button={true} key={server.id} style={{padding: 0}}>
+                <NavLink to={'/server/' + server.code} title={server.address} style={{display: 'block', width: '100%'}}>
+                    <Typography component="p" type="headline">
+                        {server.name}
+                        &nbsp;
+                        {server.id === 1 && <ListItemIcon>
+                            <StarIcon />
+                        </ListItemIcon>}
+                    </Typography>
+                </NavLink>
+            </ListItem>
+        ))}
+    </List>
 );
 
 export { ServersList };

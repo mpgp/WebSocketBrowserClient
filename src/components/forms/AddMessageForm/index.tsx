@@ -1,31 +1,59 @@
 import * as React from 'react';
+import Button from 'material-ui/Button';
+import TextField from 'material-ui/TextField';
 
 interface AddMessageFormProps {
     onSubmit: (message: string) => void;
 }
 
-class AddMessageForm extends React.Component<AddMessageFormProps, {}> {
-    handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+interface AddMessageFormState {
+    message: string;
+}
+
+class AddMessageForm extends React.Component<AddMessageFormProps, AddMessageFormState> {
+    constructor(props: AddMessageFormProps) {
+        super(props);
+        this.state = {
+            message: ' '
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({message: event.target.value});
+    }
+
+    handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        const messageInput = (this.refs.message as HTMLInputElement);
-        this.props.onSubmit(messageInput.value);
-        messageInput.value = '';
+        if (this.state.message.trim().length > 0) {
+            this.props.onSubmit(this.state.message);
+            this.setState({message: ''});
+        }
     }
 
     render() {
         return (
-            <div className="AuthForm">
+            <div className="AddMessageForm">
                 <form onSubmit={this.handleSubmit}>
-                    <p>
-                        <label>
-                            <span><b>Message:</b> </span>
-                            <input type="text" name="message" ref="message" />
-                        </label>
-                    </p>
-                    <p>
-                        <button type="submit">Send!</button>
-                    </p>
+                    <TextField
+                        id="multiline-flexible"
+                        label="Message..."
+                        multiline={false}
+                        value={this.state.message}
+                        onChange={this.handleChange}
+                        margin="normal"
+                    />
+                    <Button
+                        raised={true}
+                        type="submit"
+                        color="primary"
+                        disabled={this.state.message.trim().length === 0}
+                    >
+                        Send!
+                    </Button>
                 </form>
             </div>
         );

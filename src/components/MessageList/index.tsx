@@ -1,6 +1,6 @@
 import * as React from 'react';
+import List, { ListItem } from 'material-ui/List';
 
-import './styles.scss';
 import { DateTimeView, DateModes } from '../Shared';
 import { ChatMessage } from '../../common/interfaces/WebSocketPayloads/Server';
 
@@ -10,22 +10,24 @@ interface MessageListProps {
 }
 
 const Message = (myName: string) => (chatMessage: ChatMessage, index: number) => (
-    <p className="Message" key={index}>
+    <ListItem key={index} style={{color: '#666'}}>
         [<DateTimeView Time={chatMessage.Time} Mode={DateModes.DateTime}/>]
         &nbsp;
-        <span className={'Message__login' + (myName === chatMessage.Login ? ' bold' : '')}>
+        <span style={{color: '#000', fontWeight: (myName === chatMessage.Login ? 'bold' : 'normal')}}>
             &lt;{chatMessage.Login}&gt;
         </span>
         &nbsp;
         {chatMessage.Message}
-    </p>
+    </ListItem>
 );
 
 const MessageList = (props: MessageListProps) => (
     <div className="MessageList">
         {
             props.messages.length > 0
-                ? props.messages.map(Message(props.myName))
+                ? <List style={{position: 'relative', overflow: 'auto', maxHeight: 300}}>
+                    {props.messages.map(Message(props.myName))}
+                  </List>
                 : <p>No messages...</p>
         }
     </div>
