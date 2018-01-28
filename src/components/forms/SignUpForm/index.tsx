@@ -5,23 +5,23 @@ import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 
-export interface AuthData {
+export interface RegisterData {
     Login: string;
     Password: string;
 }
 
-interface AuthFormProps {
+interface SignUpFormFormProps {
     errors: string[];
-    onSubmit: (authData: AuthData) => void;
+    onSubmit: (registerData: RegisterData) => void;
 }
 
-interface AuthFormState {
+interface SignUpFormState {
     Login: string;
     Password: string;
 }
 
-class AuthForm extends React.Component<AuthFormProps, AuthFormState> {
-    constructor(props: AuthFormProps) {
+class SignUpForm extends React.Component<SignUpFormFormProps, SignUpFormState> {
+    constructor(props: SignUpFormFormProps) {
         super(props);
 
         this.state = {
@@ -50,10 +50,10 @@ class AuthForm extends React.Component<AuthFormProps, AuthFormState> {
     render() {
         return (
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '70%'}}>
-                <Card className="AuthForm" style={{width: '300px', margin: '0 auto'}}>
+                <Card className="SignUpForm" style={{width: '300px', margin: '0 auto'}}>
                     <CardContent>
                         <Typography component="h2" type="headline" style={{textAlign: 'center'}}>
-                            Sign In
+                            Sign Up
                             {this.props.errors && this.props.errors
                                 .map((error: string) => <p key={error}>{error}</p>)}
                         </Typography>
@@ -81,27 +81,19 @@ class AuthForm extends React.Component<AuthFormProps, AuthFormState> {
                                 fullWidth={true}
                                 disabled={!this.state.Login.trim() || !this.state.Password.trim()}
                             >
-                                Login
+                                Register
                             </Button>
                         </form>
                         <br />
                         <Divider />
                     </CardContent>
                     <CardActions>
-                        <a href="/forgot">
+                        <a href="/">
                             <Button
                                 raised={true}
                                 color="default"
                             >
-                                Forgot Password?
-                            </Button>
-                        </a>
-                        <a href="/signup">
-                            <Button
-                                raised={true}
-                                color="default"
-                            >
-                                Sign Up
+                                Sign In
                             </Button>
                         </a>
                     </CardActions>
@@ -111,4 +103,4 @@ class AuthForm extends React.Component<AuthFormProps, AuthFormState> {
     }
 }
 
-export default AuthForm;
+export default SignUpForm;

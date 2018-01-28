@@ -66,7 +66,7 @@ class Auth extends React.Component<{}, RequestStatus> {
         }
 
         return (
-            <div className="Auth">
+            <div className="Auth" style={{ height: '100%' }}>
                 {body}
             </div>
         );

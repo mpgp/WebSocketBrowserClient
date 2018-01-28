@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { REQUEST_STATUS } from '../common/enums';
 import { AccountService } from '../services/http';
 import { RequestStatus } from '../common/interfaces';
-import AuthForm, { AuthData } from '../components/forms/AuthForm';
+import SignUpForm, { RegisterData } from '../components/forms/SignUpForm';
 
 class SignUp extends React.Component<{}, RequestStatus> {
     constructor(props: {}) {
@@ -17,8 +17,8 @@ class SignUp extends React.Component<{}, RequestStatus> {
         this.signUp = this.signUp.bind(this);
     }
 
-    async signUp(authData: AuthData) {
-        const response = await AccountService.register(authData);
+    async signUp(registerData: RegisterData) {
+        const response = await AccountService.register(registerData);
         if (!response || response.errors) {
             this.setState({
                 errors: response && response.errors ? response.errors : [],
@@ -27,8 +27,8 @@ class SignUp extends React.Component<{}, RequestStatus> {
             return;
         }
 
-        const jsonAuthData = JSON.stringify({token: response.data.token, login: authData.Login});
-        localStorage.setItem('auth', jsonAuthData);
+        const jsonRegisterData = JSON.stringify({token: response.data.token, login: registerData.Login});
+        localStorage.setItem('auth', jsonRegisterData);
         this.setState({status: REQUEST_STATUS.SUCCESS});
     }
 
@@ -41,33 +41,12 @@ class SignUp extends React.Component<{}, RequestStatus> {
     }
 
     render() {
-        let body;
-
-        switch (this.state.status) {
-            case REQUEST_STATUS.SUCCESS: {
-                body = <Redirect to="/"/>;
-                break;
-            }
-
-            default: {
-                body = (
-                    <div>
-                        {this.state.errors && this.state.errors
-                            .map((error: string) => <p key={error}>{error}</p>)}
-                        <AuthForm onSubmit={this.signUp} errors={[]}/>
-                        <p>
-                            <a href="/">Sign In</a>
-                        </p>
-                    </div>
-                );
-                break;
-            }
-        }
-
         return (
-            <div className="SignUp">
-                <h1>Sign Up</h1>
-                {body}
+            <div className="SignUp" style={{ height: '100%' }}>
+                {this.state.status === REQUEST_STATUS.SUCCESS
+                    ? <Redirect to="/"/>
+                    : <SignUpForm onSubmit={this.signUp} errors={this.state.errors || []}/>
+                }
             </div>
         );
     }

@@ -16,7 +16,7 @@ class App extends React.Component<{}, {}> {
 
     render() {
         return (
-            <div className="App">
+            <div className="App" style={{ height: '100%' }}>
                 <Switch>
                     <Route path="/forgot" component={Forgot}/>
                     <Route path="/logout" component={Logout}/>
