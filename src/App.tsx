@@ -9,6 +9,8 @@ import SignUp from './pages/SignUp';
 import Forgot from './pages/Forgot';
 import NotificationService from './services/NotificationService';
 
+// TODO: why isn't PureComponent???
+// todo: React-router doesn't work with him O_o
 class App extends React.Component<{}, {}> {
     componentDidMount() {
         NotificationService.initialize((this.refs.notificationSystem as NotificationSystem.System));

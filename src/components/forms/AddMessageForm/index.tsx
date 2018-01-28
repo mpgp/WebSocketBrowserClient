@@ -10,7 +10,7 @@ interface AddMessageFormState {
     message: string;
 }
 
-class AddMessageForm extends React.Component<AddMessageFormProps, AddMessageFormState> {
+class AddMessageForm extends React.PureComponent<AddMessageFormProps, AddMessageFormState> {
     constructor(props: AddMessageFormProps) {
         super(props);
         this.state = {

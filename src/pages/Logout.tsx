@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { REQUEST_STATUS } from '../common/enums';
 import { RequestStatus } from '../common/interfaces';
 
-class Logout extends React.Component<{}, RequestStatus> {
+class Logout extends React.PureComponent<{}, RequestStatus> {
     constructor(props: {}) {
         super(props);
         this.state = {

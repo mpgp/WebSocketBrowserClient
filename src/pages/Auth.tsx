@@ -5,7 +5,9 @@ import { AccountService } from '../services/http';
 import { RequestStatus } from '../common/interfaces';
 import AuthForm, { AuthData } from '../components/forms/AuthForm';
 
-class Auth extends React.Component<{}, RequestStatus> {
+class Auth extends React.PureComponent<{}, RequestStatus> {
+    private errorMessages = {'1001': 'Incorrect Login or Password'};
+
     constructor(props: {}) {
         super(props);
         this.state = {
@@ -19,8 +21,9 @@ class Auth extends React.Component<{}, RequestStatus> {
         const response = await AccountService.auth(authData);
 
         if (!response || response.errors) {
+            const errors = response.errors ? response.errors : [];
             this.setState({
-                errors: response && response.errors ? response.errors : [],
+                errors: errors.map((errorCode) => this.errorMessages[errorCode]),
                 status: REQUEST_STATUS.ERROR
             });
             return;

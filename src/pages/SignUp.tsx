@@ -4,9 +4,11 @@ import { Redirect } from 'react-router-dom';
 import { REQUEST_STATUS } from '../common/enums';
 import { AccountService } from '../services/http';
 import { RequestStatus } from '../common/interfaces';
-import SignUpForm, { RegisterData } from '../components/forms/SignUpForm';
+import SignUpForm, { SignUpData } from '../components/forms/SignUpForm';
 
-class SignUp extends React.Component<{}, RequestStatus> {
+class SignUp extends React.PureComponent<{}, RequestStatus> {
+    private errorMessages = {'1000': 'Login already exists'};
+
     constructor(props: {}) {
         super(props);
         this.state = {
@@ -17,17 +19,18 @@ class SignUp extends React.Component<{}, RequestStatus> {
         this.signUp = this.signUp.bind(this);
     }
 
-    async signUp(registerData: RegisterData) {
-        const response = await AccountService.register(registerData);
+    async signUp(signUpData: SignUpData) {
+        const response = await AccountService.register(signUpData);
         if (!response || response.errors) {
+            const errors = response.errors ? response.errors : [];
             this.setState({
-                errors: response && response.errors ? response.errors : [],
+                errors: errors.map((errorCode) => this.errorMessages[errorCode]),
                 status: REQUEST_STATUS.ERROR
             });
             return;
         }
 
-        const jsonRegisterData = JSON.stringify({token: response.data.token, login: registerData.Login});
+        const jsonRegisterData = JSON.stringify({token: response.data.token, login: signUpData.Login});
         localStorage.setItem('auth', jsonRegisterData);
         this.setState({status: REQUEST_STATUS.SUCCESS});
     }

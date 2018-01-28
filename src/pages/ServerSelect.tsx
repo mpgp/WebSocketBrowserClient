@@ -8,7 +8,7 @@ interface ServerSelectState extends RequestStatus {
     servers: Server[];
 }
 
-class ServerSelect extends React.Component<{}, ServerSelectState> {
+class ServerSelect extends React.PureComponent<{}, ServerSelectState> {
     constructor(props: {}) {
         super(props);
         this.state = {

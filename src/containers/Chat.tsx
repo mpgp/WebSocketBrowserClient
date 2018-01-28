@@ -11,7 +11,7 @@ interface ChatState {
     messages: ServerChatMessage[];
 }
 
-class Chat extends React.Component<{}, ChatState> {
+class Chat extends React.PureComponent<{}, ChatState> {
     private chatMessageSub: Subscription;
     private Login = JSON.parse(localStorage.getItem('auth') || '').login;
 

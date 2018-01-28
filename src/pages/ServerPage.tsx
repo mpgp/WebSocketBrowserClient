@@ -15,7 +15,7 @@ interface ServerPageState extends RequestStatus {
     server: Server;
 }
 
-class ServerPage extends React.Component<RouteComponentProps<ServerPageProps>, ServerPageState> {
+class ServerPage extends React.PureComponent<RouteComponentProps<ServerPageProps>, ServerPageState> {
     constructor(props: RouteComponentProps<ServerPageProps>) {
         super(props);
         this.state = {

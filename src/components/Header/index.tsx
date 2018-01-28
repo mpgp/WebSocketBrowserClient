@@ -9,7 +9,7 @@ import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import AccountCircle from 'material-ui-icons/AccountCircle';
 
-class Header extends React.Component<{}, {}> {
+class Header extends React.PureComponent<{}, {}> {
     render() {
         return (
             <AppBar position="static">
