@@ -55,20 +55,7 @@ class Auth extends React.Component<{}, RequestStatus> {
             }
 
             case REQUEST_STATUS.ERROR: {
-                body = (
-                    <div>
-                        <h1>Sign In</h1>
-                        {this.state.errors && this.state.errors
-                            .map((error: string) => <p key={error}>{error}</p>)}
-                        <AuthForm onSubmit={this.authorize} />
-                        <p>
-                            <a href="/signup">Sign Up</a>
-                        </p>
-                        <p>
-                            <a href="/forgot">Forgot Password?</a>
-                        </p>
-                    </div>
-                );
+                body = <AuthForm onSubmit={this.authorize} errors={this.state.errors || []}/>;
                 break;
             }
 

@@ -54,7 +54,7 @@ class SignUp extends React.Component<{}, RequestStatus> {
                     <div>
                         {this.state.errors && this.state.errors
                             .map((error: string) => <p key={error}>{error}</p>)}
-                        <AuthForm onSubmit={this.signUp} />
+                        <AuthForm onSubmit={this.signUp} errors={[]}/>
                         <p>
                             <a href="/">Sign In</a>
                         </p>
