@@ -30,16 +30,13 @@ class SignUpForm extends React.Component<SignUpFormFormProps, SignUpFormState> {
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleLoginChange = this.handleLoginChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    handleLoginChange(event: React.ChangeEvent<HTMLInputElement>) {
-        this.setState({Login: event.target.value});
-    }
-
-    handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
-        this.setState({Password: event.target.value});
+    handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+        const name = event.target.name as 'Login';
+        const value = event.target.value;
+        this.setState({[name]: value});
     }
 
     handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -61,16 +58,18 @@ class SignUpForm extends React.Component<SignUpFormFormProps, SignUpFormState> {
                             <TextField
                                 helperText="Enter your Login"
                                 label="Login"
+                                name="Login"
                                 fullWidth={true}
-                                onChange={this.handleLoginChange}
+                                onChange={this.handleChange}
                             />
                             <br />
                             <TextField
                                 helperText="Enter your Password"
                                 label="Password"
+                                name="Password"
                                 type="password"
                                 fullWidth={true}
-                                onChange={this.handlePasswordChange}
+                                onChange={this.handleChange}
                             />
                             <br />
                             <br />
