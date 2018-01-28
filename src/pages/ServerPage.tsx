@@ -6,6 +6,7 @@ import { ServerService } from '../services/http';
 import { ServerRoom } from '../components/ServerRoom';
 import WebSocketService from '../services/WebSocketService';
 import { RequestStatus, Server } from '../common/interfaces';
+import AppStore from '../stores/AppStore';
 
 interface ServerPageProps {
     code: string;
@@ -31,6 +32,7 @@ class ServerPage extends React.PureComponent<RouteComponentProps<ServerPageProps
         this.setState({server, status});
         if (status === REQUEST_STATUS.SUCCESS) {
             WebSocketService.connectToServer(server.address);
+            AppStore.setTitle(server.name);
         }
     }
 

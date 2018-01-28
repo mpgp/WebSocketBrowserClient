@@ -4,6 +4,7 @@ import { REQUEST_STATUS } from '../common/enums';
 import { AccountService } from '../services/http';
 import { RequestStatus } from '../common/interfaces';
 import AuthForm, { AuthData } from '../components/forms/AuthForm';
+import AppStore from '../stores/AppStore';
 
 class Auth extends React.PureComponent<{}, RequestStatus> {
     private errorMessages = {'1001': 'Incorrect Login or Password'};
@@ -29,20 +30,18 @@ class Auth extends React.PureComponent<{}, RequestStatus> {
             return;
         }
 
-        const jsonAuthData = JSON.stringify({token: response.data.token, login: authData.Login});
-        localStorage.setItem('auth', jsonAuthData);
+        const jsonAuthData = {token: response.data.token, login: authData.Login};
+        AppStore.setUserInfo(jsonAuthData);
         this.setState({status: REQUEST_STATUS.SUCCESS});
     }
 
     async componentDidMount() {
-        const auth = JSON.parse(localStorage.getItem('auth') || '{}');
-
-        if (!auth || !auth.token) {
+        if (!AppStore.userInfo.token) {
             this.setState({status: REQUEST_STATUS.ERROR});
             return;
         }
 
-        const status = await AccountService.checkToken(auth.token);
+        const status = await AccountService.checkToken(AppStore.userInfo.token);
         this.setState({
             status: status ? REQUEST_STATUS.SUCCESS : REQUEST_STATUS.ERROR
         });

@@ -4,7 +4,7 @@ import List, { ListItem } from 'material-ui/List';
 import { DateTimeView, DateModes } from '../Shared';
 import { ChatMessage } from '../../common/interfaces/WebSocketPayloads/Server';
 
-interface MessageListProps {
+interface MessagesListProps {
     messages: ChatMessage[];
     myName: string;
 }
@@ -21,11 +21,11 @@ const Message = (myName: string) => (chatMessage: ChatMessage, index: number) =>
     </ListItem>
 );
 
-const MessageList = (props: MessageListProps) => (
+const MessagesList = (props: MessagesListProps) => (
     <div className="MessageList">
         {
             props.messages.length > 0
-                ? <List style={{position: 'relative', overflow: 'auto', maxHeight: 300}}>
+                ? <List>
                     {props.messages.map(Message(props.myName))}
                   </List>
                 : <p>No messages...</p>
@@ -33,4 +33,4 @@ const MessageList = (props: MessageListProps) => (
     </div>
 );
 
-export default MessageList;
+export default MessagesList;

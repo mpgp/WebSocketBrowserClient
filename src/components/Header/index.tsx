@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { observer } from 'mobx-react';
 import Badge from 'material-ui/Badge';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -9,7 +10,10 @@ import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import AccountCircle from 'material-ui-icons/AccountCircle';
 
-class Header extends React.PureComponent<{}, {}> {
+import AppStore from '../../stores/AppStore';
+
+@observer
+class Header extends React.Component<{}, {}> {
     render() {
         return (
             <AppBar position="static">
@@ -20,7 +24,7 @@ class Header extends React.PureComponent<{}, {}> {
                         </IconButton>
                     </NavLink>
                     <Typography type="title" color="inherit" style={{flex: 1}}>
-                        Multiplayer Game Platform
+                        {AppStore.title}
                     </Typography>
                     <div>
                         <NavLink to="/logout" exact={true}>Logout</NavLink>

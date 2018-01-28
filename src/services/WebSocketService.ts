@@ -1,3 +1,4 @@
+import AppStore from '../stores/AppStore';
 import { AuthMessage } from '../common/interfaces/WebSocketPayloads/Client';
 import { BaseMessage, WebSocketMessage } from '../common/interfaces/WebSocketPayloads';
 
@@ -49,8 +50,7 @@ class WebSocketService {
     }
 
     private OnOpen() {
-        const auth = JSON.parse(localStorage.getItem('auth') || '{}');
-        this.send(new AuthMessage(auth.token));
+        this.send(new AuthMessage(AppStore.userInfo.token));
     }
 
     private OnMessage({ data }: {data: string}) {

@@ -1,6 +1,7 @@
 import * as React from 'react';
-import Button from 'material-ui/Button';
+import Send from 'material-ui-icons/Send';
 import TextField from 'material-ui/TextField';
+import IconButton from 'material-ui/IconButton';
 
 interface AddMessageFormProps {
     onSubmit: (message: string) => void;
@@ -36,7 +37,7 @@ class AddMessageForm extends React.PureComponent<AddMessageFormProps, AddMessage
 
     render() {
         return (
-            <div className="AddMessageForm">
+            <div className="AddMessageForm" style={{marginLeft: '10px'}}>
                 <form onSubmit={this.handleSubmit}>
                     <TextField
                         id="multiline-flexible"
@@ -45,15 +46,17 @@ class AddMessageForm extends React.PureComponent<AddMessageFormProps, AddMessage
                         value={this.state.message}
                         onChange={this.handleChange}
                         margin="normal"
+                        autoFocus={true}
+                        style={{width: 'calc(100% - 50px)'}}
                     />
-                    <Button
-                        raised={true}
+                    <IconButton
+                        title="Send message"
                         type="submit"
                         color="primary"
                         disabled={this.state.message.trim().length === 0}
                     >
-                        Send!
-                    </Button>
+                        <Send />
+                    </IconButton>
                 </form>
             </div>
         );

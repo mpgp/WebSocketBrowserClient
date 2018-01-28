@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Redirect } from 'react-router-dom';
 
+import AppStore from '../stores/AppStore';
 import { REQUEST_STATUS } from '../common/enums';
 import { AccountService } from '../services/http';
 import { RequestStatus } from '../common/interfaces';
@@ -30,15 +31,13 @@ class SignUp extends React.PureComponent<{}, RequestStatus> {
             return;
         }
 
-        const jsonRegisterData = JSON.stringify({token: response.data.token, login: signUpData.Login});
-        localStorage.setItem('auth', jsonRegisterData);
+        const jsonRegisterData = {token: response.data.token, login: signUpData.Login};
+        AppStore.setUserInfo(jsonRegisterData);
         this.setState({status: REQUEST_STATUS.SUCCESS});
     }
 
     componentDidMount() {
-        const auth = JSON.parse(localStorage.getItem('auth') || '{}');
-
-        if (auth && auth.token) {
+        if (AppStore.userInfo.token) {
             this.setState({status: REQUEST_STATUS.SUCCESS});
         }
     }

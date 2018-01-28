@@ -53,7 +53,6 @@ class SignUpForm extends React.PureComponent<SignUpFormFormProps, SignUpFormStat
     }
 
     render() {
-        console.warn('render');
         const { LoginError, PasswordError } = this.state;
         return (
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '70%'}}>

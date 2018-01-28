@@ -1,4 +1,6 @@
 import * as React from 'react';
+
+import AppStore from '../stores/AppStore';
 import { REQUEST_STATUS } from '../common/enums';
 import { ServerService } from '../services/http';
 import { ServersList } from '../components/ServersList';
@@ -24,6 +26,7 @@ class ServerSelect extends React.PureComponent<{}, ServerSelectState> {
             servers,
             status
         });
+        AppStore.setTitle('Multiplayer Game Platform');
     }
 
     render() {
