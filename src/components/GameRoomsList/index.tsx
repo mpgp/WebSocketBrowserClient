@@ -1,15 +1,20 @@
 import * as React from 'react';
 import Paper from 'material-ui/Paper';
+import withStyles, { WithStyles, StyleRulesCallback } from 'material-ui/styles/withStyles';
 
-const GameRoomsListStyles = {
-    width: 'calc( 100% - 20px )',
-    margin: 10,
-    'overflow-y': 'scroll',
-    height: 'calc( 50% - 80px )'
-};
+type GameRoomsListProps = WithStyles<'root'>;
 
-const GameRoomsList = () => (
-    <Paper style={GameRoomsListStyles} className="with-scrollbar">
+const styles: StyleRulesCallback<'root'> = () => ({
+    root: {
+        width: 'calc( 100% - 20px )',
+        margin: 10,
+        overflowY: 'scroll',
+        height: 'calc( 100% - 80px )'
+    }
+});
+
+const GameRoomsList = (props: GameRoomsListProps) => (
+    <Paper className={'with-scrollbar ' + props.classes.root}>
         {
             Array.from(Array(20).keys())
                 .sort((a, b) => Math.random() - 0.5)
@@ -30,4 +35,4 @@ const GameRoomsList = () => (
     </Paper>
 );
 
-export default GameRoomsList;
+export default withStyles(styles)<{}>(GameRoomsList);
