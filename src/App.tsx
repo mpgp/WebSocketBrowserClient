@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import * as NotificationSystem from 'react-notification-system';
 
 import Main from './Main';
-import withRoot from './withRoot';
+import WithRoot from './hoc/WithRoot';
 import Logout from './pages/Logout';
 import SignUp from './pages/SignUp';
 import Forgot from './pages/Forgot';
@@ -31,4 +31,4 @@ class App extends React.Component<{}, {}> {
     }
 }
 
-export default withRoot(App);
+export default WithRoot(App);

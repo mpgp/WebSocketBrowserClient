@@ -1,46 +1,30 @@
 import * as React from 'react';
 
+import Paper from 'material-ui/Paper';
 import AppStore from '../stores/AppStore';
 import MessagesList from '../components/MessagesList';
+import Listener, { ListenerProps } from '../hoc/Listener';
+import WebSocketService from '../services/WebSocketService';
 import AddMessageForm from '../components/forms/AddMessageForm';
-import WebSocketService, { Subscription } from '../services/WebSocketService';
 import { WebSocketPayloadTypes } from '../common/interfaces/WebSocketPayloads';
 import { ChatMessage as ClientChatMessage } from '../common/interfaces/WebSocketPayloads/Client';
 import { ChatMessage as ServerChatMessage } from '../common/interfaces/WebSocketPayloads/Server';
-import Paper from 'material-ui/Paper';
 
-interface ChatState {
-    messages: ServerChatMessage[];
-}
+class Chat extends React.PureComponent<ListenerProps<ServerChatMessage>, {}> {
+    private login = AppStore.userInfo.login;
+    private messages: ServerChatMessage[] = [];
 
-class Chat extends React.PureComponent<{}, ChatState> {
-    private chatMessageSub: Subscription;
-    private Login = AppStore.userInfo.login;
-
-    constructor(props: {}) {
+    constructor(props: ListenerProps<ServerChatMessage>) {
         super(props);
-        this.state = {
-            messages: []
-        };
-
         this.onSubmitForm = this.onSubmitForm.bind(this);
-    }
-
-    componentDidMount() {
-        this.chatMessageSub = WebSocketService.subscribe(
-            WebSocketPayloadTypes.ChatMessage,
-            (message: ServerChatMessage) => {
-                this.setState((prevState) => ({messages: prevState.messages.concat(message)}));
-            }
-        );
-    }
-
-    componentWillUnmount() {
-        this.chatMessageSub.unsubscribe();
     }
 
     onSubmitForm(message: string) {
         WebSocketService.send(new ClientChatMessage(message));
+    }
+
+    componentWillReceiveProps(nextProps: ListenerProps<ServerChatMessage>) {
+        this.messages = [...this.messages, nextProps.message];
     }
 
     render() {
@@ -56,8 +40,8 @@ class Chat extends React.PureComponent<{}, ChatState> {
                     className="with-scrollbar"
                 >
                     <MessagesList
-                        messages={this.state.messages}
-                        myName={this.Login}
+                        messages={this.messages}
+                        myName={this.login}
                     />
                 </Paper>
                 <AddMessageForm onSubmit={this.onSubmitForm} />
@@ -66,4 +50,4 @@ class Chat extends React.PureComponent<{}, ChatState> {
     }
 }
 
-export default Chat;
+export default Listener<ServerChatMessage>(WebSocketPayloadTypes.ChatMessage)(Chat);
