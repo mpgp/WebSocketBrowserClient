@@ -1,16 +1,15 @@
 import * as React from 'react';
 import Paper from 'material-ui/Paper';
 
+const GameRoomsListStyles = {
+    width: 'calc( 100% - 20px )',
+    margin: 10,
+    'overflow-y': 'scroll',
+    height: 'calc( 50% - 80px )'
+};
+
 const GameRoomsList = () => (
-    <Paper
-        style={{
-            width: 'calc( 100% - 20px )',
-            margin: 10,
-            overflowY: 'scroll',
-            height: 'calc( 50% - 80px )'
-        }}
-        className="with-scrollbar"
-    >
+    <Paper style={GameRoomsListStyles} className="with-scrollbar">
         {
             Array.from(Array(20).keys())
                 .sort((a, b) => Math.random() - 0.5)

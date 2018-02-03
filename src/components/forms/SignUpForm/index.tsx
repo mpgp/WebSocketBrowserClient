@@ -4,29 +4,38 @@ import Divider from 'material-ui/Divider';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
+import withStyles, { WithStyles, StyleRulesCallback } from 'material-ui/styles/withStyles';
 
 export class SignUpData {
     Login: string;
     Password: string;
 }
 
-interface SignUpFormFormProps {
+interface SignUpProps {
     errors: string[];
     onSubmit: (registerData: SignUpData) => void;
 }
+
+type SignUpFormProps = SignUpProps & WithStyles<'root' | 'Card' | 'Typography'>;
 
 interface SignUpFormState {
     LoginError: string;
     PasswordError: string;
 }
 
-class SignUpForm extends React.PureComponent<SignUpFormFormProps, SignUpFormState> {
+const styles: StyleRulesCallback<'root'> = () => ({
+    root: {display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '70%'},
+    Card: {width: '300px', margin: '0 auto'},
+    Typography: {textAlign: 'center'}
+});
+
+class SignUpForm extends React.PureComponent<SignUpFormProps, SignUpFormState> {
     private signUpData = new SignUpData();
     private get valid() {
         return this.state.LoginError || this.state.PasswordError;
     }
 
-    constructor(props: SignUpFormFormProps) {
+    constructor(props: SignUpFormProps) {
         super(props);
 
         this.state = {
@@ -55,10 +64,10 @@ class SignUpForm extends React.PureComponent<SignUpFormFormProps, SignUpFormStat
     render() {
         const { LoginError, PasswordError } = this.state;
         return (
-            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '70%'}}>
-                <Card className="SignUpForm" style={{width: '300px', margin: '0 auto'}}>
+            <div className={this.props.classes.root}>
+                <Card className={'SignUpForm ' + this.props.classes.Card}>
                     <CardContent>
-                        <Typography component="h2" type="headline" style={{textAlign: 'center'}}>
+                        <Typography component="h2" type="headline" className={this.props.classes.Typography}>
                             Sign Up
                         </Typography>
                         {this.props.errors && this.props.errors
@@ -138,4 +147,4 @@ class SignUpForm extends React.PureComponent<SignUpFormFormProps, SignUpFormStat
     }
 }
 
-export default SignUpForm;
+export default withStyles(styles)<SignUpProps>(SignUpForm);

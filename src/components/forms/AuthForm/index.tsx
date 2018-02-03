@@ -4,21 +4,30 @@ import Divider from 'material-ui/Divider';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
+import withStyles, { WithStyles, StyleRulesCallback } from 'material-ui/styles/withStyles';
 
 export class AuthData {
     Login: string;
     Password: string;
 }
 
-interface AuthFormProps {
+interface AuthProps {
     errors: string[];
     onSubmit: (authData: AuthData) => void;
 }
+
+type AuthFormProps = AuthProps & WithStyles<'root' | 'Card' | 'Typography'>;
 
 interface AuthFormState {
     LoginError: string;
     PasswordError: string;
 }
+
+const styles: StyleRulesCallback<'root'> = () => ({
+    root: {display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '70%'},
+    Card: {width: '300px', margin: '0 auto'},
+    Typography: {textAlign: 'center'}
+});
 
 class AuthForm extends React.PureComponent<AuthFormProps, AuthFormState> {
     private authData = new AuthData();
@@ -55,10 +64,10 @@ class AuthForm extends React.PureComponent<AuthFormProps, AuthFormState> {
     render() {
         const { LoginError, PasswordError } = this.state;
         return (
-            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '70%'}}>
-                <Card className="AuthForm" style={{width: '300px', margin: '0 auto'}}>
+            <div className={this.props.classes.root}>
+                <Card className={'AuthForm ' + this.props.classes.Card}>
                     <CardContent>
-                        <Typography component="h2" type="headline" style={{textAlign: 'center'}}>
+                        <Typography component="h2" type="headline" className={this.props.classes.Typography}>
                             Sign In
                         </Typography>
                         {this.props.errors && this.props.errors
@@ -99,20 +108,10 @@ class AuthForm extends React.PureComponent<AuthFormProps, AuthFormState> {
                     </CardContent>
                     <CardActions>
                         <a href="/forgot">
-                            <Button
-                                raised={true}
-                                color="default"
-                            >
-                                Forgot Password?
-                            </Button>
+                            <Button raised={true} color="default">Forgot Password?</Button>
                         </a>
                         <a href="/signup">
-                            <Button
-                                raised={true}
-                                color="default"
-                            >
-                                Sign Up
-                            </Button>
+                            <Button raised={true} color="default">Sign Up</Button>
                         </a>
                     </CardActions>
                 </Card>
@@ -146,4 +145,4 @@ class AuthForm extends React.PureComponent<AuthFormProps, AuthFormState> {
     }
 }
 
-export default AuthForm;
+export default withStyles(styles)<AuthProps>(AuthForm);

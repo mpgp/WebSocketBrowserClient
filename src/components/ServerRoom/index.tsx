@@ -1,31 +1,39 @@
 import * as React from 'react';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
+import withStyles, { WithStyles, StyleRulesCallback } from 'material-ui/styles/withStyles';
 
 import UsersList from '../UsersList';
 import Chat from '../../containers/Chat';
 import GameRoomsList from '../GameRoomsList';
-import { Server } from '../../common/interfaces';
 
-const ServerRoom = (props: Server) => (
+type ServerRoomProps = WithStyles<'root' | 'Paper'>;
+
+const styles: StyleRulesCallback<'root'> = () => ({
+    root: {flexGrow: 1, padding: '12px'},
+    Paper: {
+        width: '80vw',
+        height: '80vh',
+        maxWidth: '100%',
+        maxHeight: '700px',
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
+        position: 'relative'
+    }
+});
+
+const ServerRoom = (props: ServerRoomProps) => (
     <div className="ServerRoom">
-        <div style={{flexGrow: 1, padding: '12px'}}>
+        <div className={props.classes.root}>
             <Grid container={true} spacing={24}>
                 <Grid item={true} xs={12} sm={9}>
-                    <Paper
-                        style={{ width: '80vw', height: '80vh',
-                            maxWidth: '100%', maxHeight: '700px',
-                            display: 'flex', alignItems: 'center', flexDirection: 'column', position: 'relative' }}
-                    >
+                    <Paper className={props.classes.Paper}>
                         <Chat/>
                     </Paper>
                 </Grid>
                 <Grid item={true} xs={12} sm={3}>
-                    <Paper
-                        style={{ width: '80vw', height: '80vh',
-                            maxWidth: '100%', maxHeight: '700px',
-                            display: 'flex', alignItems: 'center', flexDirection: 'column', position: 'relative' }}
-                    >
+                    <Paper className={props.classes.Paper}>
                         <UsersList />
                         <GameRoomsList />
                     </Paper>
@@ -35,4 +43,4 @@ const ServerRoom = (props: Server) => (
     </div>
 );
 
-export { ServerRoom };
+export default withStyles(styles)<{}>(ServerRoom);

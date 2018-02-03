@@ -1,4 +1,5 @@
 import * as React from 'react';
+import withStyles, { WithStyles, StyleRulesCallback } from 'material-ui/styles/withStyles';
 
 import Paper from 'material-ui/Paper';
 import AppStore from '../stores/AppStore';
@@ -10,11 +11,27 @@ import { WebSocketPayloadTypes } from '../common/interfaces/WebSocketPayloads';
 import { ChatMessage as ClientChatMessage } from '../common/interfaces/WebSocketPayloads/Client';
 import { ChatMessage as ServerChatMessage } from '../common/interfaces/WebSocketPayloads/Server';
 
-class Chat extends React.PureComponent<ListenerProps<ServerChatMessage>, {}> {
+type ChatProps = ListenerProps<ServerChatMessage> & WithStyles<'root' | 'Paper'>;
+
+const styles: StyleRulesCallback<'root'> = () => ({
+    root: {
+        width: '100%',
+        height: '100%',
+        paddingBottom: '10px'
+    },
+    Paper: {
+        margin: 10,
+        overflowY: 'scroll',
+        width: 'calc( 100% - 20px )',
+        height: 'calc( 100% - 80px )'
+    }
+});
+
+class Chat extends React.Component<ChatProps, {}> {
     private login = AppStore.userInfo.login;
     private messages: ServerChatMessage[] = [];
 
-    constructor(props: ListenerProps<ServerChatMessage>) {
+    constructor(props: ChatProps) {
         super(props);
         this.onSubmitForm = this.onSubmitForm.bind(this);
     }
@@ -23,26 +40,15 @@ class Chat extends React.PureComponent<ListenerProps<ServerChatMessage>, {}> {
         WebSocketService.send(new ClientChatMessage(message));
     }
 
-    componentWillReceiveProps(nextProps: ListenerProps<ServerChatMessage>) {
+    componentWillReceiveProps(nextProps: ChatProps) {
         this.messages = [...this.messages, nextProps.message];
     }
 
     render() {
         return (
-            <div className="Chat" style={{width: '100%', height: '100%', paddingBottom: '10px'}}>
-                <Paper
-                    style={{
-                        width: 'calc( 100% - 20px )',
-                        margin: 10,
-                        overflowY: 'scroll',
-                        height: 'calc( 100% - 80px )'
-                    }}
-                    className="with-scrollbar"
-                >
-                    <MessagesList
-                        messages={this.messages}
-                        myName={this.login}
-                    />
+            <div className={this.props.classes.root}>
+                <Paper className={'with-scrollbar ' + this.props.classes.Paper}>
+                    <MessagesList messages={this.messages} myName={this.login} />
                 </Paper>
                 <AddMessageForm onSubmit={this.onSubmitForm} />
             </div>
@@ -50,4 +56,5 @@ class Chat extends React.PureComponent<ListenerProps<ServerChatMessage>, {}> {
     }
 }
 
-export default Listener<ServerChatMessage>(WebSocketPayloadTypes.ChatMessage)(Chat);
+export default Listener<ServerChatMessage>(
+    WebSocketPayloadTypes.ChatMessage)(withStyles(styles)<ListenerProps<ServerChatMessage>>(Chat));

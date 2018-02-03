@@ -3,7 +3,7 @@ import * as React from 'react';
 import AppStore from '../stores/AppStore';
 import { REQUEST_STATUS } from '../common/enums';
 import { ServerService } from '../services/http';
-import { ServersList } from '../components/ServersList';
+import ServersList from '../components/ServersList';
 import { RequestStatus, Server } from '../common/interfaces';
 
 interface ServerSelectState extends RequestStatus {
@@ -34,7 +34,7 @@ class ServerSelect extends React.PureComponent<{}, ServerSelectState> {
 
         switch (this.state.status) {
             case REQUEST_STATUS.SUCCESS: {
-                body = <ServersList servers={this.state.servers}/>;
+                body = <ServersList servers={this.state.servers} />;
                 break;
             }
 

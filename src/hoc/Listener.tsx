@@ -1,12 +1,16 @@
 import * as React from 'react';
-import WebSocketService, { Subscription } from '../services/WebSocketService';
+import { StyledComponentProps } from 'material-ui';
+
 import { BaseMessage } from '../common/interfaces/WebSocketPayloads';
+import WebSocketService, { Subscription } from '../services/WebSocketService';
 
 export interface ListenerProps<T> {
     message: T;
 }
 
-const Listener = <T extends BaseMessage>(messageType: string) => (Component: React.ComponentType<ListenerProps<T>>) => {
+type WrappedProps<T> = ListenerProps<T> | StyledComponentProps<'root'>;
+
+const Listener = <T extends BaseMessage>(messageType: string) => (Component: React.ComponentType<WrappedProps<T>>) => {
     return class extends React.PureComponent<{}, ListenerProps<T>> {
         static displayName = `Listener(${Component.displayName || Component.name})`;
         private chatMessageSub: Subscription;
