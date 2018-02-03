@@ -9,7 +9,6 @@
   },
   "readme": "README.md",
   "dependencies": {
-    "cross-env": "latest",
     "material-ui": "next",
     "material-ui-icons": "latest",
     "mobx": "latest",
@@ -31,8 +30,8 @@
     "typescript": "latest"
   },
   "scripts": {
-    "start": "cross-env REACT_APP_API_PATH=\"http://localhost:5000/api/\" NODE_ENV=\"development\" REACT_APP_WEBSOCKET_PATH=\"consoleappsample\" react-scripts-ts start",
-    "build": "cross-env REACT_APP_API_PATH=\"/api/\" NODE_ENV=\"production\" REACT_APP_WEBSOCKET_PATH=\"consoleappsample\" react-scripts-ts build",
+    "start": "react-scripts-ts start",
+    "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
   }
