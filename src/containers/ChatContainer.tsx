@@ -1,7 +1,7 @@
 import * as React from 'react';
+import Paper from 'material-ui/Paper';
 import withStyles, { WithStyles, StyleRulesCallback } from 'material-ui/styles/withStyles';
 
-import Paper from 'material-ui/Paper';
 import AppStore from '../stores/AppStore';
 import MessagesList from '../components/MessagesList';
 import Listener, { ListenerProps } from '../hoc/Listener';
@@ -11,7 +11,7 @@ import { WebSocketPayloadTypes } from '../common/interfaces/WebSocketPayloads';
 import { ChatMessage as ClientChatMessage } from '../common/interfaces/WebSocketPayloads/Client';
 import { ChatMessage as ServerChatMessage } from '../common/interfaces/WebSocketPayloads/Server';
 
-type ChatProps = ListenerProps<ServerChatMessage> & WithStyles<'root' | 'Paper'>;
+type ChatContainerProps = ListenerProps<ServerChatMessage> & WithStyles<'root' | 'Paper'>;
 
 const styles: StyleRulesCallback<'root'> = () => ({
     root: {
@@ -27,11 +27,11 @@ const styles: StyleRulesCallback<'root'> = () => ({
     }
 });
 
-class Chat extends React.Component<ChatProps, {}> {
+class ChatContainer extends React.PureComponent<ChatContainerProps, {}> {
     private login = AppStore.userInfo.login;
     private messages: ServerChatMessage[] = [];
 
-    constructor(props: ChatProps) {
+    constructor(props: ChatContainerProps) {
         super(props);
         this.onSubmitForm = this.onSubmitForm.bind(this);
     }
@@ -40,7 +40,7 @@ class Chat extends React.Component<ChatProps, {}> {
         WebSocketService.send(new ClientChatMessage(message));
     }
 
-    componentWillReceiveProps(nextProps: ChatProps) {
+    componentWillReceiveProps(nextProps: ChatContainerProps) {
         this.messages = [...this.messages, nextProps.message];
     }
 
@@ -57,4 +57,4 @@ class Chat extends React.Component<ChatProps, {}> {
 }
 
 export default Listener<ServerChatMessage>(
-    WebSocketPayloadTypes.ChatMessage)(withStyles(styles)<ListenerProps<ServerChatMessage>>(Chat));
+    WebSocketPayloadTypes.ChatMessage)(withStyles(styles)<ListenerProps<ServerChatMessage>>(ChatContainer));

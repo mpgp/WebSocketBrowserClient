@@ -2,7 +2,11 @@ import * as React from 'react';
 import Paper from 'material-ui/Paper';
 import withStyles, { WithStyles, StyleRulesCallback } from 'material-ui/styles/withStyles';
 
-type UsersListProps = WithStyles<'root'>;
+interface UsersProps {
+    users: string[];
+}
+
+type UsersListProps = UsersProps & WithStyles<'root'>;
 
 const styles: StyleRulesCallback<'root'> = () => ({
     root: {
@@ -15,8 +19,8 @@ const styles: StyleRulesCallback<'root'> = () => ({
 
 const UsersList = (props: UsersListProps) => (
     <Paper className={'with-scrollbar ' + props.classes.root}>
-        {Array.from(Array(20).keys()).map(value => <p key={value}>User #{value}</p>)}
+        {props.users.map(value => <p key={value}>{value}</p>)}
     </Paper>
 );
 
-export default withStyles(styles)<{}>(UsersList);
+export default withStyles(styles)<UsersProps>(UsersList);
