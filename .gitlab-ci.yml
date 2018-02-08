@@ -1,0 +1,16 @@
+image: node:latest
+
+stages:
+  - deploy
+
+cache:
+  paths:
+  - node_modules/
+
+before_script:
+  - npm install
+
+deploy:
+  stage: deploy
+  script:
+    - npm run build
