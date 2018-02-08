@@ -66,7 +66,7 @@ class SignUpForm extends React.PureComponent<SignUpFormProps, SignUpFormState> {
             <div className={this.props.classes.root}>
                 <Card className={'SignUpForm ' + this.props.classes.Card}>
                     <CardContent>
-                        <Typography component="h2" type="headline" className={this.props.classes.Typography}>
+                        <Typography component="h2" variant="headline" className={this.props.classes.Typography}>
                             Sign Up
                         </Typography>
                         {this.props.errors && this.props.errors
@@ -93,7 +93,7 @@ class SignUpForm extends React.PureComponent<SignUpFormProps, SignUpFormState> {
                             <br />
                             <br />
                             <Button
-                                raised={true}
+                                variant={'raised'}
                                 type="submit"
                                 color="primary"
                                 fullWidth={true}
@@ -108,7 +108,7 @@ class SignUpForm extends React.PureComponent<SignUpFormProps, SignUpFormState> {
                     <CardActions>
                         <a href="/">
                             <Button
-                                raised={true}
+                                variant={'raised'}
                                 color="default"
                             >
                                 Sign In

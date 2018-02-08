@@ -66,7 +66,7 @@ class AuthForm extends React.PureComponent<AuthFormProps, AuthFormState> {
             <div className={this.props.classes.root}>
                 <Card className={'AuthForm ' + this.props.classes.Card}>
                     <CardContent>
-                        <Typography component="h2" type="headline" className={this.props.classes.Typography}>
+                        <Typography component="h2" variant="headline" className={this.props.classes.Typography}>
                             Sign In
                         </Typography>
                         {this.props.errors && this.props.errors
@@ -93,7 +93,7 @@ class AuthForm extends React.PureComponent<AuthFormProps, AuthFormState> {
                             <br />
                             <br />
                             <Button
-                                raised={true}
+                                variant={'raised'}
                                 type="submit"
                                 color="primary"
                                 fullWidth={true}
@@ -107,10 +107,10 @@ class AuthForm extends React.PureComponent<AuthFormProps, AuthFormState> {
                     </CardContent>
                     <CardActions>
                         <a href="/forgot">
-                            <Button raised={true} color="default">Forgot Password?</Button>
+                            <Button variant={'raised'} color="default">Forgot Password?</Button>
                         </a>
                         <a href="/signup">
-                            <Button raised={true} color="default">Sign Up</Button>
+                            <Button variant={'raised'} color="default">Sign Up</Button>
                         </a>
                     </CardActions>
                 </Card>

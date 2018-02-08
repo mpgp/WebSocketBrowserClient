@@ -23,7 +23,7 @@ class Header extends React.Component<{}, {}> {
                             <HomeIcon />
                         </IconButton>
                     </NavLink>
-                    <Typography type="title" color="inherit" style={{flex: 1}}>
+                    <Typography variant="title" color="inherit" style={{flex: 1}}>
                         {AppStore.title}
                     </Typography>
                     <div>

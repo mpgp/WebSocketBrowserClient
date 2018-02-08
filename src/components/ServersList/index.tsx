@@ -20,7 +20,7 @@ const ServersList = (props: ServersListProps) => (
         {props.servers.map((server: Server) => (
             <ListItem button={true} key={server.id} className={props.classes.ListItem}>
                 <NavLink to={'/server/' + server.code} title={server.address} className={props.classes.NavLink}>
-                    <Typography component="p" type="headline">
+                    <Typography component="p" variant="headline">
                         {server.name} {server.id === 1 && <ListItemIcon><StarIcon /></ListItemIcon>}
                     </Typography>
                 </NavLink>

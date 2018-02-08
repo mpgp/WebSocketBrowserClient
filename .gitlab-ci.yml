@@ -1,16 +1,26 @@
-image: node:latest
+image: docker:latest
+
+variables:
+  S3_BUCKET_NAME: "mpgp.cf"
 
 stages:
-  - deploy
+  - build
 
 cache:
   paths:
   - node_modules/
 
 before_script:
-  - npm install
+  - apk update
+  - apk upgrade
+  - apk add python python-dev py-pip build-base nodejs
+  - apk add --update py-pip &&
+  - pip install awscli
 
-deploy:
-  stage: deploy
+
+build:
+  stage: build
   script:
+    - npm install
     - npm run build
+    - aws s3 cp ./build s3://$S3_BUCKET_NAME/ --recursive --include "*.*"
