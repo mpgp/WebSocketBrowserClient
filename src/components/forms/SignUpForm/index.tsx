@@ -52,8 +52,7 @@ class SignUpForm extends React.PureComponent<SignUpFormProps, SignUpFormState> {
         const value = event.target.value;
         this.signUpData[name] = value;
 
-        const errorsState = this.validate(name, value) as SignUpFormState;
-        this.setState({...errorsState});
+        this.validate(name, value);
     }
 
     handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -122,25 +121,24 @@ class SignUpForm extends React.PureComponent<SignUpFormProps, SignUpFormState> {
     }
 
     private validate(name: string, value: string) {
-        let errorMessage = '';
         switch (name) {
             case 'Login': {
                 if (value.length < 3) {
-                    errorMessage = 'Login must be a minimum of 3 characters';
+                    this.setState({ LoginError: 'Login must be a minimum of 3 characters' });
                 } else if (value.length > 12) {
-                    errorMessage = 'Login must be a maximum of 12 characters';
+                    this.setState({ LoginError: 'Login must be a maximum of 12 characters' });
                 } else if (!/^[a-zA-Z0-9]+$/.test(value)) {
-                    errorMessage = 'The Login can consist only of letters and numbers';
+                    this.setState({ LoginError: 'The Login can consist only of letters and numbers' });
                 }
-                return {LoginError: errorMessage};
+                break;
             }
             case 'Password': {
                 if (value.length < 8) {
-                    errorMessage = 'Password must be a minimum of 8 characters';
+                    this.setState({ PasswordError: 'Password must be a minimum of 8 characters' });
                 } else if (value.length > 249) {
-                    errorMessage = 'Password is too long';
+                    this.setState({ PasswordError: 'Password is too long' });
                 }
-                return {PasswordError: errorMessage};
+                break;
             }
             default: throw 'ArgumentException';
         }
