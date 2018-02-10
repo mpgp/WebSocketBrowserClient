@@ -9,3 +9,6 @@ export { HeaderTitleContainer };
 
 import UsersListContainer from './UsersListContainer';
 export { UsersListContainer };
+
+import PrivateMessagesContainer from './PrivateMessagesContainer';
+export { PrivateMessagesContainer };

@@ -6,8 +6,7 @@ import HomeIcon from 'material-ui-icons/Home';
 import IconButton from 'material-ui/IconButton';
 
 import { HeaderUserPanel } from './';
-import { HeaderTitleContainer } from '../containers';
-import { HeaderMessagesPanelContainer } from '../containers';
+import { HeaderTitleContainer, HeaderMessagesPanelContainer } from '../containers';
 
 const Header = () => (
     <AppBar position="static">
