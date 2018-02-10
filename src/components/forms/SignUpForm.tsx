@@ -121,27 +121,35 @@ class SignUpForm extends React.PureComponent<SignUpFormProps, SignUpFormState> {
     }
 
     private validate(name: string, value: string) {
+        let newState = {};
+
         switch (name) {
             case 'Login': {
+                let LoginError = '';
                 if (value.length < 3) {
-                    this.setState({ LoginError: 'Login must be a minimum of 3 characters' });
+                    LoginError = 'Login must be a minimum of 3 characters';
                 } else if (value.length > 12) {
-                    this.setState({ LoginError: 'Login must be a maximum of 12 characters' });
+                    LoginError = 'Login must be a maximum of 12 characters';
                 } else if (!/^[a-zA-Z0-9]+$/.test(value)) {
-                    this.setState({ LoginError: 'The Login can consist only of letters and numbers' });
+                    LoginError = 'The Login can consist only of letters and numbers';
                 }
+                newState = {LoginError};
                 break;
             }
             case 'Password': {
+                let PasswordError = '';
                 if (value.length < 8) {
-                    this.setState({ PasswordError: 'Password must be a minimum of 8 characters' });
+                    PasswordError = 'Password must be a minimum of 8 characters';
                 } else if (value.length > 249) {
-                    this.setState({ PasswordError: 'Password is too long' });
+                    PasswordError = 'Password is too long';
                 }
+                newState = {PasswordError};
                 break;
             }
             default: throw 'ArgumentException';
         }
+
+        this.setState(newState);
     }
 }
 

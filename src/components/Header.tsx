@@ -1,19 +1,16 @@
 import * as React from 'react';
-import { observer } from 'mobx-react';
 import Badge from 'material-ui/Badge';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import { NavLink } from 'react-router-dom';
 import HomeIcon from 'material-ui-icons/Home';
 import MailIcon from 'material-ui-icons/Mail';
-import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import AccountCircle from 'material-ui-icons/AccountCircle';
 
-import AppStore from '../../stores/AppStore';
+import HeaderTitle from '../containers/HeaderTitle';
 
-@observer
-class Header extends React.Component<{}, {}> {
+class Header extends React.PureComponent<{}, {}> {
     render() {
         return (
             <AppBar position="static">
@@ -23,17 +20,14 @@ class Header extends React.Component<{}, {}> {
                             <HomeIcon />
                         </IconButton>
                     </NavLink>
-                    <Typography variant="title" color="inherit" style={{flex: 1}}>
-                        {AppStore.title}
-                    </Typography>
+                    <HeaderTitle />
                     <div>
                         <NavLink to="/logout" exact={true}>Logout</NavLink>
-                        <IconButton title="Not implemented yet...">
+                        <IconButton title="Private messages">
                             <Badge badgeContent={4} color="secondary">
                                 <MailIcon />
                             </Badge>
                         </IconButton>
-
                         <NavLink to="/profile" exact={true}>
                             <IconButton
                                 aria-owns={open ? 'menu-appbar' : undefined}

@@ -3,9 +3,9 @@ import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import withStyles, { WithStyles, StyleRulesCallback } from 'material-ui/styles/withStyles';
 
-import UsersListContainer from '../../containers/UsersListContainer';
-import ChatContainer from '../../containers/ChatContainer';
-import GameRoomsList from '../GameRoomsList';
+import UsersListContainer from '../containers/UsersListContainer';
+import ChatContainer from '../containers/ChatContainer';
+import GameRoomsList from './GameRoomsList';
 
 type ServerRoomProps = WithStyles<'root' | 'Paper'>;
 

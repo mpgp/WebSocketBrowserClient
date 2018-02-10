@@ -5,7 +5,7 @@ import Typography from 'material-ui/Typography';
 import List, { ListItem, ListItemIcon } from 'material-ui/List';
 import withStyles, { WithStyles, StyleRulesCallback } from 'material-ui/styles/withStyles';
 
-import { Server, Servers } from '../../common/interfaces';
+import { Server, Servers } from '../common/interfaces';
 
 type ServersListProps = Servers & WithStyles<'root' | 'ListItem' | 'NavLink'>;
 
