@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
-import AppStore from '../stores/AppStore';
+import { AppStore } from '../stores';
+import { ServerRoom } from '../components';
 import { REQUEST_STATUS } from '../common/enums';
-import { ServerService } from '../services/http';
-import ServerRoom from '../components/ServerRoom';
 import { RequestStatus } from '../common/interfaces';
-import WebSocketService from '../services/WebSocketService';
+import { ServerService, WebSocketService } from '../services';
 
 interface ServerPageProps {
     code: string;

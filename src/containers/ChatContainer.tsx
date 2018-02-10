@@ -2,11 +2,10 @@ import * as React from 'react';
 import Paper from 'material-ui/Paper';
 import withStyles, { WithStyles, StyleRulesCallback } from 'material-ui/styles/withStyles';
 
-import AppStore from '../stores/AppStore';
-import MessagesList from '../components/MessagesList';
-import Listener, { ListenerProps } from '../hoc/Listener';
-import WebSocketService from '../services/WebSocketService';
-import AddMessageForm from '../components/forms/AddMessageForm';
+import { AppStore } from '../stores';
+import { WebSocketService } from '../services';
+import { Listener, ListenerProps } from '../hoc';
+import { MessagesList, AddMessageForm } from '../components';
 import { WebSocketPayloadTypes } from '../common/interfaces/WebSocketPayloads';
 import { ChatMessage as ClientChatMessage } from '../common/interfaces/WebSocketPayloads/Client';
 import { ChatMessage as ServerChatMessage } from '../common/interfaces/WebSocketPayloads/Server';

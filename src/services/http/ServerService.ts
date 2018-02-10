@@ -1,5 +1,4 @@
-import { ApiService } from './ApiService';
-import NotificationService from '../NotificationService';
+import { ApiService, NotificationService } from '../';
 import { ApiResponse, Server } from '../../common/interfaces';
 
 const controller = 'server';

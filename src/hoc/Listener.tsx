@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { StyledComponentProps } from 'material-ui';
 
+import { WebSocketService, Subscription } from '../services';
 import { BaseMessage } from '../common/interfaces/WebSocketPayloads';
-import WebSocketService, { Subscription } from '../services/WebSocketService';
 
 export interface ListenerProps<T> {
     message: T;

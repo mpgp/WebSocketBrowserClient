@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import AppStore from '../stores/AppStore';
+import { AppStore } from '../stores';
 
 class Profile extends React.PureComponent<{}, {}> {
     componentDidMount() {

@@ -1,7 +1,6 @@
-import { ApiService } from './ApiService';
+import { AuthData } from '../../components';
+import { ApiService, NotificationService } from '../';
 import { ApiResponse } from '../../common/interfaces';
-import NotificationService from '../NotificationService';
-import { AuthData } from '../../components/forms/AuthForm';
 import { TokenValidation, UserToken } from '../../common/interfaces/ApiPayloads/Account';
 
 const controller = 'account';

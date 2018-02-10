@@ -1,7 +1,7 @@
 import * as React from 'react';
 import List, { ListItem } from 'material-ui/List';
 
-import { DateTimeView, DateModes } from './Shared';
+import { DateTimeView, DateModes } from './';
 import { ChatMessage } from '../common/interfaces/WebSocketPayloads/Server';
 
 interface MessagesListProps {

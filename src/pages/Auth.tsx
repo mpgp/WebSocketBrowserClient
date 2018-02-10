@@ -1,10 +1,10 @@
 import * as React from 'react';
 
+import { AppStore } from '../stores';
+import { AccountService } from '../services';
 import { REQUEST_STATUS } from '../common/enums';
-import { AccountService } from '../services/http';
+import { AuthForm, AuthData } from '../components';
 import { RequestStatus } from '../common/interfaces';
-import AuthForm, { AuthData } from '../components/forms/AuthForm';
-import AppStore from '../stores/AppStore';
 
 class Auth extends React.PureComponent<{}, RequestStatus> {
     private errorMessages = {'1001': 'Incorrect Login or Password'};

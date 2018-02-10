@@ -1,11 +1,8 @@
 import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import Auth from './pages/Auth';
-import Profile from './pages/Profile';
-import Header from './components/Header';
-import ServerPage from './pages/ServerPage';
-import ServerSelect from './pages/ServerSelect';
+import { Header } from './components';
+import { Auth, Profile, ServerPage, ServerSelect } from './pages';
 
 const Main = () => (
     <Auth>

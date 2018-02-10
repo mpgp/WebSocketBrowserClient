@@ -2,7 +2,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import Typography from 'material-ui/Typography';
 
-import AppStore from '../stores/AppStore';
+import { AppStore } from '../stores';
 
 @observer
 class HeaderTitleContainer extends React.Component<{}, {}> {

@@ -1,4 +1,4 @@
-import NotificationService from '../NotificationService';
+import { NotificationService } from '../';
 
 const sendRequest = <T>(method: string, path: string, body: T) => {
     return fetch(process.env.REACT_APP_API_PATH + path, {

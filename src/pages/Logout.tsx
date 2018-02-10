@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Redirect } from 'react-router-dom';
 
-import AppStore from '../stores/AppStore';
+import { AppStore } from '../stores';
 import { REQUEST_STATUS } from '../common/enums';
 import { RequestStatus } from '../common/interfaces';
 

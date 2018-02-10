@@ -1,6 +1,6 @@
 import { computed, observable } from 'mobx';
 
-import WebSocketService from '../services/WebSocketService';
+import { WebSocketService } from '../services';
 import { WebSocketPayloadTypes } from '../common/interfaces/WebSocketPayloads';
 import { AuthMessage, UserConnectionMessage } from '../common/interfaces/WebSocketPayloads/Server';
 

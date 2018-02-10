@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import AppStore from '../stores/AppStore';
+import { AppStore } from '../stores';
+import { ServerService } from '../services';
+import { ServersList } from '../components';
 import { REQUEST_STATUS } from '../common/enums';
-import { ServerService } from '../services/http';
-import ServersList from '../components/ServersList';
 import { RequestStatus, Server } from '../common/interfaces';
 
 interface ServerSelectState extends RequestStatus {

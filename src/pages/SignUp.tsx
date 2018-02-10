@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Redirect } from 'react-router-dom';
 
-import AppStore from '../stores/AppStore';
+import { AppStore } from '../stores';
 import { REQUEST_STATUS } from '../common/enums';
-import { AccountService } from '../services/http';
+import { AccountService } from '../services';
 import { RequestStatus } from '../common/interfaces';
-import SignUpForm, { SignUpData } from '../components/forms/SignUpForm';
+import { SignUpForm, SignUpData } from '../components/forms';
 
 class SignUp extends React.PureComponent<{}, RequestStatus> {
     private errorMessages = {'1000': 'Login already exists'};

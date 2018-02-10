@@ -3,14 +3,10 @@ import { Route, Switch } from 'react-router-dom';
 import * as NotificationSystem from 'react-notification-system';
 
 import Main from './Main';
-import WithRoot from './hoc/WithRoot';
-import Logout from './pages/Logout';
-import SignUp from './pages/SignUp';
-import Forgot from './pages/Forgot';
-import NotificationService from './services/NotificationService';
+import { WithRoot } from './hoc';
+import { Logout, SignUp, Forgot } from './pages';
+import { NotificationService } from './services';
 
-// TODO: why isn't PureComponent???
-// todo: React-router doesn't work with him O_o
 class App extends React.Component<{}, {}> {
     componentDidMount() {
         NotificationService.initialize((this.refs.notificationSystem as NotificationSystem.System));
