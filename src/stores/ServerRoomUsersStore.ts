@@ -22,7 +22,7 @@ class ServerRoomUsersStore {
                 if (message.Status === 'CONNECT') {
                     this._users = [...this._users, message.Login];
                 } else {
-                    var oldUserIndex = this._users.findIndex((user) => user === message.Login);
+                    let oldUserIndex = this._users.findIndex((user) => user === message.Login);
                     if (oldUserIndex !== -1) {
                         this._users.splice(oldUserIndex, 1);
                         this._users = [...this._users];

@@ -6,9 +6,9 @@ import { NavLink } from 'react-router-dom';
 import HomeIcon from 'material-ui-icons/Home';
 import MailIcon from 'material-ui-icons/Mail';
 import IconButton from 'material-ui/IconButton';
-import AccountCircle from 'material-ui-icons/AccountCircle';
 
-import HeaderTitle from '../containers/HeaderTitle';
+import HeaderUserPanel from './HeaderUserPanel';
+import HeaderTitleContainer from '../containers/HeaderTitleContainer';
 
 class Header extends React.PureComponent<{}, {}> {
     render() {
@@ -20,23 +20,14 @@ class Header extends React.PureComponent<{}, {}> {
                             <HomeIcon />
                         </IconButton>
                     </NavLink>
-                    <HeaderTitle />
+                    <HeaderTitleContainer />
                     <div>
-                        <NavLink to="/logout" exact={true}>Logout</NavLink>
                         <IconButton title="Private messages">
                             <Badge badgeContent={4} color="secondary">
                                 <MailIcon />
                             </Badge>
                         </IconButton>
-                        <NavLink to="/profile" exact={true}>
-                            <IconButton
-                                aria-owns={open ? 'menu-appbar' : undefined}
-                                aria-haspopup="true"
-                                color="secondary"
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                        </NavLink>
+                        <HeaderUserPanel />
                     </div>
                 </Toolbar>
             </AppBar>
