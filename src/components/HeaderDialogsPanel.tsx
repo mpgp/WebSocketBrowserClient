@@ -6,10 +6,11 @@ import OpenWith from 'material-ui-icons/OpenWith';
 import Slide, { SlideProps } from 'material-ui/transitions/Slide';
 import Dialog, { DialogContent, DialogTitle, } from 'material-ui/Dialog';
 
-import { PrivateMessagesContainer } from '../containers';
+import { DialogWindowContainer } from '../containers';
 
 interface HeaderMessagesPanelProps {
-    unreadDialogs: number;
+    dialogsCount: number;
+    title: string;
 }
 
 interface HeaderMessagesPanelState {
@@ -23,7 +24,7 @@ const moveDialogStyles = {
     top: 0
 };
 
-class HeaderMessagesPanel extends React.PureComponent<HeaderMessagesPanelProps, HeaderMessagesPanelState> {
+class HeaderDialogsPanel extends React.PureComponent<HeaderMessagesPanelProps, HeaderMessagesPanelState> {
     constructor(props: HeaderMessagesPanelProps) {
         super(props);
         this.state = { isOpen: false };
@@ -43,7 +44,7 @@ class HeaderMessagesPanel extends React.PureComponent<HeaderMessagesPanelProps, 
         return (
             <span>
                 <IconButton title="Private messages" onClick={this.handleOpen}>
-                    <Badge badgeContent={this.props.unreadDialogs} color="secondary">
+                    <Badge badgeContent={this.props.dialogsCount} color="secondary">
                         <MailIcon/>
                     </Badge>
                 </IconButton>
@@ -57,10 +58,10 @@ class HeaderMessagesPanel extends React.PureComponent<HeaderMessagesPanelProps, 
                     <div title="Move dialog" className="move-dialog" style={moveDialogStyles}>
                         <OpenWith />
                     </div>
-                    Private messages
+                    {this.props.title}
                 </DialogTitle>
                     <DialogContent>
-                        {this.state.isOpen && <PrivateMessagesContainer />}
+                        {this.state.isOpen && <DialogWindowContainer />}
                     </DialogContent>
                 </Dialog>
             </span>
@@ -111,4 +112,4 @@ class HeaderMessagesPanel extends React.PureComponent<HeaderMessagesPanelProps, 
     }
 }
 
-export default HeaderMessagesPanel;
+export default HeaderDialogsPanel;

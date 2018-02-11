@@ -6,7 +6,7 @@ import HomeIcon from 'material-ui-icons/Home';
 import IconButton from 'material-ui/IconButton';
 
 import { HeaderUserPanel } from './';
-import { HeaderTitleContainer, HeaderMessagesPanelContainer } from '../containers';
+import { HeaderTitleContainer, HeaderDialogsPanelContainer } from '../containers';
 
 const Header = () => (
     <AppBar position="static">
@@ -18,7 +18,7 @@ const Header = () => (
             </NavLink>
             <HeaderTitleContainer />
             <div>
-                <HeaderMessagesPanelContainer />
+                <HeaderDialogsPanelContainer />
                 <HeaderUserPanel />
             </div>
         </Toolbar>

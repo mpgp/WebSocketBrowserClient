@@ -5,7 +5,7 @@ import withStyles, { WithStyles, StyleRulesCallback } from 'material-ui/styles/w
 import { AppStore } from '../stores';
 import { WebSocketService } from '../services';
 import { Listener, ListenerProps } from '../hoc';
-import { MessagesList, AddMessageForm } from '../components';
+import { ChatMessagesList, AddMessageForm } from '../components';
 import { WebSocketPayloadTypes } from '../common/interfaces/WebSocketPayloads';
 import { ChatMessage as ClientChatMessage } from '../common/interfaces/WebSocketPayloads/Client';
 import { ChatMessage as ServerChatMessage } from '../common/interfaces/WebSocketPayloads/Server';
@@ -47,7 +47,7 @@ class ChatContainer extends React.PureComponent<ChatContainerProps, {}> {
         return (
             <div className={this.props.classes.root}>
                 <Paper className={'with-scrollbar ' + this.props.classes.Paper}>
-                    <MessagesList messages={this.messages} myName={this.login} />
+                    <ChatMessagesList messages={this.messages} myName={this.login} />
                 </Paper>
                 <AddMessageForm onSubmit={this.onSubmitForm} />
             </div>

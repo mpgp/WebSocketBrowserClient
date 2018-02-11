@@ -9,7 +9,7 @@ interface MessagesListProps {
     myName: string;
 }
 
-const Message = (myName: string) => (chatMessage: ChatMessage, index: number) => (
+const ChatMessageItem = (myName: string) => (chatMessage: ChatMessage, index: number) => (
     <ListItem key={index} style={{color: '#666'}}>
         [<DateTimeView Time={chatMessage.Time} Mode={DateModes.DateTime}/>]
         &nbsp;
@@ -21,16 +21,16 @@ const Message = (myName: string) => (chatMessage: ChatMessage, index: number) =>
     </ListItem>
 );
 
-const MessagesList = (props: MessagesListProps) => (
+const ChatMessagesList = (props: MessagesListProps) => (
     <div className="MessageList">
         {
             props.messages.length > 0
                 ? <List>
-                    {props.messages.map(Message(props.myName))}
+                    {props.messages.map(ChatMessageItem(props.myName))}
                   </List>
                 : <p>No messages...</p>
         }
     </div>
 );
 
-export default MessagesList;
+export default ChatMessagesList;

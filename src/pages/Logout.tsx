@@ -17,9 +17,9 @@ class Logout extends React.PureComponent<{}, RequestStatus> {
     componentDidMount() {
         // TODO: send request
         AppStore.removeUserInfo();
-        console.warn('send DELETE to /api/account');
+        console.warn('send DELETE to /api/token');
         this.setState({status: REQUEST_STATUS.SUCCESS});
-        setTimeout(window.location.reload(), 500);
+        setTimeout(() => window.location.reload(), 500);
     }
 
     render() {

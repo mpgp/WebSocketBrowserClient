@@ -1,6 +1,15 @@
 export * from './forms';
 export * from './Shared';
 
+import ChatMessagesList from './ChatMessagesList';
+export { ChatMessagesList };
+
+import DialogsList from './DialogsList';
+export { DialogsList };
+
+import DialogMessagesList from './DialogMessagesList';
+export { DialogMessagesList };
+
 import Game from './Game';
 export { Game };
 
@@ -10,14 +19,11 @@ export { GameRoomsList };
 import Header from './Header';
 export { Header };
 
-import HeaderMessagesPanel from './HeaderMessagesPanel';
-export { HeaderMessagesPanel };
+import HeaderDialogsPanel from './HeaderDialogsPanel';
+export { HeaderDialogsPanel };
 
 import HeaderUserPanel from './HeaderUserPanel';
 export { HeaderUserPanel };
-
-import MessagesList from './MessagesList';
-export { MessagesList };
 
 import ServerRoom from './ServerRoom';
 export { ServerRoom };
