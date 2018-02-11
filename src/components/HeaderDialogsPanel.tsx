@@ -27,7 +27,7 @@ const moveDialogStyles = {
 class HeaderDialogsPanel extends React.PureComponent<HeaderMessagesPanelProps, HeaderMessagesPanelState> {
     constructor(props: HeaderMessagesPanelProps) {
         super(props);
-        this.state = { isOpen: false };
+        this.state = { isOpen: true };
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
     }

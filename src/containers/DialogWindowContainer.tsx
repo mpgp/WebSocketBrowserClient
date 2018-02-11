@@ -35,6 +35,8 @@ class DialogWindowContainer extends React.Component<{}, DialogWindowContainerSta
             <span onClick={this.onBack} title="Go back" style={{cursor: 'pointer'}}>
                 <KeyboardArrowLeft key={0} />
                 <span key={Login} style={{top: '-5px', position: 'relative'}}>{Login}</span>
+                &nbsp;
+                <img src="https://image.flaticon.com/icons/svg/25/25231.svg" width="40" height="40" key={'_' + Login} />
             </span>
         );
         DialogsStore.setTitle(dialogTitle);

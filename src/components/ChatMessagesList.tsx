@@ -11,7 +11,7 @@ interface MessagesListProps {
 
 const ChatMessageItem = (myName: string) => ({Login, Message, Time}: ChatMessage, index: number) => (
     <ListItem key={index} style={{color: '#666'}}>
-        [<DateTimeView Time={Time} Mode={DateModes.DateTime}/>]
+        [<DateTimeView Time={Time} Mode={DateModes.Time}/>]
         &nbsp;
         <span style={{color: '#000', fontWeight: (myName === Login ? 'bold' : 'normal')}}>
             &lt;{Login}&gt;
