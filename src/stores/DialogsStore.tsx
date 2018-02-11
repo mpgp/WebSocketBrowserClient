@@ -1,4 +1,5 @@
-import { observable } from 'mobx';
+import * as React from 'react';
+import { action, observable } from 'mobx';
 
 export interface DialogMessage {
     Login: string;
@@ -26,8 +27,18 @@ const dialogsList: Dialog[] = [{
 }];
 
 class DialogsStore {
+    private static readonly defaultTitle = <span>Dialog list</span>;
+
     @observable dialogs: Dialog[] = dialogsList;
-    @observable title = 'Dialog list';
+    @observable title = DialogsStore.defaultTitle;
+
+    @action setTitle(title: JSX.Element) {
+        this.title = title;
+    }
+
+    resetTitle() {
+        this.setTitle(DialogsStore.defaultTitle);
+    }
 }
 
 export default new DialogsStore();

@@ -10,7 +10,7 @@ import { DialogWindowContainer } from '../containers';
 
 interface HeaderMessagesPanelProps {
     dialogsCount: number;
-    title: string;
+    title: JSX.Element;
 }
 
 interface HeaderMessagesPanelState {
@@ -55,9 +55,9 @@ class HeaderDialogsPanel extends React.PureComponent<HeaderMessagesPanelProps, H
                     onClose={this.handleClose}
                 >
                 <DialogTitle id="HeaderMessagesPanelTitle">
-                    <div title="Move dialog" className="move-dialog" style={moveDialogStyles}>
+                    <span title="Move dialog" className="move-dialog" style={moveDialogStyles}>
                         <OpenWith />
-                    </div>
+                    </span>
                     {this.props.title}
                 </DialogTitle>
                     <DialogContent>

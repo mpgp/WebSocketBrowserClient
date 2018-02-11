@@ -10,12 +10,10 @@ const DialogMessage = ({Login, Message, Time}: DialogMessage, index: number) => 
 
 interface DialogMessagesListProps {
     dialog: Dialog;
-    toggle: () => void;
 }
 
-const DialogMessagesList = ({dialog, toggle}: DialogMessagesListProps) => (
-    <div className="DialogsListContainer" onClick={toggle}>
-        <h2>{dialog.Login}</h2>
+const DialogMessagesList = ({dialog}: DialogMessagesListProps) => (
+    <div className="DialogsListContainer">
         {dialog.Items.map(DialogMessage)}
     </div>
 );
