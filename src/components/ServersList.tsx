@@ -15,11 +15,11 @@ const styles: StyleRulesCallback<'root'> = () => ({
     NavLink: {display: 'block', width: '100%'}
 });
 
-const ServersList = (props: ServersListProps) => (
-    <List className={props.classes.root}>
-        {props.servers.map((server: Server) => (
-            <ListItem button={true} key={server.id} className={props.classes.ListItem}>
-                <NavLink to={'/server/' + server.code} title={server.address} className={props.classes.NavLink}>
+const ServersList = ({classes, servers}: ServersListProps) => (
+    <List className={classes.root}>
+        {servers.map((server: Server) => (
+            <ListItem button={true} key={server.id} className={classes.ListItem}>
+                <NavLink to={'/server/' + server.code} title={server.address} className={classes.NavLink}>
                     <Typography component="p" variant="headline">
                         {server.name} {server.id === 1 && <ListItemIcon><StarIcon /></ListItemIcon>}
                     </Typography>

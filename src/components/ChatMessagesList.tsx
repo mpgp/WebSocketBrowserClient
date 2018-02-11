@@ -9,28 +9,26 @@ interface MessagesListProps {
     myName: string;
 }
 
-const ChatMessageItem = (myName: string) => (chatMessage: ChatMessage, index: number) => (
+const ChatMessageItem = (myName: string) => ({Login, Message, Time}: ChatMessage, index: number) => (
     <ListItem key={index} style={{color: '#666'}}>
-        [<DateTimeView Time={chatMessage.Time} Mode={DateModes.DateTime}/>]
+        [<DateTimeView Time={Time} Mode={DateModes.DateTime}/>]
         &nbsp;
-        <span style={{color: '#000', fontWeight: (myName === chatMessage.Login ? 'bold' : 'normal')}}>
-            &lt;{chatMessage.Login}&gt;
+        <span style={{color: '#000', fontWeight: (myName === Login ? 'bold' : 'normal')}}>
+            &lt;{Login}&gt;
         </span>
         &nbsp;
-        {chatMessage.Message}
+        {Message}
     </ListItem>
 );
 
-const ChatMessagesList = (props: MessagesListProps) => (
-    <div className="MessageList">
+const ChatMessagesList = ({messages, myName}: MessagesListProps) => (
+    <List className="MessageList">
         {
-            props.messages.length > 0
-                ? <List>
-                    {props.messages.map(ChatMessageItem(props.myName))}
-                  </List>
-                : <p>No messages...</p>
+            messages.length > 0
+                ? messages.map(ChatMessageItem(myName))
+                : <ListItem>No messages...</ListItem>
         }
-    </div>
+    </List>
 );
 
 export default ChatMessagesList;

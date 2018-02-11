@@ -22,17 +22,17 @@ const styles: StyleRulesCallback<'root'> = () => ({
     }
 });
 
-const ServerRoom = (props: ServerRoomProps) => (
+const ServerRoom = ({classes}: ServerRoomProps) => (
     <div className="ServerRoom">
-        <div className={props.classes.root}>
+        <div className={classes.root}>
             <Grid container={true} spacing={24}>
                 <Grid item={true} xs={12} sm={9}>
-                    <Paper className={props.classes.Paper}>
+                    <Paper className={classes.Paper}>
                         <ChatContainer />
                     </Paper>
                 </Grid>
                 <Grid item={true} xs={12} sm={3}>
-                    <Paper className={props.classes.Paper}>
+                    <Paper className={classes.Paper}>
                         <UsersListContainer />
                         <GameRoomsList />
                     </Paper>

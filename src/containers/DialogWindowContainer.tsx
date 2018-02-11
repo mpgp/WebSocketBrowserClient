@@ -2,7 +2,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import KeyboardArrowLeft from 'material-ui-icons/KeyboardArrowLeft';
 
-import { Dialog, DialogsStore } from '../stores';
+import { AppStore, Dialog, DialogsStore } from '../stores';
 import { DialogMessagesList, DialogsList } from '../components';
 
 enum Layout {
@@ -45,7 +45,7 @@ class DialogWindowContainer extends React.Component<{}, DialogWindowContainerSta
     render() {
         return this.state.layout === Layout.DIALOGS_LIST
             ? <DialogsList dialogs={DialogsStore.dialogs} onPickDialog={this.onPickDialog} />
-            : <DialogMessagesList dialog={this.pickedDialog} />;
+            : <DialogMessagesList dialog={this.pickedDialog} myName={AppStore.userInfo.login}/>;
     }
 }
 

@@ -17,9 +17,9 @@ const styles: StyleRulesCallback<'root'> = () => ({
     }
 });
 
-const UsersList = (props: UsersListProps) => (
-    <Paper className={'with-scrollbar ' + props.classes.root}>
-        {props.users.map(value => <p key={value}>{value}</p>)}
+const UsersList = ({classes, users}: UsersListProps) => (
+    <Paper className={'with-scrollbar ' + classes.root}>
+        {users.map(value => <p key={value}>{value}</p>)}
     </Paper>
 );
 

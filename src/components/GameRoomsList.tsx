@@ -13,8 +13,8 @@ const styles: StyleRulesCallback<'root'> = () => ({
     }
 });
 
-const GameRoomsList = (props: GameRoomsListProps) => (
-    <Paper className={'with-scrollbar ' + props.classes.root}>
+const GameRoomsList = ({classes}: GameRoomsListProps) => (
+    <Paper className={'with-scrollbar ' + classes.root}>
         {
             Array.from(Array(20).keys())
                 .sort((a, b) => Math.random() - 0.5)
