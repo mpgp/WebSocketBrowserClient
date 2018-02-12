@@ -12,7 +12,7 @@ const styles: StyleRulesCallback<'root'> = () => ({
     root: {
         width: 'calc( 100% - 20px )',
         margin: 10,
-        overflowY: 'scroll',
+        overflowY: 'auto',
         height: 'calc( 100% - 80px )'
     }
 });

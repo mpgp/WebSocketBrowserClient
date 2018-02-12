@@ -1,6 +1,8 @@
 import * as React from 'react';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
+import Avatar from 'material-ui/Avatar';
+import withStyles, { WithStyles, StyleRulesCallback } from 'material-ui/styles/withStyles';
 
 import { Dialog } from '../stores';
 
@@ -22,14 +24,12 @@ class DialogItem extends React.PureComponent<DialogItemProps, {}> {
         const {Items, Login} = this.props;
 
         return (
-            <Paper onClick={this.handleClick} style={{marginBottom: '15px'}}>
+            <Paper onClick={this.handleClick} style={{marginTop: '15px'}}>
                 <Grid container={true} spacing={8}>
                     <Grid item={true} xs={3}>
-                        <img
+                        <Avatar
                             style={{margin: '5px'}}
-                            src="https://image.flaticon.com/icons/svg/25/25231.svg"
-                            height="40"
-                            width="40"
+                            src={`${process.env.REACT_APP_API_PATH}user/${Login}/avatar.jpg`}
                         />
                     </Grid>
                     <Grid item={true} xs={9}>
@@ -46,14 +46,26 @@ interface DialogsListProps {
     onPickDialog: (Login: string) => void;
 }
 
-const DialogsList = ({dialogs, onPickDialog}: DialogsListProps) => (
-    <div className="DialogsListContainer">
+type DialogsListPropsWithStyles = DialogsListProps & WithStyles<'root'>;
+
+const styles: StyleRulesCallback<'root'> = () => ({
+    root: {
+        width: '400px',
+        margin: 10,
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        maxHeight: '245px'
+    }
+});
+
+const DialogsList = ({classes, dialogs, onPickDialog}: DialogsListPropsWithStyles) => (
+    <Paper className={'with-scrollbar ' + classes.root}>
         {
             dialogs.map((dialog: Dialog) => (
                 <DialogItem Login={dialog.Login} Items={dialog.Items} onPickDialog={onPickDialog} key={dialog.Login} />
             ))
         }
-    </div>
+    </Paper>
 );
 
-export default DialogsList;
+export default withStyles(styles)<DialogsListProps>(DialogsList);

@@ -1,14 +1,17 @@
 import * as React from 'react';
+import { observer } from 'mobx-react';
+import Avatar from 'material-ui/Avatar';
 import { NavLink } from 'react-router-dom';
 import IconButton from 'material-ui/IconButton';
 import Menu, { MenuItem } from 'material-ui/Menu';
-import AccountCircle from 'material-ui-icons/AccountCircle';
+import { AppStore } from '../stores';
 
 interface HeaderUserPanelState {
     isOpen: boolean;
 }
 
-class HeaderUserPanel extends React.PureComponent<{}, HeaderUserPanelState> {
+@observer
+class HeaderUserPanel extends React.Component<{}, HeaderUserPanelState> {
     private anchorEl: HTMLElement;
 
     constructor(props: {}) {
@@ -36,7 +39,7 @@ class HeaderUserPanel extends React.PureComponent<{}, HeaderUserPanelState> {
                     color="secondary"
                     onClick={this.handleClick}
                 >
-                    <AccountCircle />
+                    <Avatar src={`${process.env.REACT_APP_API_PATH}user/${AppStore.userInfo.login}/avatar.jpg`} />
                 </IconButton>
                 <Menu
                     id="simple-menu"

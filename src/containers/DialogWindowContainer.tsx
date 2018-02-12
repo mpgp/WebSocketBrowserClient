@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
+import Avatar from 'material-ui/Avatar';
+import { NavLink } from 'react-router-dom';
 import KeyboardArrowLeft from 'material-ui-icons/KeyboardArrowLeft';
 
 import { AppStore, Dialog, DialogsStore } from '../stores';
@@ -31,13 +33,20 @@ class DialogWindowContainer extends React.Component<{}, DialogWindowContainerSta
     }
 
     onPickDialog(Login: string) {
+        // TODO: move to new component!
         const dialogTitle = (
-            <span onClick={this.onBack} title="Go back" style={{cursor: 'pointer'}}>
-                <KeyboardArrowLeft key={0} />
-                <span key={Login} style={{top: '-5px', position: 'relative'}}>{Login}</span>
+            <div key={Login}>
+                <span onClick={this.onBack} title="Go back" style={{cursor: 'pointer'}} key={'back_' + Login} >
+                    <KeyboardArrowLeft key={'left_' + Login} />
+                    <span style={{top: '-5px', position: 'relative'}} key={'name_' + Login}>{Login}</span>
+                </span>
                 &nbsp;
-                <img src="https://image.flaticon.com/icons/svg/25/25231.svg" width="40" height="40" key={'_' + Login} />
-            </span>
+                <NavLink to={`/user/${Login}`} key={'link_' + Login} title="Show profile">
+                    <span style={{display: 'inline-block'}}>
+                        <Avatar src={`${process.env.REACT_APP_API_PATH}user/${Login}/avatar.jpg`} />
+                    </span>
+                </NavLink>
+            </div>
         );
         DialogsStore.setTitle(dialogTitle);
         this.pickedDialog = DialogsStore.dialogs.find((dialog: Dialog) => dialog.Login === Login) as Dialog;

@@ -20,7 +20,7 @@ const styles: StyleRulesCallback<'root'> = () => ({
     },
     Paper: {
         margin: 10,
-        overflowY: 'scroll',
+        overflowY: 'auto',
         width: 'calc( 100% - 20px )',
         height: 'calc( 100% - 80px )'
     }
