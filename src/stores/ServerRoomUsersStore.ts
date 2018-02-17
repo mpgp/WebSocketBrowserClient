@@ -14,7 +14,13 @@ class ServerRoomUsersStore {
     constructor() {
         WebSocketService.subscribe(
             WebSocketPayloadTypes.AuthMessage,
-            (message: AuthMessage) => { this._users = [...message.UsersList]; });
+            (message: AuthMessage) => {
+                if (message.Message !== 'SUCCESS') {
+                    window.location.href = '/';
+                    return;
+                }
+                this._users = [...message.UsersList];
+            });
 
         WebSocketService.subscribe(
             WebSocketPayloadTypes.UserConnectionMessage,
