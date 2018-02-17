@@ -6,12 +6,12 @@ import IconButton from 'material-ui/IconButton';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import { AppStore } from '../stores';
 
-interface HeaderUserPanelState {
+interface HeaderUserPanelContainerState {
     isOpen: boolean;
 }
 
 @observer
-class HeaderUserPanel extends React.Component<{}, HeaderUserPanelState> {
+class HeaderUserPanelContainer extends React.Component<{}, HeaderUserPanelContainerState> {
     private anchorEl: HTMLElement;
 
     constructor(props: {}) {
@@ -59,4 +59,4 @@ class HeaderUserPanel extends React.Component<{}, HeaderUserPanelState> {
     }
 }
 
-export default HeaderUserPanel;
+export default HeaderUserPanelContainer;

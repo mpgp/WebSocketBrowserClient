@@ -10,5 +10,8 @@ export { HeaderDialogsPanelContainer };
 import HeaderTitleContainer from './HeaderTitleContainer';
 export { HeaderTitleContainer };
 
+import HeaderUserPanelContainer from './HeaderUserPanelContainer';
+export { HeaderUserPanelContainer };
+
 import UsersListContainer from './UsersListContainer';
 export { UsersListContainer };

@@ -7,14 +7,14 @@ import Slide, { SlideProps } from 'material-ui/transitions/Slide';
 import Dialog, { DialogContent, DialogTitle, } from 'material-ui/Dialog';
 
 import { DialogWindowContainer } from '../containers';
+import { DialogsStoreMode } from '../stores';
 
 interface HeaderMessagesPanelProps {
+    changeStatus: (isOpen: boolean) => void;
     dialogsCount: number;
-    title: JSX.Element;
-}
-
-interface HeaderMessagesPanelState {
     isOpen: boolean;
+    mode: DialogsStoreMode;
+    title: JSX.Element;
 }
 
 const moveDialogStyles = {
@@ -24,20 +24,19 @@ const moveDialogStyles = {
     top: 0
 };
 
-class HeaderDialogsPanel extends React.PureComponent<HeaderMessagesPanelProps, HeaderMessagesPanelState> {
+class HeaderDialogsPanel extends React.PureComponent<HeaderMessagesPanelProps, {}> {
     constructor(props: HeaderMessagesPanelProps) {
         super(props);
-        this.state = { isOpen: true };
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
     }
 
     handleOpen() {
-        this.setState({ isOpen: true });
+        this.props.changeStatus(true);
     }
 
     handleClose() {
-        this.setState({ isOpen: false });
+        this.props.changeStatus(false);
     }
 
     render() {
@@ -49,7 +48,7 @@ class HeaderDialogsPanel extends React.PureComponent<HeaderMessagesPanelProps, H
                     </Badge>
                 </IconButton>
                 <Dialog
-                    open={this.state.isOpen}
+                    open={this.props.isOpen}
                     transition={this.transition}
                     keepMounted={true}
                     onClose={this.handleClose}
@@ -61,7 +60,7 @@ class HeaderDialogsPanel extends React.PureComponent<HeaderMessagesPanelProps, H
                     {this.props.title}
                 </DialogTitle>
                     <DialogContent>
-                        {this.state.isOpen && <DialogWindowContainer />}
+                        {this.props.isOpen && <DialogWindowContainer mode={this.props.mode} />}
                     </DialogContent>
                 </Dialog>
             </span>

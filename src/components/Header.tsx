@@ -5,8 +5,7 @@ import { NavLink } from 'react-router-dom';
 import HomeIcon from 'material-ui-icons/Home';
 import IconButton from 'material-ui/IconButton';
 
-import { HeaderUserPanel } from './';
-import { HeaderTitleContainer, HeaderDialogsPanelContainer } from '../containers';
+import { HeaderTitleContainer, HeaderDialogsPanelContainer, HeaderUserPanelContainer } from '../containers';
 
 const Header = () => (
     <AppBar position="static">
@@ -19,7 +18,7 @@ const Header = () => (
             <HeaderTitleContainer />
             <div>
                 <HeaderDialogsPanelContainer />
-                <HeaderUserPanel />
+                <HeaderUserPanelContainer />
             </div>
         </Toolbar>
     </AppBar>

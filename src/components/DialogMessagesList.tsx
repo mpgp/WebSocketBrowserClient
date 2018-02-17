@@ -1,10 +1,9 @@
 import * as React from 'react';
 import List, { ListItem } from 'material-ui/List';
+import withStyles, { WithStyles, StyleRulesCallback } from 'material-ui/styles/withStyles';
 
 import { DateModes, DateTimeView } from './';
 import { Dialog, DialogMessage } from '../stores';
-import { StyleRulesCallback, WithStyles } from 'material-ui/styles/withStyles';
-import withStyles from 'material-ui/styles/withStyles';
 
 const DialogMessage = (myName: string) => ({Login, Message, Time}: DialogMessage, index: number) => (
     <ListItem key={index}>
@@ -18,7 +17,8 @@ const DialogMessage = (myName: string) => ({Login, Message, Time}: DialogMessage
 );
 
 interface DialogMessagesListProps {
-    dialog: Dialog;
+    dialogs: Dialog[];
+    login: string;
     myName: string;
 }
 
@@ -34,9 +34,11 @@ const styles: StyleRulesCallback<'root'> = () => ({
     }
 });
 
-const DialogMessagesList = ({classes, dialog, myName}: DialogMessagesListPropsWithStyles) => (
+const DialogMessagesList = ({classes, dialogs, login, myName}: DialogMessagesListPropsWithStyles) => (
     <List className={'with-scrollbar ' + classes.root}>
-        {dialog.Items.map(DialogMessage(myName))}
+        {
+            (dialogs.find((dialog) => dialog.Login === login) as Dialog)
+                .Items.map(DialogMessage(myName))}
     </List>
 );
 
