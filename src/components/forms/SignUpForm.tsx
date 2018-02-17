@@ -9,6 +9,7 @@ import withStyles, { WithStyles, StyleRulesCallback } from 'material-ui/styles/w
 export class SignUpData {
     Login: string;
     Password: string;
+    RepeatPassword: string;
 }
 
 interface SignUpProps {
@@ -21,6 +22,7 @@ type SignUpFormProps = SignUpProps & WithStyles<'root' | 'Card' | 'Typography'>;
 interface SignUpFormState {
     LoginError: string;
     PasswordError: string;
+    RepeatPasswordError: string;
 }
 
 const styles: StyleRulesCallback<'root'> = () => ({
@@ -32,7 +34,9 @@ const styles: StyleRulesCallback<'root'> = () => ({
 class SignUpForm extends React.PureComponent<SignUpFormProps, SignUpFormState> {
     private signUpData = new SignUpData();
     private get valid() {
-        return this.state.LoginError || this.state.PasswordError;
+        return !this.state.LoginError && this.signUpData.Login
+            && !this.state.PasswordError && this.signUpData.Password
+            && !this.state.RepeatPasswordError && this.signUpData.RepeatPassword;
     }
 
     constructor(props: SignUpFormProps) {
@@ -40,7 +44,8 @@ class SignUpForm extends React.PureComponent<SignUpFormProps, SignUpFormState> {
 
         this.state = {
             LoginError: '',
-            PasswordError: ''
+            PasswordError: '',
+            RepeatPasswordError: ''
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -57,11 +62,13 @@ class SignUpForm extends React.PureComponent<SignUpFormProps, SignUpFormState> {
 
     handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        this.props.onSubmit(this.signUpData);
+        const signUpData = {...this.signUpData};
+        delete signUpData.RepeatPassword;
+        this.props.onSubmit(signUpData);
     }
 
     render() {
-        const { LoginError, PasswordError } = this.state;
+        const { LoginError, PasswordError, RepeatPasswordError } = this.state;
         return (
             <div className={this.props.classes.root}>
                 <Card className={'SignUpForm ' + this.props.classes.Card}>
@@ -81,6 +88,7 @@ class SignUpForm extends React.PureComponent<SignUpFormProps, SignUpFormState> {
                                 onChange={this.handleChange}
                             />
                             <br />
+                            <br />
                             <TextField
                                 error={!!PasswordError}
                                 helperText={PasswordError ? PasswordError : 'Enter your Password'}
@@ -92,12 +100,23 @@ class SignUpForm extends React.PureComponent<SignUpFormProps, SignUpFormState> {
                             />
                             <br />
                             <br />
+                            <TextField
+                                error={!!RepeatPasswordError}
+                                helperText={RepeatPasswordError ? RepeatPasswordError : 'Repeat your Password'}
+                                label="Repeat Password"
+                                name="RepeatPassword"
+                                type="password"
+                                fullWidth={true}
+                                onChange={this.handleChange}
+                            />
+                            <br />
+                            <br />
                             <Button
                                 variant={'raised'}
                                 type="submit"
                                 color="primary"
                                 fullWidth={true}
-                                disabled={!!this.valid}
+                                disabled={!this.valid}
                             >
                                 Register
                             </Button>
@@ -144,6 +163,19 @@ class SignUpForm extends React.PureComponent<SignUpFormProps, SignUpFormState> {
                     PasswordError = 'Password is too long';
                 }
                 newState = {PasswordError};
+                break;
+            }
+            case 'RepeatPassword': {
+                let RepeatPasswordError = '';
+                if (value !== this.signUpData.Password) {
+                    RepeatPasswordError = 'These passwords don\'t match';
+                }
+
+                if (this.state.RepeatPasswordError === RepeatPasswordError) {
+                    this.forceUpdate();
+                } else {
+                    newState = {RepeatPasswordError};
+                }
                 break;
             }
             default: throw 'ArgumentException';

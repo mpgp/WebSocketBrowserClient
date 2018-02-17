@@ -1,4 +1,4 @@
-import { AuthData } from '../../components';
+import { AuthData, SignUpData } from '../../components';
 import { ApiService, NotificationService } from '../';
 import { ApiResponse } from '../../common/interfaces';
 import { TokenValidation, UserToken } from '../../common/interfaces/ApiPayloads/Account';
@@ -18,7 +18,7 @@ const checkToken = (token: string): Promise<number> => ApiService.patch(controll
         }
     });
 
-const register = (body: AuthData): Promise<ApiResponse<UserToken>> => ApiService
+const register = (body: SignUpData): Promise<ApiResponse<UserToken>> => ApiService
     .put(controller, {...body, Avatar: '0.jpg'});
 
 const AccountService = { auth, checkToken, register };
