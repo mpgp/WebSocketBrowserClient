@@ -81,6 +81,7 @@ class AuthForm extends React.PureComponent<AuthFormProps, AuthFormState> {
                                 onChange={this.handleChange}
                             />
                             <br />
+                            <br />
                             <TextField
                                 error={!!PasswordError}
                                 helperText={PasswordError ? PasswordError : 'Enter your Password'}

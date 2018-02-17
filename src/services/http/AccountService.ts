@@ -18,8 +18,7 @@ const checkToken = (token: string): Promise<number> => ApiService.patch(controll
         }
     });
 
-const register = (body: SignUpData): Promise<ApiResponse<UserToken>> => ApiService
-    .put(controller, {...body, Avatar: '0.jpg'});
+const register = (body: SignUpData): Promise<ApiResponse<UserToken>> => ApiService.put(controller, body);
 
 const AccountService = { auth, checkToken, register };
 export { AccountService };
