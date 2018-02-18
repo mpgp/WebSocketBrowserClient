@@ -2,10 +2,10 @@ import * as React from 'react';
 import { action, observable } from 'mobx';
 
 import { AppStore } from './';
+import { DialogTitle } from '../components';
 import { WebSocketService } from '../services';
 import { WebSocketPayloadTypes } from '../common/interfaces/WebSocketPayloads';
 import { DialogMessage as ServerDialogMessage } from '../common/interfaces/WebSocketPayloads/Server';
-import DialogTitle from '../components/DialogTitle';
 
 export enum DialogsStoreMode {
     DIALOG_MESSAGES_LIST,

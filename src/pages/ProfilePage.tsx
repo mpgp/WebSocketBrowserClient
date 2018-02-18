@@ -3,14 +3,14 @@ import { NavLink } from 'react-router-dom';
 
 import { AppStore } from '../stores';
 
-class Profile extends React.PureComponent<{}, {}> {
+class ProfilePage extends React.PureComponent<{}, {}> {
     componentDidMount() {
         AppStore.setTitle('Your profile');
     }
 
     render() {
         return (
-            <div className="Profile">
+            <div className="ProfilePage">
                 <p>Hello, {AppStore.userInfo.login}!</p>
                 <NavLink to="/">Go back</NavLink>
             </div>
@@ -18,4 +18,4 @@ class Profile extends React.PureComponent<{}, {}> {
     }
 }
 
-export default Profile;
+export default ProfilePage;

@@ -2,12 +2,12 @@ import * as React from 'react';
 import { Redirect } from 'react-router-dom';
 
 import { AppStore } from '../stores';
-import { REQUEST_STATUS } from '../common/enums';
 import { AccountService } from '../services';
+import { REQUEST_STATUS } from '../common/enums';
 import { RequestStatus } from '../common/interfaces';
-import { SignUpForm, SignUpData } from '../components/forms';
+import { SignUpForm, SignUpData } from '../components';
 
-class SignUp extends React.PureComponent<{}, RequestStatus> {
+class SignUpPage extends React.PureComponent<{}, RequestStatus> {
     private errorMessages = {'1000': 'Login already exists'};
 
     constructor(props: {}) {
@@ -54,4 +54,4 @@ class SignUp extends React.PureComponent<{}, RequestStatus> {
     }
 }
 
-export default SignUp;
+export default SignUpPage;

@@ -2,18 +2,18 @@ import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { Header } from './components';
-import { Auth, Profile, ServerPage, ServerSelect } from './pages';
+import { AuthPage, ProfilePage, ServerPage, ServerSelectPage } from './pages';
 
 const Main = () => (
-    <Auth>
+    <AuthPage>
         <Header />
         <Switch>
-            <Route path="/" component={ServerSelect} exact={true}/>
-            <Route path="/profile" component={Profile}/>
+            <Route path="/" component={ServerSelectPage} exact={true}/>
+            <Route path="/profile" component={ProfilePage}/>
             <Route path="/server/:code" component={ServerPage}/>
             <Redirect to="/"/>
         </Switch>
-    </Auth>
+    </AuthPage>
 );
 
 export default Main;

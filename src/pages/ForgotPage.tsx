@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Forgot = () => (
-    <div className="Forgot">
+const ForgotPage = () => (
+    <div className="ForgotPage">
         <p>Not implemented yet...</p>
         <NavLink to="/">Go back</NavLink>
     </div>
 );
 
-export default Forgot;
+export default ForgotPage;

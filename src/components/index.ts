@@ -1,4 +1,4 @@
-export * from './forms';
+export * from './Forms';
 export * from './Shared';
 
 import ChatMessagesList from './ChatMessagesList';

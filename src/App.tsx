@@ -4,7 +4,7 @@ import * as NotificationSystem from 'react-notification-system';
 
 import Main from './Main';
 import { WithRoot } from './hoc';
-import { Logout, SignUp, Forgot } from './pages';
+import { LogoutPage, SignUpPage, ForgotPage } from './pages';
 import { NotificationService } from './services';
 
 class App extends React.Component<{}, {}> {
@@ -16,9 +16,9 @@ class App extends React.Component<{}, {}> {
         return (
             <div className="App" style={{ height: '100%' }}>
                 <Switch>
-                    <Route path="/forgot" component={Forgot}/>
-                    <Route path="/logout" component={Logout}/>
-                    <Route path="/signup" component={SignUp}/>
+                    <Route path="/forgot" component={ForgotPage}/>
+                    <Route path="/logout" component={LogoutPage}/>
+                    <Route path="/signup" component={SignUpPage}/>
                     <Route path="/" component={Main}/>
                 </Switch>
                 <NotificationSystem ref="notificationSystem" />

@@ -10,15 +10,15 @@ interface DialogTitleProps {
 
 const DialogTitle = ({login, onTitleClick}: DialogTitleProps) => (
     <div key={login}>
-                <span onClick={onTitleClick} title="Go back" style={{cursor: 'pointer'}} key={'back_' + login} >
-                    <KeyboardArrowLeft key={'left_' + login} />
-                    <span style={{top: '-5px', position: 'relative'}} key={'name_' + login}>{login}</span>
-                </span>
+        <span onClick={onTitleClick} title="Go back" style={{cursor: 'pointer'}}>
+            <KeyboardArrowLeft />
+            <span style={{top: '-5px', position: 'relative'}}>{login}</span>
+        </span>
         &nbsp;
-        <NavLink to={`/user/${login}`} key={'link_' + login} title="Show profile">
-                    <span style={{display: 'inline-block'}}>
-                        <Avatar src={`${process.env.REACT_APP_API_PATH}user/${login}/avatar.jpg`} />
-                    </span>
+        <NavLink to={`/user/${login}`} title="Show profile">
+            <span style={{display: 'inline-block'}}>
+                <Avatar src={`${process.env.REACT_APP_API_PATH}user/${login}/avatar.jpg`} />
+            </span>
         </NavLink>
     </div>
 );

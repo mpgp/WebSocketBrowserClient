@@ -1,8 +1,8 @@
-import { BaseMessage } from '../BaseMessage';
-import { WebSocketPayloadTypes } from '../WebSocketPayloadTypes';
+import { BaseMessage, WebSocketPayloadTypes } from '../';
 
 export class ChatMessage extends BaseMessage {
     public Message: string;
+
     protected messageType = WebSocketPayloadTypes.ChatMessage;
 
     constructor(message: string) {

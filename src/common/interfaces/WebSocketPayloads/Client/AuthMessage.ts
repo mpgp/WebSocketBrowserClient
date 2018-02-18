@@ -1,8 +1,8 @@
-import { BaseMessage } from '../BaseMessage';
-import { WebSocketPayloadTypes } from '../WebSocketPayloadTypes';
+import { BaseMessage, WebSocketPayloadTypes } from '../';
 
 export class AuthMessage extends BaseMessage {
     public Token: string;
+
     protected messageType = WebSocketPayloadTypes.AuthMessage;
 
     constructor(token: string) {

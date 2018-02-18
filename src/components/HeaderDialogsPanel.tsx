@@ -6,8 +6,8 @@ import OpenWith from 'material-ui-icons/OpenWith';
 import Slide, { SlideProps } from 'material-ui/transitions/Slide';
 import Dialog, { DialogContent, DialogTitle, } from 'material-ui/Dialog';
 
-import { DialogWindowContainer } from '../containers';
 import { DialogsStoreMode } from '../stores';
+import { DialogWindowContainer } from '../containers';
 
 interface HeaderMessagesPanelProps {
     changeStatus: (isOpen: boolean) => void;
@@ -41,7 +41,7 @@ class HeaderDialogsPanel extends React.PureComponent<HeaderMessagesPanelProps, {
 
     render() {
         return (
-            <span>
+            <React.Fragment>
                 <IconButton title="Private messages" onClick={this.handleOpen}>
                     <Badge badgeContent={this.props.dialogsCount} color="secondary">
                         <MailIcon/>
@@ -63,7 +63,7 @@ class HeaderDialogsPanel extends React.PureComponent<HeaderMessagesPanelProps, {
                         {this.props.isOpen && <DialogWindowContainer mode={this.props.mode} />}
                     </DialogContent>
                 </Dialog>
-            </span>
+            </React.Fragment>
         );
     }
 

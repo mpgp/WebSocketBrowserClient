@@ -6,7 +6,7 @@ import { REQUEST_STATUS } from '../common/enums';
 import { AuthForm, AuthData } from '../components';
 import { RequestStatus } from '../common/interfaces';
 
-class Auth extends React.PureComponent<{}, RequestStatus> {
+class AuthPage extends React.PureComponent<{}, RequestStatus> {
     private errorMessages = {'1001': 'Incorrect Login or Password'};
 
     constructor(props: {}) {
@@ -75,4 +75,4 @@ class Auth extends React.PureComponent<{}, RequestStatus> {
     }
 }
 
-export default Auth;
+export default AuthPage;

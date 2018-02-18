@@ -1,20 +1,20 @@
-import Auth from './Auth';
-export { Auth };
+import AuthPage from './AuthPage';
+export { AuthPage };
 
-import Forgot from './Forgot';
-export { Forgot };
+import ForgotPage from './ForgotPage';
+export { ForgotPage };
 
-import Logout from './Logout';
-export { Logout };
+import LogoutPage from './LogoutPage';
+export { LogoutPage };
 
-import Profile from './Profile';
-export { Profile };
+import ProfilePage from './ProfilePage';
+export { ProfilePage };
 
 import ServerPage from './ServerPage';
 export { ServerPage };
 
-import ServerSelect from './ServerSelect';
-export { ServerSelect };
+import ServerSelectPage from './ServerSelectPage';
+export { ServerSelectPage };
 
-import SignUp from './SignUp';
-export { SignUp };
+import SignUpPage from './SignUpPage';
+export { SignUpPage };

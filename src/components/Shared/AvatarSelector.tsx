@@ -1,13 +1,14 @@
 import * as React from 'react';
 import Paper from 'material-ui/Paper';
-import MobileStepper from 'material-ui/MobileStepper';
 import Button from 'material-ui/Button';
+import MobileStepper from 'material-ui/MobileStepper';
 import KeyboardArrowLeft from 'material-ui-icons/KeyboardArrowLeft';
 import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
 
 interface AvatarSelectorProps {
     onPickAvatar: (avatar: string) => void;
 }
+
 interface AvatarSelectorState {
     ActiveStep: number;
     Avatar: number;

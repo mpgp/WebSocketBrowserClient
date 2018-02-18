@@ -4,6 +4,7 @@ import Avatar from 'material-ui/Avatar';
 import { NavLink } from 'react-router-dom';
 import IconButton from 'material-ui/IconButton';
 import Menu, { MenuItem } from 'material-ui/Menu';
+
 import { AppStore } from '../stores';
 
 interface HeaderUserPanelContainerState {

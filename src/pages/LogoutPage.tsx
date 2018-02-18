@@ -5,7 +5,7 @@ import { AppStore } from '../stores';
 import { REQUEST_STATUS } from '../common/enums';
 import { RequestStatus } from '../common/interfaces';
 
-class Logout extends React.PureComponent<{}, RequestStatus> {
+class LogoutPage extends React.PureComponent<{}, RequestStatus> {
     constructor(props: {}) {
         super(props);
         this.state = {
@@ -27,4 +27,4 @@ class Logout extends React.PureComponent<{}, RequestStatus> {
     }
 }
 
-export default Logout;
+export default LogoutPage;
