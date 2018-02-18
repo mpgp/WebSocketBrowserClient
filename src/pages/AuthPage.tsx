@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { observer } from 'mobx-react';
 
 import { AppStore } from '../stores';
 import { AccountService } from '../services';
@@ -6,7 +7,8 @@ import { REQUEST_STATUS } from '../common/enums';
 import { AuthForm, AuthData } from '../components';
 import { RequestStatus } from '../common/interfaces';
 
-class AuthPage extends React.PureComponent<{}, RequestStatus> {
+@observer
+class AuthPage extends React.Component<{}, RequestStatus> {
     private errorMessages = {'1001': 'Incorrect Login or Password'};
 
     constructor(props: {}) {

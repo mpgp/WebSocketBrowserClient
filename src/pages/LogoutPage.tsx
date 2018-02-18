@@ -1,11 +1,13 @@
 import * as React from 'react';
+import { observer } from 'mobx-react';
 import { Redirect } from 'react-router-dom';
 
 import { AppStore } from '../stores';
 import { REQUEST_STATUS } from '../common/enums';
 import { RequestStatus } from '../common/interfaces';
 
-class LogoutPage extends React.PureComponent<{}, RequestStatus> {
+@observer
+class LogoutPage extends React.Component<{}, RequestStatus> {
     constructor(props: {}) {
         super(props);
         this.state = {

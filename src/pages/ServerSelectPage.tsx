@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { observer } from 'mobx-react';
 
 import { AppStore } from '../stores';
 import { ServerService } from '../services';
@@ -10,7 +11,8 @@ interface ServerSelectState extends RequestStatus {
     servers: Server[];
 }
 
-class ServerSelect extends React.PureComponent<{}, ServerSelectState> {
+@observer
+class ServerSelectPage extends React.Component<{}, ServerSelectState> {
     constructor(props: {}) {
         super(props);
         this.state = {
@@ -57,4 +59,4 @@ class ServerSelect extends React.PureComponent<{}, ServerSelectState> {
     }
 }
 
-export default ServerSelect;
+export default ServerSelectPage;

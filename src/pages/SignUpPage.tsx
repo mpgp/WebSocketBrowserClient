@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { observer } from 'mobx-react';
 import { Redirect } from 'react-router-dom';
 
 import { AppStore } from '../stores';
@@ -7,7 +8,8 @@ import { REQUEST_STATUS } from '../common/enums';
 import { RequestStatus } from '../common/interfaces';
 import { SignUpForm, SignUpData } from '../components';
 
-class SignUpPage extends React.PureComponent<{}, RequestStatus> {
+@observer
+class SignUpPage extends React.Component<{}, RequestStatus> {
     private errorMessages = {'1000': 'Login already exists'};
 
     constructor(props: {}) {

@@ -17,6 +17,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-notification-system": "latest",
+    "react-router": "latest",
     "react-router-dom": "latest",
     "react-scripts-ts": "latest"
   },
@@ -26,6 +27,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/react-notification-system": "latest",
+    "@types/react-router": "latest",
     "@types/react-router-dom": "latest",
     "typescript": "latest"
   },

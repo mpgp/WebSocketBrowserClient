@@ -1,17 +1,18 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { observer } from 'mobx-react';
 
 import { AppStore } from '../stores';
 import { ServerRoom } from '../components';
 import { REQUEST_STATUS } from '../common/enums';
-import { RequestStatus } from '../common/interfaces';
+import { RequestStatus, RouteComponentProps } from '../common/interfaces';
 import { ServerService, WebSocketService } from '../services';
 
 interface ServerPageProps {
     code: string;
 }
 
-class ServerPage extends React.PureComponent<RouteComponentProps<ServerPageProps>, RequestStatus> {
+@observer
+class ServerPage extends React.Component<RouteComponentProps<ServerPageProps>, RequestStatus> {
     constructor(props: RouteComponentProps<ServerPageProps>) {
         super(props);
         this.state = { status: REQUEST_STATUS.PENDING };

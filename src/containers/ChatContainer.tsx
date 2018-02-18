@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { observer } from 'mobx-react';
 import Paper from 'material-ui/Paper';
 import withStyles, { WithStyles, StyleRulesCallback } from 'material-ui/styles/withStyles';
 
@@ -26,7 +27,8 @@ const styles: StyleRulesCallback<'root'> = () => ({
     }
 });
 
-class ChatContainer extends React.PureComponent<ChatContainerProps, {}> {
+@observer
+class ChatContainer extends React.Component<ChatContainerProps, {}> {
     private login = AppStore.userInfo.login;
     private messages: ServerChatMessage[] = [];
 

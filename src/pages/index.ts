@@ -18,3 +18,6 @@ export { ServerSelectPage };
 
 import SignUpPage from './SignUpPage';
 export { SignUpPage };
+
+import UserPage from './UserPage';
+export { UserPage };
